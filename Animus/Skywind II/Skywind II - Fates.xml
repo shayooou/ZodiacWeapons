@@ -23,7 +23,7 @@
 		<!-- Book of Skywind II FATE Task 2 - Tower of Power -->	
 		<If condition="not ZodiacManager.CurrentBook.FateTask2Completed">
 			<Log Message="Moving to FATE 'Tower of Power'" />
-			<LisbethTravel Area="Coerthas Central Highlands" Position="-546.1525, 238.769, 353.947"/>
+			<LisbethTravel Area="Coerthas Central Highlands" Position="-562.5767, 242.992, 362.7813"/>
 			<While Condition="not ZodiacManager.CurrentBook.FateTask2Completed">
 				<Log Message="Waiting on FATE 'Tower of Power'" />
 				<If condition="GameObjectManager.GetObjectByNPCId(1603)">
