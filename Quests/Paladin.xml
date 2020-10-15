@@ -477,32 +477,30 @@
 			</If>	
 		</If>
 		
-		
 		<!-- Buy Zenith weapons -->
-		<!-- If Has Completed A Relic Reborn (Curtana) and Curtana -->
-		<While Condition="IsQuestCompleted(66656) and HasAtLeast(1675,1)">
-			<Log Message="Artemis Bow finished, upgrading to Curtana Zenith!" />
-			<If Condition="not HasAtLeast(6268,3)">
+		<!-- If Has Completed A Relic Reborn (Curtana) and has Curtana -->
+		<While Condition="IsQuestCompleted(66661) and HasAtLeast(1675,1)">	
+			<Log Message="Curtana finished, upgrading to Curtana Zenith!" />
+			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
-					<Log Message="Going to purchase Thavnairian Mist!" />
 					<GetTo ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
 					<!-- Buy Thavnairian Mist -->
 					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
 				</If>	
 				<While Condition="not HasAtLeast(28,60)">
 					<RunCode name="NeedPoetics"/>
+					<WaitTimer WaitTime="10" />
 				</While>
-			</If>			
+			</If>
 			<If Condition="HasAtLeast(6268,3)"> <!-- HasAtLeast 3 Thavnairian Mist -->
 				<Log Message="Exchanging Curtana with Furnace" />
 				<GetTo ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
-				<RunCode name="ExchangeCurtana"/>
-				<WaitTimer WaitTime="3" />
-				<RunCode name="ExchangeHolyShield"/>
-			</If>
-		</While>
-		
-		
+				<BuyShopExchangeItem NpcId="2002555" ItemId="6257" Count="1"/>
+				<WaitTimer WaitTime="5" />
+				<BuyShopExchangeItem NpcId="2002555" ItemId="6266" Count="1"/>
+			</If>			
+		</While>		
+				
 		<!-- Up in Arms -->
 		<If Condition="IsQuestCompleted(66656)and not HasQuest(66971) and not IsQuestCompleted(66971)">
 		  <If Condition="not IsOnMap(154)">

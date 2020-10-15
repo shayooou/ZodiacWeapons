@@ -511,26 +511,28 @@
 				<TurnIn ItemId="6267" QuestId="66660" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112"/>
 			</If>	
 		</If>
-		
+
 		<!-- Buy Zenith weapons -->
-		<!-- If Has Completed A Relic Reborn (Thyrus) and has Thyrus -->																										
-		<If Condition="IsQuestCompleted(66660) and HasAtLeast(2052,1)">
-			<GetTo ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
-			<If Condition="HasAtLeast(6268,2)"> <!-- Thavnairian Mist -->
-				<GetTo ZoneId="154" XYZ="450.1296, -0.3836476, -69.53964"/>
-				<RunCode name="ExchangeThyrus"/>
-			</If>
-			<If Condition="not HasAtLeast(6268,3)">
-				<If Condition="HasAtLeast(28,60)">
+		<!-- If Has Completed A Relic Reborn (Thyrus) and has Thyrus -->
+		<While Condition="IsQuestCompleted(66661) and HasAtLeast(2052,1)">	
+			<Log Message="Thyrus finished, upgrading to Thyrus Zenith!" />
+			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
+				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
 					<GetTo ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
 					<!-- Buy Thavnairian Mist -->
 					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
 				</If>	
-				<If Condition="not HasAtLeast(28,60)">
+				<While Condition="not HasAtLeast(28,60)">
 					<RunCode name="NeedPoetics"/>
-				</If>
+					<WaitTimer WaitTime="10" />
+				</While>
 			</If>
-		</If>
+			<If Condition="HasAtLeast(6268,3)"> <!-- HasAtLeast 3 Thavnairian Mist -->
+				<Log Message="Exchanging Thyrus with Furnace" />
+				<GetTo ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
+				<BuyShopExchangeItem NpcId="2002555" ItemId="6262" Count="1"/>
+			</If>			
+		</While>
 		
 		<!-- Up in Arms -->
 		<If Condition="IsQuestCompleted(66660)and not HasQuest(66971) and not IsQuestCompleted(66971)">

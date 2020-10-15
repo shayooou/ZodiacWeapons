@@ -500,23 +500,26 @@
 		</If>
 		
 		<!-- Buy Zenith weapons -->
-		<!-- If Has Completed A Relic Reborn (The Veil of Wiyu) and has Veil of Wiyu -->																										
-		<If Condition="IsQuestCompleted(66662) and HasAtLeast(2213,1)">
-			<GetTo ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
-			<If Condition="HasAtLeast(6268,2)"> <!-- Thavnairian Mist -->
-				<RunCode name="ExchangeVeil"/>
-			</If>
-			<If Condition="not HasAtLeast(6268,3)">
-				<If Condition="HasAtLeast(28,60)">
+		<!-- If Has Completed A Relic Reborn (The Veil of Wiyu) and has The Veil of Wiyu -->
+		<While Condition="IsQuestCompleted(66661) and HasAtLeast(2213,1)">	
+			<Log Message="The Veil of Wiyu finished, upgrading to The Veil of Wiyu Zenith!" />
+			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
+				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
 					<GetTo ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
 					<!-- Buy Thavnairian Mist -->
 					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
 				</If>	
-				<If Condition="not HasAtLeast(28,60)">
+				<While Condition="not HasAtLeast(28,60)">
 					<RunCode name="NeedPoetics"/>
-				</If>
+					<WaitTimer WaitTime="10" />
+				</While>
 			</If>
-		</If>	
+			<If Condition="HasAtLeast(6268,3)"> <!-- HasAtLeast 3 Thavnairian Mist -->
+				<Log Message="Exchanging The Veil of Wiyu with Furnace" />
+				<GetTo ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
+				<BuyShopExchangeItem NpcId="2002555" ItemId="6264" Count="1"/>
+			</If>			
+		</While>			
 		
 		<!-- Up in Arms -->
 		<If Condition="IsQuestCompleted(66662)and not HasQuest(66971) and not IsQuestCompleted(66971)">
