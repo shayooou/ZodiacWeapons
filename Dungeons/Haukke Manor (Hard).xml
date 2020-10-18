@@ -46,15 +46,21 @@
 			<MoveTo XYZ="16.98096, 17, -52.54222"/>
 			<UseObject NpcIds="2003312" XYZ="16.23937,17,-54.15789" Radius="50" condition="GetInstanceTodo(0) &lt; 1"/>
 			<MoveTo XYZ="15.98883,17,-82.16676"/>
-			<RunCode name="LockedDoor1"/>
+			<While condition="GameObjectManager.GetObjectByNPCId(2003315).IsTargetable">
+				<RunCode name="LockedDoor1"/>
+			</While>	
 			<MoveTo XYZ="16.20898, 17, -98.04694"/>
 			<UseObject NpcIds="2003314" XYZ="16.23937,17,-54.15789" Radius="50" condition="GetInstanceTodo(0) &lt; 1"/>
 			<MoveTo XYZ="0.7017622,17,-96.12426"/>
-			<RunCode name="LockedDoor2"/>
+			<While condition="GameObjectManager.GetObjectByNPCId(2003316).IsTargetable">
+				<RunCode name="LockedDoor2"/>
+			</While>	
 			<MoveTo XYZ="-19.5165, 17, -96.8035"/>
 			<UseObject NpcIds="2003430" XYZ="-19.5165, 17, -96.8035" Radius="50" condition="GetInstanceTodo(0) &lt; 1"/>
 			<MoveTo XYZ="-15.9416,17,-86.21455"/>
-			<RunCode name="LockedDoor3"/>
+			<While condition="GameObjectManager.GetObjectByNPCId(2003317).IsTargetable">
+				<RunCode name="LockedDoor3"/>
+			</While>	
 			<MoveTo XYZ="-22.77435, 17, -0.1981363"/>
 			<Grind GrindRef="FirstBoss" While="not GameObjectManager.GetObjectByNPCId(426).CurrentHealth == 0"/> <!-- Fight First Boss -->
 			<WaitTimer WaitTime="3" />
@@ -62,7 +68,9 @@
 				<RunCode name="OpenChest" />
 			</If>
 			<MoveTo XYZ="31.37083, 16.99994, 1.565044"/>
-			<RunCode name="CrystalBall1"/>	
+			<While condition="GameObjectManager.GetObjectByNPCId(2002916).IsTargetable">
+				<RunCode name="CrystalBall1"/>	
+			</While>	
 		</If>
 		
 		<!-- Clear the Red Hall 0/1 -->
@@ -71,14 +79,18 @@
 			<MoveTo XYZ="41.81406, 0, -35.50204"/>
 			<UseObject NpcIds="2003313" XYZ="41.81406, 0, -35.50204" Radius="100" condition="GetInstanceTodo(0) &lt; 1"/>
 			<MoveTo XYZ="46.73828,-0.01531982,-35.96558"/>
-			<RunCode name="LockedDoor4"/>
+			<While condition="GameObjectManager.GetObjectByNPCId(2003320).IsTargetable">
+				<RunCode name="LockedDoor4"/>
+			</While>	
 			<MoveTo XYZ="21.36292, 0, -0.07704652"/>
 			<Grind GrindRef="SecondBoss" While="not GameObjectManager.GetObjectByNPCId(2341).CurrentHealth == 0"/> <!-- Fight Second Boss -->
 			<If Condition="&openchest; == 1">
 				<RunCode name="OpenChest" />
 			</If>
 			<MoveTo XYZ="-43.45517,-6.880034E-16,13.58027"/>
-			<RunCode name="CrystalBall2"/>	
+			<While condition="GameObjectManager.GetObjectByNPCId(2002941).IsTargetable">
+				<RunCode name="CrystalBall2"/>
+			</While>	
 		</If>
 		
 		<!-- Defeat Halicarnassus 0/1 -->
@@ -258,25 +270,7 @@
 			ff14bot.RemoteWindows.SelectYesno.ClickYes();
 			while (!CommonBehaviors.IsLoading) { await Coroutine.Yield(); }
       ]]>
-	</CodeChunk>	
-	<CodeChunk Name="ExitDuty">
-		<![CDATA[
-			ff14bot.Managers.GameObjectManager.GetObjectByNPCId(2000139).Interact();
-			await Coroutine.Sleep(1000);
-			ff14bot.RemoteWindows.SelectYesno.ClickYes();
-			await Coroutine.Sleep(3000);
-      ]]>
-	</CodeChunk>
-	<CodeChunk Name="LeaveDuty">
-		<![CDATA[
-			ff14bot.Managers.DutyManager.LeaveActiveDuty();
-			await Coroutine.Wait(20000, () => CommonBehaviors.IsLoading);
-			if (CommonBehaviors.IsLoading)
-			{
-				await Coroutine.Wait(-1, () => !CommonBehaviors.IsLoading);
-			}
-		]]>
-	</CodeChunk>	
+	</CodeChunk>		
 	<CodeChunk Name="ChangeZone">
 		<![CDATA[
 			MovementManager.SetFacing(3.190046f);
