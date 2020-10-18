@@ -80,15 +80,10 @@
 			<While condition="GameObjectManager.GetObjectByNPCId(2003320).IsTargetable">
 				<RunCode name="LockedDoor4"/>
 			</While>
-			<If Condition="&openchest; == 1">
-				<MoveTo XYZ="70.11511,-0.01531982,-48.90515"/>
-				<LLOpenChest/>
-			</If>			
+			<MoveTo XYZ="70.11511,-0.01531982,-48.90515"/>
+			<LLOpenChest/>	
 			<MoveTo XYZ="21.36292, 0, -0.07704652"/>
 			<Grind GrindRef="SecondBoss" While="not GameObjectManager.GetObjectByNPCId(2341).CurrentHealth == 0"/> <!-- Fight Second Boss -->
-			<If Condition="&openchest; == 1">
-				<LLOpenChest/>
-			</If>
 			<MoveTo XYZ="-43.45517,-6.880034E-16,13.58027"/>
 			<RunCode name="CrystalBall2"/>	
 		</If>
@@ -96,10 +91,7 @@
 		<!-- Defeat Halicarnassus 0/1 -->
 		<If Condition="GetInstanceTodo(3) == 0">
 			<Log Message="Defeat Halicarnassus 0/1" />
-			<MoveTo XYZ="-26.35083, -18.8, 45.07621"/>
-			<If Condition="&openchest; == 1">
-				<LLOpenChest/>
-			</If>
+			<NoCombatMoveTo XYZ="-26.35083, -18.8, 45.07621"/>
 			<MoveTo XYZ="-14.77353, -18.9, 0.1370375"/>
 			<BotSettings AutoEquip="0" />	
 			<If Condition="ClassName == ((ClassJobType.Bard))"> 
