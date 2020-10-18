@@ -119,6 +119,7 @@
 			<If condition="ZodiacCompletedMahatma() == 0 and not ZodiacMahatmaIsDone()">
 				<While Condition="not HasAtLeast(28,50)">
 					<RunCode name="NeedPoetics"/>
+					<WaitTimer WaitTime="60" />
 				</While>
 				<If Condition="HasAtLeast(28,50)">	
 					<LisbethTravel Area="Western La Noscea" Position="642.0411, 9.382738, 511.8205"/>
@@ -129,8 +130,14 @@
 			<!-- Buy Next Mahatma -->
 			<While condition="ZodiacMahatmaIsDone()">
 				<Log Message="Current Mahatma done, attaching next one." />
-				<LisbethTravel Area="Western La Noscea" Position="642.0411, 9.382738, 511.8205"/>
-				<RunCode name="AttachMahatma"/>
+				<While Condition="not HasAtLeast(28,50)">
+					<RunCode name="NeedPoetics"/>
+					<WaitTimer WaitTime="60" />
+				</While>
+				<If Condition="HasAtLeast(28,50)">					
+					<LisbethTravel Area="Western La Noscea" Position="642.0411, 9.382738, 511.8205"/>
+					<RunCode name="AttachMahatma"/>
+				</If>	
 			</While>
 			<!-- Mahatma Farm -->	
 			<If condition="not ZodiacMahatmaIsDone()">			
@@ -279,6 +286,7 @@
 					Logging.WriteDiagnostic("Selecting Yes.");
 					ff14bot.RemoteWindows.SelectYesno.ClickYes();
 				}
+				else
 				{
 					Logging.WriteDiagnostic("Select Yes/No window failed to open.");
 					ff14bot.TreeRoot.Stop("Window failed to open");
@@ -296,13 +304,8 @@
 		</CodeChunk>
 		<CodeChunk Name="NeedPoetics">
 			  <![CDATA[
-				var _msg = String.Empty;
-				#if RB_CN
-						_msg = "请手动完成下一个任务。";
-				#else
-						_msg = "Please farm more poetics.";
-				#endif
-				Core.OverlayManager.AddToast(() => _msg, TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
+			Core.OverlayManager.AddToast(() => "Please farm at least 50 Tomestone of Poetics to continue.", TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
+			await Coroutine.Sleep(60000);			  
 			  ]]>
 		</CodeChunk>
 		<CodeChunk Name="PurchaseZodiacZenith">

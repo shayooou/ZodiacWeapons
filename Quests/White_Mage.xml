@@ -327,27 +327,18 @@
 	<If Condition="ClassName == ((ClassJobType.WhiteMage))">
 		<!-- A Relic Reborn (Thyrus) -->
 		<If Condition="not HasQuest(66660) and not IsQuestCompleted(66660)">
-		  <If Condition="not IsOnMap(154)">
-			<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-		  </If>
-		  <FlyTo XYZ="427.4873, -5.342077, -74.43809" Land="True"/>
+			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
 		  <ChangeClass Job="WhiteMage" />
 		  <If Condition="IsQuestAcceptQualified(66660)">
 			<PickupQuest QuestId="66660" NpcId="1003075"/>
 		  </If>
 		</If>
 		<If Condition="GetQuestStep(66660) == 1">
-			<If Condition="not IsOnMap(180)">
-				<TeleportTo Name="Camp Overlook" AetheryteId="16"/>
-			</If>
-		  <GetTo ZoneId="180" XYZ="149.9808, 25.3147, -755.6115" Land="True"/>
+		  <LisbethTravel Area="Outer La Noscea" Position="157.9357, 24.1721, -753.2645"/>
 		  <UseObject NpcIds="2002496" XYZ="149.9808, 25.3147, -755.6115" Radius="25"  QuestId="66660" StepId="1"/>
 		</If>  
 		<If Condition="GetQuestStep(66660) == 2">
-			<If Condition="not IsOnMap(154)">
-				<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-			</If>
-			<FlyTo XYZ="427.4873, -5.342077, -74.43809" Land="True"/>
+			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
 			<!-- Handover timeworn Thyrus --> 
 			<HandOver ItemId="2000993" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66660" StepId="2"/>
 		</If>
@@ -355,10 +346,7 @@
 			<RunCode name="NoWhisperingRod"/>	
 		</If>
 		<If Condition="GetQuestStep(66660) == 3 and HasAtLeast(2049,1)">
-		  <If Condition="not IsOnMap(154)">
-			<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-		  </If>
-		  <FlyTo XYZ="427.4873, -5.342077, -74.43809" Land="True"/>
+			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
 		  <!-- Turn in Madman's Whispering Rod -->
 		  <HandOver StepId="3" ItemId="2049" QuestId="66660" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112"/>	
 		</If>				 
@@ -373,10 +361,7 @@
 		  <LLoadProfile Path="../Dungeons/A Relic Reborn the Chimera.xml"/>
 		</If>
 		<If Condition="GetQuestStep(66660) == 5">
-			<If Condition="not IsOnMap(154)">
-				<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-			</If>
-			<FlyTo XYZ="427.4873, -5.342077, -74.43809" Land="True"/>
+			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
 			<!-- Handover pinch of alumina salts WHM -->
 			<HandOver ItemId="2001002" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66660" StepId="5"/>
 		</If>
@@ -536,10 +521,7 @@
 		
 		<!-- Up in Arms -->
 		<If Condition="IsQuestCompleted(66660)and not HasQuest(66971) and not IsQuestCompleted(66971)">
-		  <If Condition="not IsOnMap(154)">
-			<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-		  </If>
-		  <FlyTo XYZ="427.4873, -5.342077, -74.43809" Land="True"/>
+<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
 		  <If Condition="not HasAtLeast(6262,1)">
 			<RunCode name="NoThyrusZenith"/>
 		  </If>
