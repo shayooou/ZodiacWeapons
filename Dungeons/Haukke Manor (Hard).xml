@@ -65,7 +65,7 @@
 			<Grind GrindRef="FirstBoss" While="not GameObjectManager.GetObjectByNPCId(426).CurrentHealth == 0"/> <!-- Fight First Boss -->
 			<WaitTimer WaitTime="3" />
 			<If Condition="&openchest; == 1">
-				<RunCode name="OpenChest" />
+				<LLOpenChest/>
 			</If>
 			<MoveTo XYZ="31.37083, 16.99994, 1.565044"/>
 			<RunCode name="CrystalBall1"/>		
@@ -74,16 +74,20 @@
 		<!-- Clear the Red Hall 0/1 -->
 		<If Condition="GetInstanceTodo(2) == 0">
 			<Log Message="Clear the Red Hall 0/1" />
-			<MoveTo XYZ="41.81406, 0, -35.50204"/>
+			<NoCombatMoveTo XYZ="41.81406, 0, -35.50204"/>
 			<UseObject NpcIds="2003313" XYZ="41.81406, 0, -35.50204" Radius="100" condition="GetInstanceTodo(0) &lt; 1"/>
 			<MoveTo XYZ="46.73828,-0.01531982,-35.96558"/>
 			<While condition="GameObjectManager.GetObjectByNPCId(2003320).IsTargetable">
 				<RunCode name="LockedDoor4"/>
-			</While>	
+			</While>
+			<If Condition="&openchest; == 1">
+				<MoveTo XYZ="70.11511,-0.01531982,-48.90515"/>
+				<LLOpenChest/>
+			</If>			
 			<MoveTo XYZ="21.36292, 0, -0.07704652"/>
 			<Grind GrindRef="SecondBoss" While="not GameObjectManager.GetObjectByNPCId(2341).CurrentHealth == 0"/> <!-- Fight Second Boss -->
 			<If Condition="&openchest; == 1">
-				<RunCode name="OpenChest" />
+				<LLOpenChest/>
 			</If>
 			<MoveTo XYZ="-43.45517,-6.880034E-16,13.58027"/>
 			<RunCode name="CrystalBall2"/>	
@@ -94,7 +98,7 @@
 			<Log Message="Defeat Halicarnassus 0/1" />
 			<MoveTo XYZ="-26.35083, -18.8, 45.07621"/>
 			<If Condition="&openchest; == 1">
-				<RunCode name="OpenChest" />
+				<LLOpenChest/>
 			</If>
 			<MoveTo XYZ="-14.77353, -18.9, 0.1370375"/>
 			<BotSettings AutoEquip="0" />	
@@ -177,7 +181,7 @@
 			</If>			
 			<Grind GrindRef="FinalBoss" While="not GameObjectManager.GetObjectByNPCId(2346).CurrentHealth == 0"/> <!-- Fight final boss -->
 			<If Condition="&openchest; == 1">
-				<RunCode name="OpenChest" />
+				<LLOpenChest/>
 			</If>
 			<While condition="DutyManager.InInstance">	
 				<WaitTimer WaitTime="10" />
