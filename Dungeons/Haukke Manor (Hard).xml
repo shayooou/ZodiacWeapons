@@ -68,9 +68,7 @@
 				<RunCode name="OpenChest" />
 			</If>
 			<MoveTo XYZ="31.37083, 16.99994, 1.565044"/>
-			<While condition="GameObjectManager.GetObjectByNPCId(2002916).IsTargetable">
-				<RunCode name="CrystalBall1"/>	
-			</While>	
+			<RunCode name="CrystalBall1"/>		
 		</If>
 		
 		<!-- Clear the Red Hall 0/1 -->
@@ -88,9 +86,7 @@
 				<RunCode name="OpenChest" />
 			</If>
 			<MoveTo XYZ="-43.45517,-6.880034E-16,13.58027"/>
-			<While condition="GameObjectManager.GetObjectByNPCId(2002941).IsTargetable">
-				<RunCode name="CrystalBall2"/>
-			</While>	
+			<RunCode name="CrystalBall2"/>	
 		</If>
 		
 		<!-- Defeat Halicarnassus 0/1 -->
