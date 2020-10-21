@@ -263,13 +263,13 @@
     <!-- The Weaponsmith of Legend -->
     <If Condition="not HasQuest(66241) and not IsQuestCompleted(66241)">
 	  <ChangeClass Job="Warrior" />
-      <GetTo ZoneId="140" XYZ="-470.4957, 23.03529, -355.3192"/>
+      <LisbethTravel ZoneId="140" XYZ="-470.4957, 23.03529, -355.3192"/>
       <If Condition="IsQuestAcceptQualified(66241)">
         <PickupQuest QuestId="66241" NpcId="1005021"/>
       </If>
     </If>
     <If Condition="GetQuestStep(66241) == 1">
-      <GetTo ZoneId="156" XYZ="25.51611, 29, -823.7956"/>
+      <LisbethTravel ZoneId="156" XYZ="25.51611, 29, -823.7956"/>
       <TalkTo NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66241" StepId="1"/>
     </If>
     <If Condition="GetQuestStep(66241) == 255">
@@ -322,7 +322,7 @@
 		<If Condition="GetQuestStep(66655) == 6">
 			<If Condition="not HasAtLeast(6267,1)">
 				<If Condition="HasAtLeast(28,15)">
-					<GetTo ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
+					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
 					<!-- Buy Radz-at-Han Quenching Oil -->										   
 					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6267" SelectString="2" Count="1"/>
 				</If>	
@@ -332,7 +332,7 @@
 			</If>
 			<If Condition="not HasAtLeast(6268,3)">
 				<If Condition="HasAtLeast(28,60)">
-					<GetTo ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
+					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
 					<!-- Buy Thavnairian Mist -->
 					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
 				</If>	
@@ -424,7 +424,7 @@
 		<If Condition="GetQuestStep(66655) == 255">
 			<If Condition="not HasAtLeast(6267,1)">
 				<If Condition="HasAtLeast(28,15)">
-					<GetTo ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
+					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
 					<!-- Buy Radz-at-Han Quenching Oil -->										   
 					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6267" SelectString="2" Count="1"/>
 				</If>	
@@ -443,7 +443,7 @@
 			<Log Message="Bravura finished, upgrading to Bravura Zenith!" />
 			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
-					<GetTo ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
+					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
 					<!-- Buy Thavnairian Mist -->
 					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
 				</If>	
@@ -454,7 +454,7 @@
 			</If>
 			<If Condition="HasAtLeast(6268,3)"> <!-- HasAtLeast 3 Thavnairian Mist -->
 				<Log Message="Exchanging Bravura with Furnace" />
-				<GetTo ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
+				<LisbethTravel ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
 				<BuyShopExchangeItem NpcId="2002555" ItemId="6259" Count="1"/>
 			</If>			
 		</While>			
@@ -476,7 +476,7 @@
 		  </If>
 		</If>
 		<If Condition="GetQuestStep(66971) == 255">
-		  <GetTo ZoneId="154" XYZ="407.3613, -4.538448, -88.70496"/>
+		  <LisbethTravel ZoneId="154" XYZ="407.3613, -4.538448, -88.70496"/>
 		  <TurnIn QuestId="66971" NpcId="1008948" XYZ="405.1117, -4.498068, -89.15851"/>
 		</If>
 
@@ -490,7 +490,7 @@
 			</If>
 			<FlyTo XYZ="410.7605, -6.053607, -88.41638" Land="True"/>
 			<ChangeClass Job="Warrior" />
-			<GetTo ZoneId="154" XYZ="405.1117,-4.498068,-89.15851"/>
+			<LisbethTravel ZoneId="154" XYZ="405.1117,-4.498068,-89.15851"/>
 			<RunCode name="BuyBravuraAtma"/>
 		</If>
 		<!-- Has Bravura Zenith and not Bravura Atma -->
@@ -509,7 +509,7 @@
 			<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
 		  </If>
 		  <FlyTo XYZ="410.7605, -6.053607, -88.41638" Land="True"/>		
-		  <GetTo ZoneId="154" XYZ="407.8153, -4.709439, -88.4598"/>
+		  <LisbethTravel ZoneId="154" XYZ="407.8153, -4.709439, -88.4598"/>
 			<!-- Equip Bravura Atma so quest is available -->
 			  <If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7826">
 					<RunCode Name="BravuraAtma" />
@@ -520,11 +520,11 @@
 		  </If>
 		</If>
 		<If Condition="GetQuestStep(66972) == 1">
-		  <GetTo ZoneId="156" XYZ="25.59451, 29, -822.5854"/>
+		  <LisbethTravel ZoneId="156" XYZ="25.59451, 29, -822.5854"/>
 		  <TalkTo NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66972" StepId="1"/>
 		</If>
 		<If Condition="GetQuestStep(66972) == 255">
-		  <GetTo ZoneId="156" XYZ="69.80656, 33.06655, -706.0764"/>
+		  <LisbethTravel ZoneId="156" XYZ="69.80656, 33.06655, -706.0764"/>
 		  <TurnIn QuestId="66972" NpcId="1006976" XYZ="71.94617, 33.06656, -706.2944"/>
 		</If>	
 
@@ -536,7 +536,7 @@
 				<If Condition="not IsOnMap(156)">
 					<TeleportTo AetheryteId="24"/> 
 				</If>
-				<GetTo ZoneId="156" XYZ="71.94617,33.06656,-706.2944"/>
+				<LisbethTravel ZoneId="156" XYZ="71.94617,33.06656,-706.2944"/>
 				<RunCode name="BuyFireBooks"/>
 			</If>
 			

@@ -46,7 +46,7 @@
 			<MoveTo XYZ="221.233, 64.69081, 7.753107" />	
 			<Grind GrindRef="FirstBoss" While="GetInstanceTodo(1) == 0"/> <!-- Fight First Boss -->
 			<If Condition="&openchest; == 1">
-				<RunCode name="OpenChest" />
+				<LLOpenChest />
 			</If>
 		</If>
 		
@@ -56,7 +56,7 @@
 			<MoveTo XYZ="220.1684, 63.00777, -134.2725" />
 			<UseObject InCombat="True" NpcIds="2004054,2004074,2004075" Radius="50" XYZ="220.1684, 63.00777, -134.2725" condition="GetInstanceTodo(2) == 0"/>
 			<If Condition="&openchest; == 1">
-				<RunCode name="OpenChest" />
+				<LLOpenChest />
 			</If>		
 		</If>
 
@@ -75,7 +75,7 @@
 				</HotSpots>
 			</UseObject>
 			<If Condition="&openchest; == 1">
-				<RunCode name="OpenChest" />
+				<LLOpenChest />
 			</If>			
 		</If>	
 		
@@ -94,7 +94,7 @@
 			<MoveTo XYZ="-64.88319, 44.11395, -125.0798" />
 			<Grind GrindRef="SecondBoss" While="GetInstanceTodo(3) == 0"/> <!-- Fight second Boss -->
 			<If Condition="&openchest; == 1">
-				<RunCode name="OpenChest" />
+				<LLOpenChest />
 			</If>			
 		</If>
 
@@ -111,7 +111,7 @@
 		<If Condition="GetInstanceTodo(4) == 1">
 			<Log Message="Navigate the geysers 1/2" />		
 			<MoveTo XYZ="-294.4839,6.210388,-44.84625" />
-			<RunCode name="OpenChest" />
+			<LLOpenChest />
 			<MoveTo XYZ="-307.3551, 4.495271, 14.34614" />
 			<Grind GrindRef="Geyser2" While="GetInstanceTodo(4) &lt; 2"/> <!-- Clear second geyser -->	
 		</If>
@@ -119,10 +119,10 @@
 		<!-- Dismemeber the arms and tentacles 0/10 -->
 		<If Condition="GetInstanceTodo(5) &lt; 10 and GetInstanceTodo(4) == 2">
 			<Log Message="Dismemeber the arms and tentacles 0/10" />
-			<RunCode name="DisableSideStep"/>
 			<MoveTo XYZ="-317.9591, 1.899866, 36.26224" />
 			<While Condition="IsOnMap(361)">
 				<RunCode name="Announce_Manual_Completion"/>
+				<WaitTimer WaitTime="26" />
 			</While>
 		</If>	
 
@@ -214,66 +214,6 @@
             ff14bot.RemoteWindows.SelectYesno.ClickYes();
 			await Coroutine.Sleep(3000);
       ]]>
-	</CodeChunk>	
-	<CodeChunk Name="ExitDuty">
-		<![CDATA[
-			ff14bot.Managers.GameObjectManager.GetObjectByNPCId(2000139).Interact();
-			await Coroutine.Sleep(1000);
-			ff14bot.RemoteWindows.SelectYesno.ClickYes();
-			await Coroutine.Sleep(3000);
-      ]]>
-	</CodeChunk>	
-	<CodeChunk Name="ChangeZone">
-		<![CDATA[
-			MovementManager.SetFacing(3.190046f);
-			MovementManager.MoveForwardStart();
-			while (!CommonBehaviors.IsLoading) { await Coroutine.Yield(); }
-			MovementManager.MoveStop();
-		]]>
-	</CodeChunk>	
-	<CodeChunk name="OpenChest">
-		<![CDATA[    
-		if (GameObjectManager.GetObjectsOfType<Treasure>().Where(r => r.Distance() < 50 && (r.Name == "Treasure Coffer" || r.Name == "treasure coffer")).Any())
-		{
-			var _chest = GameObjectManager.GetObjectsOfType<Treasure>().Where(r => r.Distance() < 50 && (r.Name == "宝箱" || r.Name == "Treasure Coffer" || r.Name == "treasure coffer")).FirstOrDefault();
-			while (Core.Me.Distance(_chest.Location) > 1)
-			{
-			await CommonTasks.MoveTo(_chest.Location);
-			await Coroutine.Yield();
-			}
-			
-			Navigator.PlayerMover.MoveStop();
-			await Coroutine.Sleep(1000);
-			Poi.Current = new Poi(_chest, PoiType.Kill);
-			Poi.Current.Unit.Interact();                    
-			await Coroutine.Sleep(1000);        
-		}
-		]]>
-	</CodeChunk>
-	  <CodeChunk Name="EnableSideStep">
-      <![CDATA[
-        foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "SideStep"))
-        {
-          try
-          {
-            if (plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = true;  }
-          }
-          catch (Exception ex) {  }
-        }
-      ]]>
-    </CodeChunk>
-	<CodeChunk Name="DisableSideStep">
-		<![CDATA[
-			foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "SideStep"))
-			{
-			try
-			{
-				if (!plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = false;  }
-			}
-			catch (Exception ex) {  }
-			}
-		]]>
-	</CodeChunk> 
-
+	</CodeChunk>		
   </CodeChunks>
 </Profile>
