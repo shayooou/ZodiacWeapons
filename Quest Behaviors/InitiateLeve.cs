@@ -82,6 +82,7 @@ namespace ff14bot.NeoProfiles
 					{
 						if(leve.GlobalId == LeveId && leve.Step == 1)
 						{
+							ActionManager.Dismount();
 							ulong globalId = (ulong) leve.GlobalId;
 							windowByName.SendAction(3,3,0xC,3,globalId,3,2); //Set Quest
 							await Coroutine.Sleep(200);
