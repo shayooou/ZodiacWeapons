@@ -543,7 +543,7 @@
 			</If>
 			
 		<!-- Netherfire I -->
-			<If Condition="HasAtLeast(2001299,1)  and HasAtLeast(7832,1)">
+			<If Condition="HasAtLeast(2001300,1)  and HasAtLeast(7832,1)">
 				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7832">
 					<RunCode Name="OmnilexAtma" />
 					<WaitTimer WaitTime="3" />

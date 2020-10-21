@@ -18,6 +18,7 @@
 		<If condition="not DutyManager.InInstance">
 			<LLJoinDuty DutyId="56" trial="true"/>
 		</If>
+		<WaitTimer WaitTime="1" />
 		<If condition="DutyManager.InInstance">
 			<If Condition="ClassName == ((ClassJobType.Bard))"> 
 				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7867">
@@ -96,11 +97,10 @@
 					<WaitTimer WaitTime="3" />
 				</If>
 			</If>
-			<MoveTo XYZ="-13.12728, 0, -8.592924" usemesh="false" />
 			<Grind GrindRef="Ifrit" While="not GameObjectManager.GetObjectByNPCId(1185).CurrentHealth == 0"/> <!-- Kill Ifrit -->	
 			<While condition="DutyManager.InInstance">	
-				<WaitTimer WaitTime="10" />
 				<LLLeaveDuty/>
+				<WaitTimer WaitTime="3" />
 			</While>						
 			<If Condition="NovusLightLevel() &lt; 2000">
 				<RunCode name="LightLevel"/>
