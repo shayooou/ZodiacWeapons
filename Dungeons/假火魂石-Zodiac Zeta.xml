@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Profile: The Tam-Tara Deepcroft
+  Authors: Zamphire
+  Code Credit: TuckMeIntoBread, Kayla.
+-->
+
+<Profile>
+  <Name>假火刷魂石</Name>
+  <BehaviorDirectory></BehaviorDirectory>
+  <Order>
+  <BotSettings AutoEquip="0" />
+	<While condition="not ZodiacMahatmaIsDone()">
+		<If condition="not DutyManager.InInstance">
+			<LLJoinDuty DutyId="56" trial="true"/>
+		</If>
+		<WaitTimer WaitTime="1" />
+		<If condition="DutyManager.InInstance">
+					<If Condition="ClassName == ((ClassJobType.Bard))"> 
+						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9495">
+							<Log Message="Equipping Yoichi Bow" />
+							<EquipWeapon ItemID="9495"/>
+							<WaitTimer WaitTime="3" />
+						</While>
+					</If>
+					<If Condition="ClassName == ((ClassJobType.BlackMage))"> 
+						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9497">
+							<Log Message="Equipping Lilith Rod" />
+							<EquipWeapon ItemID="9497"/>
+							<WaitTimer WaitTime="3" />
+						</While>
+					</If>
+					<If Condition="ClassName == ((ClassJobType.Dragoon))"> 
+						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9494">
+							<Log Message="Equipping Longinus" />
+							<EquipWeapon ItemID="9494"/>
+							<WaitTimer WaitTime="3" />
+						</While>
+					</If>	
+					<If Condition="ClassName == ((ClassJobType.Monk))"> 
+						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9492">
+							<Log Message="Equipping Kaiser Knuckles" />
+							<EquipWeapon ItemID="9492"/>
+							<WaitTimer WaitTime="3" />
+						</While>
+					</If>
+					<If Condition="ClassName == ((ClassJobType.Ninja))"> 
+						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9501">
+							<Log Message="Equipping Sasuke's Blades" />
+							<EquipWeapon ItemID="9501"/>
+							<WaitTimer WaitTime="3" />
+						</While>
+					</If>
+					<If Condition="ClassName == ((ClassJobType.Paladin))"> 
+						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9491">
+							<Log Message="Equipping Excalibur" />
+							<EquipWeapon ItemID="9491"/>
+							<WaitTimer WaitTime="3" />
+						</While>
+					</If>
+					<If Condition="ClassName == ((ClassJobType.Paladin))"> 
+						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.OffHand].RawItemId != 9500">
+							<Log Message="Equipping Aegis Shield" />
+							<EquipWeapon ItemID="9500"/>
+							<WaitTimer WaitTime="3" />
+						</While>
+					</If>			
+					<If Condition="ClassName == ((ClassJobType.Scholar))"> 
+						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9499">
+							<Log Message="Equipping Last Resort" />
+							<EquipWeapon ItemID="9499"/>
+							<WaitTimer WaitTime="3" />
+						</While>
+					</If>
+					<If Condition="ClassName == ((ClassJobType.Summoner))"> 
+						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9498">
+							<Log Message="Equipping Apocalypse" />
+							<EquipWeapon ItemID="9498"/>
+							<WaitTimer WaitTime="3" />
+						</While>
+					</If>	
+					<If Condition="ClassName == ((ClassJobType.Warrior))"> 
+						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9493">
+							<Log Message="Equipping Ragnarok" />
+							<EquipWeapon ItemID="9493"/>
+							<WaitTimer WaitTime="3" />
+						</While>
+					</If>
+					<If Condition="ClassName == ((ClassJobType.WhiteMage))"> 
+						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9496">
+							<Log Message="Equipping Nirvana" />
+							<EquipWeapon ItemID="9496"/>
+							<WaitTimer WaitTime="3" />
+						</While>
+					</If>				
+				<Grind GrindRef="Ifrit" While="not GameObjectManager.GetObjectByNPCId(1185).CurrentHealth == 0"/> <!-- Kill Ifrit -->	
+				<While condition="DutyManager.InInstance">	
+                    <LLLeaveDuty/>
+					<WaitTimer WaitTime="3" />
+				</While>		
+		</If>
+	</While>	
+	<If condition="ZodiacMahatmaIsDone()">
+		<LLoadProfile Path="../Start.xml"/>	
+	</If>	
+
+  </Order>
+  <GrindAreas>
+	<GrindArea name="Ifrit">
+        <Hotspots>
+			<Hotspot Radius="200" XYZ="15,0,0" />
+        </Hotspots>
+        <TargetMobs>
+			<TargetMob Name="Ifrit" Id="1185" Weight="1" />		
+        </TargetMobs>
+	</GrindArea>
+  </GrindAreas>	
+	<CodeChunk Name="EnableSideStep">
+		<![CDATA[
+			foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "SideStep"))
+			{
+			try
+			{
+				if (plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = true;  }
+			}
+			catch (Exception ex) {  }
+			}
+		]]>
+	</CodeChunk>
+	<CodeChunk Name="DisableSideStep">
+		<![CDATA[
+			foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "SideStep"))
+			{
+			try
+			{
+				if (!plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = false;  }
+			}
+			catch (Exception ex) {  }
+			}
+		]]>
+	</CodeChunk> 		
+  </CodeChunks>  
+</Profile>

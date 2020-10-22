@@ -29,7 +29,7 @@
 					<RunCode name="CultistOrb1"/>
 				</While>	
 				<If Condition="&openchest; == 1">
-					<RunCode name="OpenChest" />
+					<LLOpenChest />
 				</If>			
 			</If>
 			
@@ -41,7 +41,7 @@
 					<RunCode name="CultistOrb2"/>
 				</While>	
 				<If Condition="&openchest; == 1">
-					<RunCode name="OpenChest" />
+					<LLOpenChest />
 				</If>			
 			</If>
 			
@@ -81,7 +81,7 @@
 					<RunCode name="CultistOrb4"/>
 				</While>	
 				<If Condition="&openchest; == 1">
-					<RunCode name="OpenChest" />
+					<LLOpenChest />
 				</If>			
 			</If>
 			
@@ -93,83 +93,83 @@
 					<If Condition="ClassName == ((ClassJobType.Bard))"> 
 						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9495">
 							<Log Message="Equipping Yoichi Bow" />
-							<RunCode Name="YoichiBow" />
+							<EquipWeapon ItemID="9495"/>
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>
 					<If Condition="ClassName == ((ClassJobType.BlackMage))"> 
 						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9497">
 							<Log Message="Equipping Lilith Rod" />
-							<RunCode Name="LilithRod" />
+							<EquipWeapon ItemID="9497"/>
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>
 					<If Condition="ClassName == ((ClassJobType.Dragoon))"> 
 						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9494">
 							<Log Message="Equipping Longinus" />
-							<RunCode Name="Longinus" />
+							<EquipWeapon ItemID="9494"/>
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>	
 					<If Condition="ClassName == ((ClassJobType.Monk))"> 
 						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9492">
 							<Log Message="Equipping Kaiser Knuckles" />
-							<RunCode Name="KaiserKnuckles" />
+							<EquipWeapon ItemID="9492"/>
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>
 					<If Condition="ClassName == ((ClassJobType.Ninja))"> 
 						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9501">
 							<Log Message="Equipping Sasuke's Blades" />
-							<RunCode Name="SasukeBlades" />
+							<EquipWeapon ItemID="9501"/>
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>
 					<If Condition="ClassName == ((ClassJobType.Paladin))"> 
 						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9491">
 							<Log Message="Equipping Excalibur" />
-							<RunCode Name="Excalibur" />
+							<EquipWeapon ItemID="9491"/>
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>
 					<If Condition="ClassName == ((ClassJobType.Paladin))"> 
 						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.OffHand].RawItemId != 9500">
 							<Log Message="Equipping Aegis Shield" />
-							<RunCode Name="AegisShield" />
+							<EquipWeapon ItemID="9500"/>
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>			
 					<If Condition="ClassName == ((ClassJobType.Scholar))"> 
 						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9499">
 							<Log Message="Equipping Last Resort" />
-							<RunCode Name="LastResort" />
+							<EquipWeapon ItemID="9499"/>
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>
 					<If Condition="ClassName == ((ClassJobType.Summoner))"> 
 						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9498">
 							<Log Message="Equipping Apocalypse" />
-							<RunCode Name="Apocalypse" />
+							<EquipWeapon ItemID="9498"/>
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>	
 					<If Condition="ClassName == ((ClassJobType.Warrior))"> 
 						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9493">
 							<Log Message="Equipping Ragnarok" />
-							<RunCode Name="Ragnarok" />
+							<EquipWeapon ItemID="9493"/>
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>
 					<If Condition="ClassName == ((ClassJobType.WhiteMage))"> 
 						<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 9496">
 							<Log Message="Equipping Nirvana" />
-							<RunCode Name="Nirvana" />
+							<EquipWeapon ItemID="9496"/>
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>				
 				<Grind grindRef="Galvanth" While="GameObjectManager.GetObjectByNPCId(73)"/> <!-- Fight Galvanth the Dominator -->		
 				<If Condition="&openchest; == 1">
-					<RunCode name="OpenChest" />
+					<LLOpenChest />
 				</If>			
 				<While condition="DutyManager.InInstance">	
 					<WaitTimer WaitTime="5" />
@@ -233,206 +233,30 @@
 			ff14bot.Managers.GameObjectManager.GetObjectByNPCId(2000063).Interact();
 			await Coroutine.Sleep(3000);
       ]]>	 	  
-	</CodeChunk>	
-	<CodeChunk Name="ExitDuty">
+	</CodeChunk>		
+	<CodeChunk Name="EnableSideStep">
 		<![CDATA[
-			ff14bot.Managers.GameObjectManager.GetObjectByNPCId(2000139).Interact();
-			await Coroutine.Sleep(1000);
-			ff14bot.RemoteWindows.SelectYesno.ClickYes();
-			await Coroutine.Sleep(3000);
-      ]]>
-	</CodeChunk>	
-	<CodeChunk name="OpenChest">
-		<![CDATA[    
-		if (GameObjectManager.GetObjectsOfType<Treasure>().Where(r => r.Distance() < 50 && (r.Name == "Treasure Coffer" || r.Name == "treasure coffer")).Any())
-		{
-			var _chest = GameObjectManager.GetObjectsOfType<Treasure>().Where(r => r.Distance() < 50 && (r.Name == "宝箱" || r.Name == "Treasure Coffer" || r.Name == "treasure coffer")).FirstOrDefault();
-			while (Core.Me.Distance(_chest.Location) > 1)
-			{
-			await CommonTasks.MoveTo(_chest.Location);
-			await Coroutine.Yield();
-			}
-			
-			Navigator.PlayerMover.MoveStop();
-			await Coroutine.Sleep(1000);
-			Poi.Current = new Poi(_chest, PoiType.Kill);
-			Poi.Current.Unit.Interact();                    
-			await Coroutine.Sleep(1000);        
-		}
-		]]>
-	</CodeChunk>
-       <CodeChunk Name="BuyMahatma"> 
- 		  <![CDATA[ 
-			Core.OverlayManager.AddToast(() => "Please buy the next Mahatma and start the profile again.", TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
-			await Coroutine.Sleep(26000);
-		  ]]>
-        </CodeChunk>	
-		  <CodeChunk Name="EnableSideStep">
-		  <![CDATA[
 			foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "SideStep"))
 			{
-			  try
-			  {
+			try
+			{
 				if (plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = true;  }
-			  }
-			  catch (Exception ex) {  }
 			}
-		  ]]>
-		</CodeChunk>
-		<CodeChunk Name="DisableSideStep">
-			<![CDATA[
-				foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "SideStep"))
-				{
-				try
-				{
-					if (!plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = false;  }
-				}
-				catch (Exception ex) {  }
-				}
-			]]>
-		</CodeChunk> 		
- 		<CodeChunk Name="LastResort">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 9499)
-				{
-					slot.Move(EquipSlot);
-				}
+			catch (Exception ex) {  }
 			}
 		]]>
-		</CodeChunk>		
-  		<CodeChunk Name="Apocalypse">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
+	</CodeChunk>
+	<CodeChunk Name="DisableSideStep">
+		<![CDATA[
+			foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "SideStep"))
 			{
-				if(slot.RawItemId == 9498)
-				{
-					slot.Move(EquipSlot);
-				}
+			try
+			{
+				if (!plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = false;  }
+			}
+			catch (Exception ex) {  }
 			}
 		]]>
-		</CodeChunk>
-  		<CodeChunk Name="LilithRod">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 9497)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>	
-  		<CodeChunk Name="Ragnarok">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 9493)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>
-  		<CodeChunk Name="Excalibur">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 9491)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>		
-		</CodeChunk>
-  		<CodeChunk Name="AegisShield">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.OffHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 9500)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>		
-		</CodeChunk>	
-  		<CodeChunk Name="YoichiBow">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 9495)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>	
-  		<CodeChunk Name="Longinus">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 9494)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>	
-  		<CodeChunk Name="KaiserKnuckles">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 9492)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>
-  		<CodeChunk Name="SasukeBlades">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 9501)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>		
-  		<CodeChunk Name="Nirvana">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 9496)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>		
+	</CodeChunk> 		
   </CodeChunks>  
 </Profile>  

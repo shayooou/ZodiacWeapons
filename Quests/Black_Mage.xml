@@ -215,13 +215,13 @@
     <!-- The Weaponsmith of Legend -->
     <If Condition="not HasQuest(66241) and not IsQuestCompleted(66241)">
 	  <ChangeClass Job="BlackMage" />								
-      <GetTo ZoneId="140" XYZ="-470.4957, 23.03529, -355.3192"/>
+      <LisbethTravel ZoneId="140" XYZ="-470.4957, 23.03529, -355.3192"/>
       <If Condition="IsQuestAcceptQualified(66241)">
         <PickupQuest QuestId="66241" NpcId="1005021"/>
       </If>
     </If>
     <If Condition="GetQuestStep(66241) == 1">
-      <GetTo ZoneId="156" XYZ="25.51611, 29, -823.7956"/>
+      <LisbethTravel ZoneId="156" XYZ="25.51611, 29, -823.7956"/>
       <TalkTo NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66241" StepId="1"/>
     </If>
     <If Condition="GetQuestStep(66241) == 255">
@@ -244,7 +244,7 @@
 		  </If>
 		</If>
 		<If Condition="GetQuestStep(66659) == 1">
-		  <GetTo ZoneId="180" XYZ="224.9637,24.12439,-651.3314"/>
+		  <LisbethTravel ZoneId="180" XYZ="224.9637,24.12439,-651.3314"/>
 		  <UseObject NpcIds="2002495" XYZ="224.9637,24.12439,-651.3314"  Radius="25"  QuestId="66659" StepId="1"/>
 		</If>  
 		<If Condition="GetQuestStep(66659) == 2">
@@ -269,7 +269,7 @@
 		<If Condition="GetQuestStep(66659) == 4">
 		<!-- Check if the duty A Relic Reborn: The Chimera is unlocked -->
 			<If condition="not (IsQuestCompleted(66655) or IsQuestCompleted(66659) or IsQuestCompleted(66659) or IsQuestCompleted(66658) or IsQuestCompleted(66659) or IsQuestCompleted(66660) or IsQuestCompleted(66661) or IsQuestCompleted(66662) or IsQuestCompleted(66663))">
-				<GetTo ZoneId="155" XYZ="531.1261, 350.3369, -710.7814"/>
+				<LisbethTravel ZoneId="155" XYZ="531.1261, 350.3369, -710.7814"/>
 				<If condition="GameObjectManager.GetObjectByNPCId(2003993).IsTargetable">  
 				  <UseObject NpcIds="2003993" XYZ="532.5856, 350.6066, -710.9941"  Radius="25"  QuestId="66659" while="GameObjectManager.GetObjectByNPCId(2003993).IsTargetable"/>
 				</If>  
@@ -287,7 +287,7 @@
 		<If Condition="GetQuestStep(66659) == 6">
 			<If Condition="not HasAtLeast(6267,1)">
 				<If Condition="HasAtLeast(28,15)">
-					<GetTo ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
+					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
 					<!-- Buy Radz-at-Han Quenching Oil -->										   
 					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6267" SelectString="2" Count="1"/>
 				</If>	
@@ -297,7 +297,7 @@
 			</If>
 			<If Condition="not HasAtLeast(6268,3)">
 				<If Condition="HasAtLeast(28,60)">
-					<GetTo ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
+					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
 					<!-- Buy Thavnairian Mist -->
 					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
 				</If>	
@@ -306,7 +306,7 @@
 				</If>
 			</If>
 				<RunCode name="Disable_Flight"/>
-		  <GetTo ZoneId="156" XYZ="26.15508, 29, -823.166"/>
+		  <LisbethTravel ZoneId="156" XYZ="26.15508, 29, -823.166"/>
 		  <TalkTo NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66659" StepId="6"/>
 		</If>
 		<If Condition="GetQuestStep(66659) == 7">
@@ -316,7 +316,7 @@
 			<LLoadProfile Path="../Dungeons/Amdapor Keep.xml"/>
 		</If>
 		<If Condition="GetQuestStep(66659) == 8">
-		  <GetTo ZoneId="156" XYZ="25.67217, 29, -823.6172"/>
+		  <LisbethTravel ZoneId="156" XYZ="25.67217, 29, -823.6172"/>
 		  <!-- Handover Amdapor glyph BLM -->
 		  <HandOver ItemId="2001010" NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66659" StepId="8"/>
 		</If>
@@ -333,7 +333,7 @@
 				<RunCode Name="UnfinishedStardust" />
 				<WaitTimer WaitTime="3" />
 			</While>
-			<GetTo ZoneId="180" XYZ="74.54537, 54.23363, -535.9759" />													
+			<LisbethTravel ZoneId="180" XYZ="74.54537, 54.23363, -535.9759" />													
 			<Grind grindRef="RelicRebornStardust" postCombatDelay="1" while="GetQuestStep(66659) == 10"/>			
 		</If>
 		<If Condition="GetQuestStep(66659) == 11">
@@ -401,7 +401,7 @@
 		<If Condition="GetQuestStep(66659) == 255">
 			<If Condition="not HasAtLeast(6267,1)">
 				<If Condition="HasAtLeast(28,15)">
-					<GetTo ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
+					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
 					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6267" SelectString="2" Count="1"/>
 				</If>	
 				<If Condition="not HasAtLeast(28,15)">
@@ -419,7 +419,7 @@
 			<Log Message="Stardust Rod finished, upgrading to Stardust Rod Zenith!" />
 			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
-					<GetTo ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
+					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
 					<!-- Buy Thavnairian Mist -->
 					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
 				</If>	
@@ -430,7 +430,7 @@
 			</If>
 			<If Condition="HasAtLeast(6268,3)"> <!-- HasAtLeast 3 Thavnairian Mist -->
 				<Log Message="Exchanging Stardust Rod with Furnace" />
-				<GetTo ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
+				<LisbethTravel ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
 				<BuyShopExchangeItem NpcId="2002555" ItemId="6262" Count="1"/>
 			</If>			
 		</While>
@@ -455,7 +455,7 @@
 		  </If>
 		</If>
 		<If Condition="GetQuestStep(66971) == 255">
-		  <GetTo ZoneId="154" XYZ="407.3613, -4.538448, -88.70496"/>
+		  <LisbethTravel ZoneId="154" XYZ="407.3613, -4.538448, -88.70496"/>
 		  <TurnIn QuestId="66971" NpcId="1008948" XYZ="405.1117, -4.498068, -89.15851"/>																																										  
 		</If>
 
@@ -468,7 +468,7 @@
 			</If>
 			<FlyTo XYZ="410.7605, -6.053607, -88.41638" Land="True"/>
 			<ChangeClass Job="BlackMage" />
-			<GetTo ZoneId="154" XYZ="405.1117,-4.498068,-89.15851"/>
+			<LisbethTravel ZoneId="154" XYZ="405.1117,-4.498068,-89.15851"/>
 			<RunCode name="BuyStardustAtma"/>
 		</If>
 		<!-- Has Stardust Rod Zenith and not Stardust Rod Atma -->
@@ -487,7 +487,7 @@
 			<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
 		  </If>
 		  <FlyTo XYZ="410.7605, -6.053607, -88.41638" Land="True"/>		
-		  <GetTo ZoneId="154" XYZ="407.8153, -4.709439, -88.4598"/>
+		  <LisbethTravel ZoneId="154" XYZ="407.8153, -4.709439, -88.4598"/>
 			<!-- Equip Stardust Atma so quest is available -->
 			  <If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7830">
 					<RunCode Name="StardustAtma" />
@@ -498,11 +498,11 @@
 		  </If>
 		</If>
 		<If Condition="GetQuestStep(66972) == 1">
-		  <GetTo ZoneId="156" XYZ="25.59451, 29, -822.5854"/>
+		  <LisbethTravel ZoneId="156" XYZ="25.59451, 29, -822.5854"/>
 		  <TalkTo NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66972" StepId="1"/>
 		</If>
 		<If Condition="GetQuestStep(66972) == 255">
-		  <GetTo ZoneId="156" XYZ="69.80656, 33.06655, -706.0764"/>
+		  <LisbethTravel ZoneId="156" XYZ="69.80656, 33.06655, -706.0764"/>
 		  <TurnIn QuestId="66972" NpcId="1006976" XYZ="71.94617, 33.06656, -706.2944"/>
 		</If>	
 
@@ -514,7 +514,7 @@
 				<If Condition="not IsOnMap(156)">
 					<TeleportTo AetheryteId="24"/> 
 				</If>
-				<GetTo ZoneId="156" XYZ="71.94617,33.06656,-706.2944"/>
+				<LisbethTravel ZoneId="156" XYZ="71.94617,33.06656,-706.2944"/>
 				<RunCode name="BuyFireBooks"/>
 			</If>
 			
