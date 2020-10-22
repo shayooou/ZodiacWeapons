@@ -392,7 +392,7 @@
 		
 		<!-- Buy Zenith weapons -->
 		<!-- If Has Completed A Relic Reborn (The Sphairai) and has Sphairai -->
-		<While Condition="IsQuestCompleted(66661) and HasAtLeast(1746,1)">	
+		<While Condition="IsQuestCompleted(66657) and HasAtLeast(1746,1)">	
 			<Log Message="Sphairai finished, upgrading to Sphairai Zenith!" />
 			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->

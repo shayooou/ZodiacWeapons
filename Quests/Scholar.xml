@@ -423,7 +423,7 @@
 
 		<!-- Buy Zenith weapons -->
 		<!-- If Has Completed A Relic Reborn (Omnilex) and has Omnilex -->
-		<While Condition="IsQuestCompleted(66661) and HasAtLeast(2214,1)">	
+		<While Condition="IsQuestCompleted(66663) and HasAtLeast(2214,1)">	
 			<Log Message="Omnilex finished, upgrading to Omnilex Zenith!" />
 			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->

@@ -415,7 +415,7 @@
  
 		<!-- Buy Zenith weapons -->
 		<!-- If Has Completed A Relic Reborn (Stardust Rod) and has Stardust Rod -->
-		<While Condition="IsQuestCompleted(66661) and HasAtLeast(2140,1)">	
+		<While Condition="IsQuestCompleted(66659) and HasAtLeast(2140,1)">	
 			<Log Message="Stardust Rod finished, upgrading to Stardust Rod Zenith!" />
 			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->

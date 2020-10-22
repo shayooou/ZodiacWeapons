@@ -381,7 +381,7 @@
 		
 		<!-- Buy Zenith weapons -->
 		<!-- If Has Completed A Relic Reborn (Yoshimitsu) and has Yoshimitsu -->
-		<While Condition="IsQuestCompleted(66661) and HasAtLeast(7888,1)">	
+		<While Condition="IsQuestCompleted(67115) and HasAtLeast(7888,1)">	
 			<Log Message="Yoshimitsu finished, upgrading to Yoshimitsu Zenith!" />
 			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->

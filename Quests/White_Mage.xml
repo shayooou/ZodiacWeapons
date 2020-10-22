@@ -164,42 +164,110 @@
         </CodeChunk>		
         <CodeChunk Name="BuyThyrusAtma"> <!-- Upgrade Thyrus Zenith -->
             <![CDATA[ 
-                await Buddy.Coroutines.Coroutine.Sleep(500);
-                ff14bot.Managers.GameObjectManager.GetObjectByNPCId(1008948).Interact();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectIconString.IsOpen)
-                    ff14bot.RemoteWindows.SelectIconString.ClickSlot(1);
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectString.IsOpen)
-                    ff14bot.RemoteWindows.SelectString.ClickSlot(6);
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                 if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
-                    ff14bot.RemoteWindows.SelectYesno.ClickYes();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }				
+				Dictionary<ClassJobType, uint[]> Slots = new Dictionary<ClassJobType, uint[]>
+				{
+					{ClassJobType.Paladin, new uint[] {0}},
+					{ClassJobType.Monk, new uint[] {1}},
+					{ClassJobType.Warrior, new uint[] {2}},
+					{ClassJobType.Dragoon, new uint[] {3}},
+					{ClassJobType.Bard, new uint[] {4}},
+					{ClassJobType.Ninja, new uint[] {5}},
+					{ClassJobType.WhiteMage, new uint[] {6}},
+					{ClassJobType.BlackMage, new uint[] {7}},
+					{ClassJobType.Summoner, new uint[] {8}},
+					{ClassJobType.Scholar, new uint[] {9}},
+				};
+
+				foreach (var slot in Slots[Core.Me.CurrentJob])
+				{			
+			
+					var npcId = GameObjectManager.GetObjectByNPCId(1008948);
+
+					if (!npcId.IsWithinInteractRange)
+					{
+						var _target = npcId.Location;
+						Navigator.PlayerMover.MoveTowards(_target);
+						while (_target.Distance2D(Core.Me.Location) >= 4)
+						{
+							Navigator.PlayerMover.MoveTowards(_target);
+							await Coroutine.Sleep(100);
+						}
+						Navigator.PlayerMover.MoveStop();
+					}
+
+					npcId.Interact();			
+				
+					await Coroutine.Wait(5000, () => SelectIconString.IsOpen);
+					await Buddy.Coroutines.Coroutine.Sleep(500);
+					if (ff14bot.RemoteWindows.SelectIconString.IsOpen)
+					{
+							Logging.WriteDiagnostic("Selecting 'Relic Weapon Zenith Enhancement'.");
+							SelectIconString.ClickLineContains("Relic Weapon Zenith Enhancement");
+					}
+					else
+					{
+						Logging.WriteDiagnostic("Relic Weapon Zenith Enhancement window failed to open.");
+						ff14bot.TreeRoot.Stop("Window failed to open");
+					}			
+				
+				
+					await Coroutine.Wait(5000, () => Talk.DialogOpen);
+					await Buddy.Coroutines.Coroutine.Sleep(500);
+					while (Talk.DialogOpen)
+					{
+						Talk.Next();
+						await Coroutine.Wait(2000, () => !Talk.DialogOpen);
+						await Buddy.Coroutines.Coroutine.Sleep(1000);   
+					}	
+
+					await Coroutine.Wait(5000, () => SelectString.IsOpen);
+					await Buddy.Coroutines.Coroutine.Sleep(500);
+					if (ff14bot.RemoteWindows.SelectString.IsOpen)
+					{
+						Logging.WriteDiagnostic("Choosing weapon Zenith.");
+						ff14bot.RemoteWindows.SelectString.ClickSlot(slot);
+					}
+					else
+					{
+						Logging.WriteDiagnostic("Weapon select window failed to open.");
+						ff14bot.TreeRoot.Stop("Window failed to open");
+					}	
+
+					await Coroutine.Wait(5000, () => SelectYesno.IsOpen);
+					await Buddy.Coroutines.Coroutine.Sleep(500);
+					if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
+					{
+						Logging.WriteDiagnostic("Selecting Yes.");
+						ff14bot.RemoteWindows.SelectYesno.ClickYes();
+					}
+					else
+					{
+						Logging.WriteDiagnostic("Select Yes/No window failed to open.");
+						ff14bot.TreeRoot.Stop("Window failed to open");
+					}
+
+					await Coroutine.Wait(5000, () => Talk.DialogOpen);
+					await Buddy.Coroutines.Coroutine.Sleep(500);
+					while (Talk.DialogOpen)
+					{
+						Talk.Next();
+						await Coroutine.Wait(2000, () => !Talk.DialogOpen);
+						await Buddy.Coroutines.Coroutine.Sleep(1000); 
+						if (QuestLogManager.InCutscene)
+						{
+							while (QuestLogManager.InCutscene)
+							{
+								while (Talk.DialogOpen)
+								{
+									Talk.Next();
+									await Buddy.Coroutines.Coroutine.Sleep(1000);
+								}
+								await Buddy.Coroutines.Coroutine.Sleep(1000);
+							}
+						}							
+					}
+				}	
+
             ]]>
         </CodeChunk>
         <CodeChunk Name="BuyFireBooks">
@@ -499,7 +567,7 @@
 
 		<!-- Buy Zenith weapons -->
 		<!-- If Has Completed A Relic Reborn (Thyrus) and has Thyrus -->
-		<While Condition="IsQuestCompleted(66661) and HasAtLeast(2052,1)">	
+		<While Condition="IsQuestCompleted(66660) and HasAtLeast(2052,1)">	
 			<Log Message="Thyrus finished, upgrading to Thyrus Zenith!" />
 			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
@@ -544,12 +612,8 @@
 		<!-- Has all Atma and Thyrus Zenith -->								  
 		<If Condition="(HasAtLeast(7851,1)) and (HasAtLeast(7852,1)) and (HasAtLeast(7853,1)) and (HasAtLeast(7854,1)) and (HasAtLeast(7855,1)) and (HasAtLeast(7856,1)) and (HasAtLeast(7857,1)) and (HasAtLeast(7858,1)) and (HasAtLeast(7859,1)) and (HasAtLeast(7860,1)) and (HasAtLeast(7861,1)) and (HasAtLeast(7862,1)) and HasAtLeast(6262,1)">
 			<Log Message="We have all the atmas taking us back to Jalzahn!" />
-			<If Condition="not IsOnMap(154)">
-				<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-			</If>
-			<FlyTo XYZ="410.7605, -6.053607, -88.41638" Land="True"/>
+			<LisbethTravel Area="North Shroud" Position="406.4438, -4.498047, -89.05788"/>
 			<ChangeClass Job="Whitemage" />
-			<LisbethTravel ZoneId="154" XYZ="405.1117,-4.498068,-89.15851"/>
 			<RunCode name="BuyThyrusAtma"/>														   								   
 		</If>		
 		<!-- Has Thyrus Zenith and not Thyrus Atma -->										  

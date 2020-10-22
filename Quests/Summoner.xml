@@ -501,7 +501,7 @@
 		
 		<!-- Buy Zenith weapons -->
 		<!-- If Has Completed A Relic Reborn (The Veil of Wiyu) and has The Veil of Wiyu -->
-		<While Condition="IsQuestCompleted(66661) and HasAtLeast(2213,1)">	
+		<While Condition="IsQuestCompleted(66662) and HasAtLeast(2213,1)">	
 			<Log Message="The Veil of Wiyu finished, upgrading to The Veil of Wiyu Zenith!" />
 			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->

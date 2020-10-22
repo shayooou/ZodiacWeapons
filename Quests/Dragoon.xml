@@ -392,7 +392,7 @@
 		
 		<!-- Buy Zenith weapons -->
 		<!-- If Has Completed A Relic Reborn (Gae Bolg) and has Gae Bolg -->
-		<While Condition="IsQuestCompleted(66661) and HasAtLeast(1885,1)">	
+		<While Condition="IsQuestCompleted(66658) and HasAtLeast(1885,1)">	
 			<Log Message="Gae Bolg finished, upgrading toGae Bolg Zenith!" />
 			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->

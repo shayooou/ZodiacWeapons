@@ -154,7 +154,6 @@
 
 				await Coroutine.Wait(5000, () => SelectIconString.IsOpen);
 				await Buddy.Coroutines.Coroutine.Sleep(500);
-
 				if (ff14bot.RemoteWindows.SelectIconString.IsOpen)
 				{
 					Logging.WriteDiagnostic("SelectIconString Open. Clicking Mahatma Exchange.");

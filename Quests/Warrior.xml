@@ -439,7 +439,7 @@
 		
 		<!-- Buy Zenith weapons -->
 		<!-- If Has Completed A Relic Reborn (Bravura) and has Bravura -->
-		<While Condition="IsQuestCompleted(66661) and HasAtLeast(1816,1)">	
+		<While Condition="IsQuestCompleted(66655) and HasAtLeast(1816,1)">	
 			<Log Message="Bravura finished, upgrading to Bravura Zenith!" />
 			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
