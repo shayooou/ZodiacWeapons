@@ -6,6 +6,12 @@
   Code Credit: TuckMeIntoBread, Kayla, Sodimm
 -->
 
+<!DOCTYPE Profile [
+<!-- Profile Settings -->
+<!ENTITY Ifrit "1">
+<!ENTITY Deepcroft "0">   		
+]>
+
 <Profile>
   <Name>Zodiac Zeta Quests</Name>
   <BehaviorDirectory>..\Quest Behaviors</BehaviorDirectory>
@@ -139,7 +145,12 @@
 			</While>
 			<!-- Mahatma Farm -->	
 			<If condition="not ZodiacMahatmaIsDone()">			
-				<LLoadProfile Path="../Dungeons/Tam Tara Deepcroft (Zodiac Zeta).xml"/>
+				<If Condition="&Ifrit; == 1">	
+					<LLoadProfile Path="../Dungeons/假火魂石-Zodiac Zeta.xml"/>
+				</If>
+				<If Condition="&Deepcroft; == 1">	
+					<LLoadProfile Path="../Dungeons/Tam Tara Deepcroft (Zodiac Zeta).xml"/>
+				</If>	
 			</If>	
 		</If>
 		
