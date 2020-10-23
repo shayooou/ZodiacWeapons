@@ -76,21 +76,21 @@
 				<If Condition="ClassName == ((ClassJobType.Scholar))">	
 					<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7871">
 						<Log Message="Equipping Omnilex Novus..." />
-						<EquipWeapon ItemID="7871"/>>
+						<EquipWeapon ItemID="7871"/>
 						<WaitTimer WaitTime="3" />
 					</While>
 				</If>	
 				<If Condition="ClassName == ((ClassJobType.Warrior))"> 		
 					<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7865">
 						<Log Message="Equipping Bravura Novus..." />
-						<EquipWeapon ItemID="7865"/>>					
+						<EquipWeapon ItemID="7865"/>					
 						<WaitTimer WaitTime="3" />
 					</While>
 				</If>	
 				<If Condition="ClassName == ((ClassJobType.WhiteMage))">	
 					<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7868">
 						<Log Message="Equipping Thyrus Novus..." />
-						<EquipWeapon ItemID="7868"/>>					
+						<EquipWeapon ItemID="7868"/>					
 						<WaitTimer WaitTime="3" />
 					</While>
 				</If>	
@@ -172,21 +172,21 @@
 				<If Condition="ClassName == ((ClassJobType.Scholar))">	
 					<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7871">
 						<Log Message="Equipping Omnilex Novus..." />
-						<EquipWeapon ItemID="7871"/>>
+						<EquipWeapon ItemID="7871"/>
 						<WaitTimer WaitTime="3" />
 					</While>
 				</If>	
 				<If Condition="ClassName == ((ClassJobType.Warrior))"> 		
 					<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7865">
 						<Log Message="Equipping Bravura Novus..." />
-						<EquipWeapon ItemID="7865"/>>					
+						<EquipWeapon ItemID="7865"/>					
 						<WaitTimer WaitTime="3" />
 					</While>
 				</If>	
 				<If Condition="ClassName == ((ClassJobType.WhiteMage))">	
 					<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7868">
 						<Log Message="Equipping Thyrus Novus..." />
-						<EquipWeapon ItemID="7868"/>>					
+						<EquipWeapon ItemID="7868"/>					
 						<WaitTimer WaitTime="3" />
 					</While>
 				</If>
