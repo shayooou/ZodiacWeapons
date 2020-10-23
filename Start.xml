@@ -95,7 +95,7 @@
 		<If Condition="not ClassName == ClassJobType.BlackMage">	
 			<ChangeClass Job="BlackMage" />
 		</If>	
-		<LLoadProfile Path="Quests/Black_Mage.xml"/>
+		<LLoadProfile Path="Quests/Black Mage.xml"/>
 	</If>	
   
 	<!-- Load Dragoon -->
@@ -159,7 +159,7 @@
 		<If Condition="not ClassName == ClassJobType.WhiteMage">	
 			<ChangeClass Job="WhiteMage" />
 		</If>	
-		<LLoadProfile Path="Quests/White_Mage.xml"/>
+		<LLoadProfile Path="Quests/White Mage.xml"/>
 	</If>
 
   </Order>
