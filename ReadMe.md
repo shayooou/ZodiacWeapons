@@ -8,19 +8,38 @@ Before you start, open the Start.xml and set your desired job to 1, all other jo
 
 Make sure you have completed your class quests up through level 50 to begin the relic quest.
 
-In the Start.xml you will find a list of items, one for each job. You must buy this item and meld it with the required materia (also listed) and have it in your inventory before starting the profile. You can also find this list below.
+You will need a minimum of 3500 Tomestone of Poetics to complete this profile. 
+Obviously we can't hold that much at once, so the profile will stop and announce the need for more when you run out.
 
-			Bard		Longarm's Composite Bow				Heavens Eye Materia III X2
-			Black Mage	Sanguine Scepter				Savage Might Materia III X2
-			Dragoon		Champion's Lance				Savage Aim Materia III X2
-			Monk		Wildling's Cesti				Savage Aim Materia III X2
-			Ninja		Vamper's Knives	Heavens 			Eye Materia III X2
-			Paladin		Aeolian Scimitar				Battledance Materia III X2
-			Scholar		Erudite's Picatrix Of Healing			Quicktongue Materia III X2
-			Summoner	Erudite's Picatrix Of Casting			Savage Might Materia III X2
-			Warrior		Barbarian's Bardiche				Battledance Materia III X2
-			White Mage	Madman's Whispering Rod				Quicktongue Materia III X2
+You will also need 400,000 gil.
 
+You will also need 80,000 Grand Company Seals.
+	
+Items required for quest. Have these in your inventory before starting profile.
+
+	Bard		Longarm's Composite Bow				Heavens Eye Materia III X2
+	Black Mage	Sanguine Scepter				Savage Might Materia III X2
+	Dragoon		Champion's Lance				Savage Aim Materia III X2
+	Monk		Wildling's Cesti				Savage Aim Materia III X2
+	Ninja		Vamper's Knives					Heavens Eye Materia III X2
+	Paladin		Aeolian Scimitar				Battledance Materia III X2
+	Scholar		Erudite's Picatrix Of Healing			Quicktongue Materia III X2
+	Summoner	Erudite's Picatrix Of Casting			Savage Might Materia III X2
+	Warrior		Barbarian's Bardiche				Battledance Materia III X2
+	White Mage	Madman's Whispering Rod				Quicktongue Materia III X2
+						
+You will need these items for the Zodiac stage of the quest.
+			
+	Item				Source
+	HQ Furnace Ring			Market Board. Or crafted, requires material obtained from desynthesising Aged Ring from Silver Bazaar, Western Thanalan (x15 y29).
+	HQ Bundle of Perfect Firewood	Market Board. Or crafted, requires material obtained from desynthesising Aged Spear from Silver Bazaar, Western Thanalan (x15 y29).
+	HQ Perfect Mortar		Market Board. Or crafted, requires material obtained from desynthesising Aged Mortar from Silver Bazaar, Western Thanalan (x15 y29).
+	HQ Perfect Pestle		Market Board. Or crafted, requires material obtained from desynthesising Aged Pestle from Silver Bazaar, Western Thanalan (x15 y29).
+	HQ Perfect Vellum		Market Board. Or crafted, requires material obtained from desynthesising Aged Vellum from Silver Bazaar, Western Thanalan (x15 y29).
+	HQ Perfect Pounce		Market Board. Or crafted, requires material obtained from desynthesising Aged goods from Silver Bazaar, Western Thanalan (x15 y29).
+	HQ Tailor-made Eel Pie		Market Board. Or crafted, requires material obtained from desynthesising Aged goods from Silver Bazaar, Western Thanalan (x15 y29).
+	HQ Perfect Cloth		Market Board. Or crafted, requires material obtained from desynthesising Aged goods from Silver Bazaar, Western Thanalan (x15 y29).
+			
 You will need ExBuddy installed in your plugins folder which can be found here https://github.com/Entrax643/ExBuddy
 You will need to take the ExTurnInGuildLeveTag.cs file from my Plugins folder and place it in RebornBuddy\Plugins\ExBuddy\OrderBotTags\Behaviors folder, overwriting the current one. This files makes some changes to fix the GuildLeve turn ins.
 
@@ -58,7 +77,7 @@ I'm in the process of changing over all the movement in this profile to be handl
 - Fate "Suprise" is kinda hard for the bot to solo. It lets the NPCs die and then the Fate fails. Might need to do this manually.
 - [X] Book of Skywind II
 - [X] Book of Skyearth I
-- [ ] Purchase Animus from Jalzahn
+- [X] Purchase Animus from Jalzahn
 
 
 ### Novus Zodiac Weapons
@@ -66,13 +85,12 @@ I'm in the process of changing over all the movement in this profile to be handl
 - [X] Star Light, Star Bright
 - [X]  Farming 75 Alexandrite
 - [ ] Melding Materia to Scroll
-- [ ] Purchase Novus Zodiac
+- [X] Purchase Novus Zodiac
 
 ### Nexus Zodiac Weapons
 - [X] Mmmmmm, Soulglazed Relics
 - [X] Light Farming * +
-- [ ] Purchase Nexus Zodiac
-* You must manually have Jalzhan soulglaze your relic before starting light farming.
+- [X] Purchase Nexus Zodiac
 + You have three choices for Light Farming, see below.
 
 ### Zodiac Braves Weapons
@@ -90,7 +108,7 @@ I'm in the process of changing over all the movement in this profile to be handl
 - [X] Rise and Shine
 - [X] The Vital Title
 - [X] Mahatma Light Farming
-- [ ] Purchase Zodiac Zeta
+- [X] Purchase Zodiac Zeta
 
 
 
@@ -113,7 +131,7 @@ We cannot manually meld materia to your Sphere scroll. It will farm the 75 Alexa
 	* Copperbell Mines (Hard): One of the Collapsed Rocks has a smaller hitbox then RB thinks it does. Sometimes melee classes don't get close enough. Watch this.
 	* The Tousand Maws of Toto-Rak: The meshing here is absolutely horrible. Keep an eye on it as you run as it may not be able to get to some of the photocells that drop. And could possibly get stuck on things.
 	* Hullbreaker Isle: Currently cannot fight the kraken due to no meshing of the fight area. You will need to do this fight manually, but the bot will do the rest of the instance.
-	* Stone Vigil (Hard): The second fight Curca Fera is neigh impossible to solo, even by hand. Do this dungeon synced manually.
+	* Stone Vigil (Hard): The second boss fight, Curca Fera is neigh impossible to solo, even by hand. Do this dungeon synced manually.
 	
 * Leves
 	* You must already have levequests unlocked for the Whitebrim, Saint Coinarch's Find and Camp Bluefog. I can't automate those quests yet as they combine a quest and a levequest in one.
