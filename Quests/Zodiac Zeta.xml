@@ -113,8 +113,11 @@
 		
 		<If condition="IsQuestCompleted(66096)">
 			<While condition="ZodiacCompletedMahatma() == 11 and ZodiacMahatmaIsDone()">
+				<BotSettings AutoEquip="1" />
 				<LisbethTravel Area="North Shroud" Position="407.7509, -4.688663, -89.3384"/>
 				<RunCode name="PurchaseZodiacZenith"/>
+				<BotSettings AutoEquip="0" />
+				<StopBot />
 			</While>
 			<If condition="ZodiacCompletedMahatma() == 0 and not ZodiacMahatmaIsDone()">
 				<While Condition="not HasAtLeast(28,50)">
@@ -307,10 +310,124 @@
 			  ]]>
 		</CodeChunk>
 		<CodeChunk Name="PurchaseZodiacZenith">
-		  <![CDATA[ 
-			Core.OverlayManager.AddToast(() => "Talk to Jalzahn and purchase your final relic upgrade.", TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
-			await Coroutine.Sleep(26000);
-		  ]]>
-		</CodeChunk>	
+            <![CDATA[ 
+			
+				Dictionary<ClassJobType, uint[]> Slots = new Dictionary<ClassJobType, uint[]>
+				{
+					{ClassJobType.Paladin, new uint[] {9491, 9500}},
+					{ClassJobType.Monk, new uint[] {9492}},
+					{ClassJobType.Warrior, new uint[] {9493}},
+					{ClassJobType.Dragoon, new uint[] {9494}},
+					{ClassJobType.Bard, new uint[] {9495}},
+					{ClassJobType.Ninja, new uint[] {9501}},
+					{ClassJobType.WhiteMage, new uint[] {9496}},
+					{ClassJobType.BlackMage, new uint[] {9497}},
+					{ClassJobType.Summoner, new uint[] {9498}},
+					{ClassJobType.Scholar, new uint[] {9499}},
+				};			
+
+				foreach (var slot in Slots[Core.Me.CurrentJob])
+				{		
+					var npcId = GameObjectManager.GetObjectByNPCId(1008948);
+
+					if (!npcId.IsWithinInteractRange)
+
+					{
+						var _target = npcId.Location;
+						Navigator.PlayerMover.MoveTowards(_target);
+						while (_target.Distance2D(Core.Me.Location) >= 4)
+						{
+							Navigator.PlayerMover.MoveTowards(_target);
+							await Coroutine.Sleep(100);
+						}
+						Navigator.PlayerMover.MoveStop();
+					}
+
+					npcId.Interact();
+					
+					await Coroutine.Wait(10000, () => SelectIconString.IsOpen);
+					await Buddy.Coroutines.Coroutine.Sleep(500);
+					if (ff14bot.RemoteWindows.SelectIconString.IsOpen)
+					{
+						Logging.WriteDiagnostic("Selecting 'Zodiac Weapon Awakening'.");
+						SelectIconString.ClickLineContains("Zodiac Weapon Awakening");
+					}
+					else
+					{
+						Logging.WriteDiagnostic("Zodiac Weapon Awakening window failed to open.");
+						ff14bot.TreeRoot.Stop("Window failed to open");
+					}
+					
+					await Coroutine.Wait(10000, () => Talk.DialogOpen);
+					await Buddy.Coroutines.Coroutine.Sleep(500);
+					while (Talk.DialogOpen)
+					{
+						Talk.Next();
+						await Coroutine.Wait(2000, () => !Talk.DialogOpen);
+						await Buddy.Coroutines.Coroutine.Sleep(1000);
+					}
+					
+					await Coroutine.Wait(5000, () => SelectString.IsOpen);
+					await Buddy.Coroutines.Coroutine.Sleep(500);
+					if (ff14bot.RemoteWindows.SelectString.IsOpen)
+					{
+						Logging.WriteDiagnostic("Choosing Awaken Weapon.");
+						ff14bot.RemoteWindows.SelectString.ClickSlot(0);
+					}
+					else
+					{
+						Logging.WriteDiagnostic("Weapon select window failed to open.");
+						ff14bot.TreeRoot.Stop("Window failed to open");
+					}
+				
+					await Coroutine.Wait(10000, () => Request.IsOpen);
+					await Buddy.Coroutines.Coroutine.Sleep(500);		
+					if (ff14bot.RemoteWindows.Request.IsOpen)
+					{
+						Logging.WriteDiagnostic("Selecting weapon to hand over.");
+						await CommonTasks.HandOverRequestedItems();
+					}
+					else
+					{
+						Logging.WriteDiagnostic("Request weapon window failed to open.");
+						ff14bot.TreeRoot.Stop("Window failed to open");
+					}				
+					
+					await Coroutine.Wait(10000, () => Talk.DialogOpen);
+					await Buddy.Coroutines.Coroutine.Sleep(500);
+					while (Talk.DialogOpen)
+					{
+						Talk.Next();
+						await Coroutine.Wait(2000, () => !Talk.DialogOpen);
+						await Buddy.Coroutines.Coroutine.Sleep(1000);						
+					}
+					
+					await Coroutine.Wait(5000, () => RaptureAtkUnitManager.GetWindowByName("RelicSphereUpgrade")!= null);
+					if (RaptureAtkUnitManager.GetWindowByName("RelicSphereUpgrade") != null)
+					{
+						RaptureAtkUnitManager.GetWindowByName("RelicSphereUpgrade").SendAction(1,3,0);
+						await Coroutine.Wait(10000, ()=> QuestLogManager.InCutscene);
+						if (QuestLogManager.InCutscene)
+						{
+							while (QuestLogManager.InCutscene)
+							{
+								while (Talk.DialogOpen)
+								{
+									Talk.Next();
+									await Buddy.Coroutines.Coroutine.Sleep(2000);
+								}
+								await Buddy.Coroutines.Coroutine.Sleep(2000);
+							}
+						}												
+					}					
+					else
+					{
+						Logging.WriteDiagnostic("Upgrade Relic window failed to open.");
+						ff14bot.TreeRoot.Stop("Window failed to open");											
+					}										
+					
+				}
+	  ]]>
+	</CodeChunk>	
 	</CodeChunks>
 </Profile>	

@@ -1,29 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
-  Profile: Monk Relic Weapon
+  Profile: Black Mage Relic Weapon
   Version: 1.0
   Authors: Zamphire
   Code Credit: TuckMeIntoBread, Kayla, Sodimm
 -->
 
 <Profile>
-  <Name>Monk Relic Weapon</Name>
+  <Name>Black Mage Relic Weapon</Name>
   <BehaviorDirectory></BehaviorDirectory>
   <Order>
-  
-	<Log Message="Starting Monk Zodiac Questing Version 1.0" />
-
-	<!-- Obtain Base relic: Sphairai -->
-	<If condition="not IsQuestCompleted(66657)">
-		<Log Message="Sphairai not yet obtained" />
+	
+	<Log Message="Starting Black Mage Zodiac Questing Version 1.0" />
+	
+	<!-- Obtain Base Relic: Stardust Rod -->
+	<If condition="not IsQuestCompleted(66659)">
+		<Log Message="Stardust Rod not yet obtained" />
 		<LLoadProfile Path="A Relic Reborn.xml"/>
 	</If>
 	
 	
 	<!-- Buy Zenith weapons -->
-	<!-- If Has Completed A Relic Reborn (The Sphairai) and has Sphairai -->
-	<While Condition="IsQuestCompleted(66657) and HasAtLeast(1746,1)">	
-		<Log Message="Sphairai finished, upgrading to Sphairai Zenith!" />
+	<!-- If Has Completed A Relic Reborn (Stardust Rod) and has Stardust Rod -->
+	<While Condition="IsQuestCompleted(66659) and HasAtLeast(2140,1)">	
+		<Log Message="Stardust Rod finished, upgrading to Stardust Rod Zenith!" />
 		<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
 			<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
 				<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
@@ -36,48 +36,48 @@
 			</While>
 		</If>
 		<If Condition="HasAtLeast(6268,3)"> <!-- HasAtLeast 3 Thavnairian Mist -->
-			<Log Message="Exchanging Sphairai with Furnace" />
+			<Log Message="Exchanging Stardust Rod with Furnace" />
 			<LisbethTravel ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
-			<BuyShopExchangeItem NpcId="2002555" ItemId="6258" Count="1"/>
+			<BuyShopExchangeItem NpcId="2002555" ItemId="6262" Count="1"/>
 		</If>			
-	</While>								 
+	</While>							 
 
-	<!-- Obtain Sphairai Atma -->
-	<If Condition="HasAtLeast(6258,1)">
+	<!-- Obtain Stardust Rod Atma -->
+	<If Condition="HasAtLeast(6263,1)">
 		<Log Message="Starting Atma Farm..." />
 		<LLoadProfile Path="Atma Farm.xml"/>
 	</If>	
 	
-	<!-- Obtain Sphairai Animus -->
-	<If Condition="HasAtLeast(7825,1)">
+	<!-- Obtain Stardust Rod Animus -->
+	<If Condition="HasAtLeast(7830,1)">
 		<Log Message="Starting Animus Book Farm..." />
 		<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
 	</If>
 		
-	<!-- Obtain Sphairai Novus -->
-	<If condition="HasAtLeast(7835,1)">
-		<Log Message="Starting Sphairai Novus Questing..." />
+	<!-- Obtain Stardust Rod Novus -->
+	<If condition="HasAtLeast(7840,1)">
+		<Log Message="Starting Stardust Rod Novus Questing..." />
 		<LLoadProfile Path="Relic Novus.xml"/>
 	</If>
 		
-	<!-- Obtain Sphairai Nexus -->
-	<If condition="HasAtLeast(7864,1)">
-		<Log Message="Starting Sphairai Nexus Questing..." />
+	<!-- Obtain Stardust Rod Nexus -->
+	<If condition="HasAtLeast(7869,1)">
+		<Log Message="Starting Stardust Rod Nexus Questing..." />
 		<LLoadProfile Path="Relic Nexus.xml"/>
 	</If>
 
-	<!-- Obtain Kaiser Knuckles -->
-	<If condition="HasAtLeast(8650,1)">
-		<Log Message="Starting Kaiser Knuckles Questing..." />
+	<!-- Obtain Lilith Rod -->
+	<If condition="HasAtLeast(8655,1)">
+		<Log Message="Starting Lilith Rod Questing..." />
 		<LLoadProfile Path="Zodiac Braves.xml"/>
 	</If>
 		
-	<!-- Zodiac Kaiser Knuckles Zeta -->	
-	<If condition="HasAtLeast(9492,1)">
-		<Log Message="Starting Kaiser Knuckles Zeta Questing..." />
+	<!-- Zodiac Yoichi Bow Zeta -->	
+	<If condition="HasAtLeast(9497,1)">
+		<Log Message="Starting Lilith Rod Zeta Questing..." />
 		<LLoadProfile Path="Zodiac Zeta.xml"/>
 	</If>
-
+		
   </Order>
 	<CodeChunks>
 		<CodeChunk Name="NeedPoetics">
@@ -86,5 +86,5 @@
 			await Coroutine.Sleep(26000);
 		  ]]>
 		</CodeChunk>    
-	</CodeChunks>   
+	</CodeChunks>
 </Profile>
