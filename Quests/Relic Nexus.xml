@@ -116,9 +116,9 @@
 	<!-- Light Farm -->
 		<If condition="IsQuestCompleted(65742)">
 				<If Condition="ClassName == ((ClassJobType.Bard))"> 
-					<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7876">
+					<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7867">
 						<Log Message="Equipping Artemis Bow Novus..." />
-						<EquipWeapon ItemID="7876"/>
+						<EquipWeapon ItemID="7867"/>
 						<WaitTimer WaitTime="3" />					
 					</While>					
 				</If>
