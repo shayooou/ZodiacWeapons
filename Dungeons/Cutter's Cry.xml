@@ -23,9 +23,7 @@
 			<BotSettings AutoEquip="1" />	
 			<Grind GrindRef="ClearFirstRoom" While="GetInstanceTodo(0) &lt; 8"/> <!-- Clear first room -->
 			<MoveTo XYZ="259.5017,-3.5003,88.0854" distance="1"/> <!-- Move to Shifting Sands -->				
-			<While condition="GameObjectManager.GetObjectByNPCId(2000460).IsTargetable">
-				<RunCode name="ShiftingSands1"/>
-			</While>	
+			<RunCode name="ShiftingSands1"/>	
 		</If>
 		
 		<!-- Slay all the enemies 0/8 -->
@@ -33,9 +31,7 @@
 			<Log Message="Slay all the enemies 0/8" />
 			<Grind GrindRef="ClearSecondRoom" While="GetInstanceTodo(1) &lt; 8"/> <!-- Clear second room -->
 			<MoveTo XYZ="79.08752,0.2892196,152.2087" distance="1"/> <!-- Move to Shifting Sands -->
-			<While condition="GameObjectManager.GetObjectByNPCId(2000461).IsTargetable">
-				<RunCode name="ShiftingSands2"/>
-			</While>	
+			<RunCode name="ShiftingSands2"/>	
 		</If>
 
 		<!-- Clear the Feeding Pit 0/1 -->
@@ -47,9 +43,7 @@
 				<LLOpenChest/>
 			</If>
 			<MoveTo XYZ="-8.133057,-5.813782,215.7168" distance="1"/> <!-- Move to Shifting Sands -->
-			<While condition="GameObjectManager.GetObjectByNPCId(2000464).IsTargetable">
-				<RunCode name="ShiftingSands3"/>
-			</While>	
+			<RunCode name="ShiftingSands3"/>	
 		</If>
 
 		<!-- Clear the Sunken Antechamber 0/1 -->
@@ -58,18 +52,14 @@
 			<MoveTo XYZ="301.8386,-0.7172241,-111.0399" distance="1"/> <!-- Move to Shifting Sands -->
 			<RunCode name="ShiftingSands4"/>
 			<MoveTo XYZ="319.0203,0.2593384,-232.6543" distance="1"/>	<!-- Move to Shifting Sands -->
-			<While condition="GameObjectManager.GetObjectByNPCId(2000466).IsTargetable">
-				<RunCode name="ShiftingSands5"/>
-			</While>	
+			<RunCode name="ShiftingSands5"/>
 			<MoveTo XYZ="-144.1552, -3.247438, 179.403" usemesh="false" />
 			<Grind GrindRef="SecondBoss" While="not GameObjectManager.GetObjectByNPCId(1589).CurrentHealth == 0"/> <!-- Fight second Boss -->
 			<If Condition="&openchest; == 1">
 				<LLOpenChest/>
 			</If>
 			<MoveTo XYZ="-144.4572,-3.646973,134.844" />
-			<While condition="GameObjectManager.GetObjectByNPCId(2000469).IsTargetable">
-				<RunCode name="ShiftingSands6"/>
-			</While>	
+			<RunCode name="ShiftingSands6"/>	
 		</If>			
 		
 		<!-- Clear the chimera 0/1 -->
@@ -216,87 +206,200 @@
   <CodeChunks>
  	<CodeChunk Name="ShiftingSands1">
 		<![CDATA[
-			var x = GameObjectManager.GetObjectByNPCId(2000460);
-			var pos = new Vector3(x.Location.X, x.Location.Y, x.Location.Z);
-			Navigator.PlayerMover.MoveTowards(pos);
-			await Coroutine.Wait(-1, () => Core.Me.Distance(pos) < 3f);
-			Navigator.PlayerMover.MoveStop();
-			await Coroutine.Sleep(1000);
-			ff14bot.Managers.GameObjectManager.GetObjectByNPCId(x.NpcId).Interact();		
-			await Coroutine.Wait(10000, () => SelectYesno.IsOpen);
-			ff14bot.RemoteWindows.SelectYesno.ClickYes();
-			while (!CommonBehaviors.IsLoading) { await Coroutine.Yield(); }
+			var npcId = GameObjectManager.GetObjectByNPCId(2000460);
 			
+			if (!npcId.IsWithinInteractRange)
+			
+			{	
+				var _target = npcId.Location;
+				Navigator.PlayerMover.MoveTowards(_target);
+				while (_target.Distance2D(Core.Me.Location) >= 4)
+				{
+					Navigator.PlayerMover.MoveTowards(_target);
+					await Coroutine.Sleep(100);
+				}
+				Navigator.PlayerMover.MoveStop();
+			}
+
+			npcId.Interact();		
+		
+			await Coroutine.Wait(5000, () => SelectYesno.IsOpen);
+			await Buddy.Coroutines.Coroutine.Sleep(500);
+			if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
+			{
+				Logging.WriteDiagnostic("Selecting Yes.");
+				ff14bot.RemoteWindows.SelectYesno.ClickYes();					
+			}
+			
+			while (!CommonBehaviors.IsLoading) 
+			{ 
+				await Coroutine.Yield(); 
+			}				
       ]]>
 	</CodeChunk>
  	<CodeChunk Name="ShiftingSands2">
 		<![CDATA[
-			var x = GameObjectManager.GetObjectByNPCId(2000461);
-			var pos = new Vector3(x.Location.X, x.Location.Y, x.Location.Z);
-			Navigator.PlayerMover.MoveTowards(pos);
-			await Coroutine.Wait(-1, () => Core.Me.Distance(pos) < 3f);
-			Navigator.PlayerMover.MoveStop();
-			await Coroutine.Sleep(1000);
-			ff14bot.Managers.GameObjectManager.GetObjectByNPCId(x.NpcId).Interact();		
-			await Coroutine.Wait(10000, () => SelectYesno.IsOpen);
-			ff14bot.RemoteWindows.SelectYesno.ClickYes();
-			while (!CommonBehaviors.IsLoading) { await Coroutine.Yield(); }		
+			var npcId = GameObjectManager.GetObjectByNPCId(2000461);
+			
+			if (!npcId.IsWithinInteractRange)
+			
+			{	
+				var _target = npcId.Location;
+				Navigator.PlayerMover.MoveTowards(_target);
+				while (_target.Distance2D(Core.Me.Location) >= 4)
+				{
+					Navigator.PlayerMover.MoveTowards(_target);
+					await Coroutine.Sleep(100);
+				}
+				Navigator.PlayerMover.MoveStop();
+			}
+
+			npcId.Interact();		
+		
+			await Coroutine.Wait(5000, () => SelectYesno.IsOpen);
+			await Buddy.Coroutines.Coroutine.Sleep(500);
+			if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
+			{
+				Logging.WriteDiagnostic("Selecting Yes.");
+				ff14bot.RemoteWindows.SelectYesno.ClickYes();					
+			}
+			
+			while (!CommonBehaviors.IsLoading) 
+			{ 
+				await Coroutine.Yield(); 
+			}	
       ]]>
 	</CodeChunk>
  	<CodeChunk Name="ShiftingSands3">
 		<![CDATA[
-			var x = GameObjectManager.GetObjectByNPCId(2000464);
-			var pos = new Vector3(x.Location.X, x.Location.Y, x.Location.Z);
-			Navigator.PlayerMover.MoveTowards(pos);
-			await Coroutine.Wait(-1, () => Core.Me.Distance(pos) < 3f);
-			Navigator.PlayerMover.MoveStop();
-			await Coroutine.Sleep(1000);
-			ff14bot.Managers.GameObjectManager.GetObjectByNPCId(x.NpcId).Interact();		
-			await Coroutine.Wait(10000, () => SelectYesno.IsOpen);
-			ff14bot.RemoteWindows.SelectYesno.ClickYes();
-			while (!CommonBehaviors.IsLoading) { await Coroutine.Yield(); }			
+			var npcId = GameObjectManager.GetObjectByNPCId(2000464);
+			
+			if (!npcId.IsWithinInteractRange)
+			
+			{	
+				var _target = npcId.Location;
+				Navigator.PlayerMover.MoveTowards(_target);
+				while (_target.Distance2D(Core.Me.Location) >= 4)
+				{
+					Navigator.PlayerMover.MoveTowards(_target);
+					await Coroutine.Sleep(100);
+				}
+				Navigator.PlayerMover.MoveStop();
+			}
+
+			npcId.Interact();		
+		
+			await Coroutine.Wait(5000, () => SelectYesno.IsOpen);
+			await Buddy.Coroutines.Coroutine.Sleep(500);
+			if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
+			{
+				Logging.WriteDiagnostic("Selecting Yes.");
+				ff14bot.RemoteWindows.SelectYesno.ClickYes();					
+			}
+			
+			while (!CommonBehaviors.IsLoading) 
+			{ 
+				await Coroutine.Yield(); 
+			}				
       ]]>
 	</CodeChunk>
  	<CodeChunk Name="ShiftingSands4">
 		<![CDATA[
-			var x = GameObjectManager.GetObjectByNPCId(2000465);
-			var pos = new Vector3(x.Location.X, x.Location.Y, x.Location.Z);
-			Navigator.PlayerMover.MoveTowards(pos);
-			await Coroutine.Wait(-1, () => Core.Me.Distance(pos) < 3f);
-			Navigator.PlayerMover.MoveStop();
-			await Coroutine.Sleep(1000);
-			ff14bot.Managers.GameObjectManager.GetObjectByNPCId(x.NpcId).Interact();		
-			await Coroutine.Wait(10000, () => SelectYesno.IsOpen);
-			ff14bot.RemoteWindows.SelectYesno.ClickYes();
-			while (!CommonBehaviors.IsLoading) { await Coroutine.Yield(); }				
+			var npcId = GameObjectManager.GetObjectByNPCId(2000465);
+			
+			if (!npcId.IsWithinInteractRange)
+			
+			{	
+				var _target = npcId.Location;
+				Navigator.PlayerMover.MoveTowards(_target);
+				while (_target.Distance2D(Core.Me.Location) >= 4)
+				{
+					Navigator.PlayerMover.MoveTowards(_target);
+					await Coroutine.Sleep(100);
+				}
+				Navigator.PlayerMover.MoveStop();
+			}
+
+			npcId.Interact();		
+		
+			await Coroutine.Wait(5000, () => SelectYesno.IsOpen);
+			await Buddy.Coroutines.Coroutine.Sleep(500);
+			if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
+			{
+				Logging.WriteDiagnostic("Selecting Yes.");
+				ff14bot.RemoteWindows.SelectYesno.ClickYes();					
+			}
+			
+			while (!CommonBehaviors.IsLoading) 
+			{ 
+				await Coroutine.Yield(); 
+			}					
       ]]>
 	</CodeChunk>
  	<CodeChunk Name="ShiftingSands5">
 		<![CDATA[
-			var x = GameObjectManager.GetObjectByNPCId(2000466);
-			var pos = new Vector3(x.Location.X, x.Location.Y, x.Location.Z);
-			Navigator.PlayerMover.MoveTowards(pos);
-			await Coroutine.Wait(-1, () => Core.Me.Distance(pos) < 3f);
-			Navigator.PlayerMover.MoveStop();
-			await Coroutine.Sleep(1000);
-			ff14bot.Managers.GameObjectManager.GetObjectByNPCId(x.NpcId).Interact();		
-			await Coroutine.Wait(10000, () => SelectYesno.IsOpen);
-			ff14bot.RemoteWindows.SelectYesno.ClickYes();
-			while (!CommonBehaviors.IsLoading) { await Coroutine.Yield(); }		
+			var npcId = GameObjectManager.GetObjectByNPCId(2000466);
+			
+			if (!npcId.IsWithinInteractRange)
+			
+			{	
+				var _target = npcId.Location;
+				Navigator.PlayerMover.MoveTowards(_target);
+				while (_target.Distance2D(Core.Me.Location) >= 4)
+				{
+					Navigator.PlayerMover.MoveTowards(_target);
+					await Coroutine.Sleep(100);
+				}
+				Navigator.PlayerMover.MoveStop();
+			}
+
+			npcId.Interact();		
+		
+			await Coroutine.Wait(5000, () => SelectYesno.IsOpen);
+			await Buddy.Coroutines.Coroutine.Sleep(500);
+			if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
+			{
+				Logging.WriteDiagnostic("Selecting Yes.");
+				ff14bot.RemoteWindows.SelectYesno.ClickYes();					
+			}
+			
+			while (!CommonBehaviors.IsLoading) 
+			{ 
+				await Coroutine.Yield(); 
+			}				
       ]]>
 	</CodeChunk>
  	<CodeChunk Name="ShiftingSands6">
 		<![CDATA[
-			var x = GameObjectManager.GetObjectByNPCId(2000469);
-			var pos = new Vector3(x.Location.X, x.Location.Y, x.Location.Z);
-			Navigator.PlayerMover.MoveTowards(pos);
-			await Coroutine.Wait(-1, () => Core.Me.Distance(pos) < 3f);
-			Navigator.PlayerMover.MoveStop();
-			await Coroutine.Sleep(1000);
-			ff14bot.Managers.GameObjectManager.GetObjectByNPCId(x.NpcId).Interact();		
-			await Coroutine.Wait(10000, () => SelectYesno.IsOpen);
-			ff14bot.RemoteWindows.SelectYesno.ClickYes();
-			while (!CommonBehaviors.IsLoading) { await Coroutine.Yield(); }			
+			var npcId = GameObjectManager.GetObjectByNPCId(2000469);
+			
+			if (!npcId.IsWithinInteractRange)
+			
+			{	
+				var _target = npcId.Location;
+				Navigator.PlayerMover.MoveTowards(_target);
+				while (_target.Distance2D(Core.Me.Location) >= 4)
+				{
+					Navigator.PlayerMover.MoveTowards(_target);
+					await Coroutine.Sleep(100);
+				}
+				Navigator.PlayerMover.MoveStop();
+			}
+
+			npcId.Interact();		
+		
+			await Coroutine.Wait(5000, () => SelectYesno.IsOpen);
+			await Buddy.Coroutines.Coroutine.Sleep(500);
+			if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
+			{
+				Logging.WriteDiagnostic("Selecting Yes.");
+				ff14bot.RemoteWindows.SelectYesno.ClickYes();					
+			}
+			
+			while (!CommonBehaviors.IsLoading) 
+			{ 
+				await Coroutine.Yield(); 
+			}				
       ]]>
 	</CodeChunk>				
   </CodeChunks>
