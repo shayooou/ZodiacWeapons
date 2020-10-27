@@ -1,598 +1,91 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Profile: Dragoon Relic Weapon
-  Version: 0.4
+  Version: 1.0
   Authors: Zamphire
   Code Credit: TuckMeIntoBread, Kayla, Sodimm
 -->
 
 <Profile>
   <Name>Dragoon Relic Weapon</Name>
-  <BehaviorDirectory>..\Quest Behaviors</BehaviorDirectory>
-  <CodeChunks>
-  		<CodeChunk Name="UnfinishedGaeBolg">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 1874)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>
-  		<CodeChunk Name="GaeBolgZenith">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 6260)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>	
-  		<CodeChunk Name="GaeBolgAtma">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 7827)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>		
-		<CodeChunk Name="NoChampionLance">
-			  <![CDATA[
-				var _msg = String.Empty;
-				#if RB_CN
-						_msg = "请手动完成下一个任务。";
-				#else
-						_msg = "Please have Champion's Lance melded with Savage Aim Materia III X2.";
-				#endif
-				Core.OverlayManager.AddToast(() => _msg, TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
-			  ]]>
-		</CodeChunk>
-		<CodeChunk Name="NoGaeBolgZenith">
-			  <![CDATA[
-				var _msg = String.Empty;
-				#if RB_CN
-						_msg = "请手动完成下一个任务。";
-				#else
-						_msg = "Please trade Gae Bolg and 3x Thavnairian Mist to the Furnace in North Shrough next to Gerolt for Gae Bolg Zenith.";
-				#endif
-				Core.OverlayManager.AddToast(() => _msg, TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
-			  ]]>
-		</CodeChunk>
-		<CodeChunk Name="NeedPoetics">
-			  <![CDATA[
-				var _msg = String.Empty;
-				#if RB_CN
-						_msg = "请手动完成下一个任务。";
-				#else
-						_msg = "Please farm 15 poetics to purchase Radz-at-Han Quenching Oil.";
-				#endif
-				Core.OverlayManager.AddToast(() => _msg, TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
-			  ]]>
-		</CodeChunk>
-		<CodeChunk Name="Disable_Flight">
-		<![CDATA[
-			foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "Enable Flight" || p.Plugin.Name == "启用飞行"))
-			{
-			try
-			{
-				if (!plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = false;  }
-			}
-			catch (Exception ex) {  }
-			}
-		]]>
-		</CodeChunk>
-		<CodeChunk Name="ExchangeGaeBolg"> <!-- Needs to be updated to Dragoon slot. -->
-            <![CDATA[ 
-				ff14bot.Managers.GameObjectManager.GetObjectByNPCId(2002555).Interact();
-                await Buddy.Coroutines.Coroutine.Sleep(500);
-                RaptureAtkUnitManager.GetWindowByName("ShopExchangeItem").SendAction(2, 0, 0, 1, 3);
-                await Buddy.Coroutines.Coroutine.Sleep(120);
-                RaptureAtkUnitManager.GetWindowByName("ShopExchangeItemDialog").SendAction(1, 0, 0);
-                await Buddy.Coroutines.Coroutine.Sleep(120);
-                foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledSlots)
-                {
-                    if(slot.RawItemId == 1885)
-                    {
-                        slot.Handover();
-                    }
-                    if(slot.RawItemId == 6268)
-                    {
-                        slot.Handover();
-                    }					
-                }
-                await Buddy.Coroutines.Coroutine.Sleep(120);
-                if (ff14bot.RemoteWindows.Request.IsOpen)
-                    ff14bot.RemoteWindows.Request.HandOver();
-            ]]>
-        </CodeChunk>		
-        <CodeChunk Name="BuyGaeBolgAtma"> <!-- Needs to be changed to Gae Bolg slot -->
-            <![CDATA[ 
-                await Buddy.Coroutines.Coroutine.Sleep(500);
-                ff14bot.Managers.GameObjectManager.GetObjectByNPCId(1008948).Interact();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectIconString.IsOpen)
-                    ff14bot.RemoteWindows.SelectIconString.ClickSlot(1);
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectString.IsOpen)
-                    ff14bot.RemoteWindows.SelectString.ClickSlot(0);
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                 if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
-                    ff14bot.RemoteWindows.SelectYesno.ClickYes();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }				
-            ]]>
-        </CodeChunk>
-        <CodeChunk Name="BuyFireBooks">
-            <![CDATA[ 
-                await Buddy.Coroutines.Coroutine.Sleep(500);
-                ff14bot.Managers.GameObjectManager.GetObjectByNPCId(1006976).Interact();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectIconString.IsOpen)
-                    ff14bot.RemoteWindows.SelectIconString.ClickSlot(0);
-				await Buddy.Coroutines.Coroutine.Sleep(1000);	
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectString.IsOpen)
-                    ff14bot.RemoteWindows.SelectString.ClickSlot(0);
-				await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectString.IsOpen)
-                    ff14bot.RemoteWindows.SelectString.ClickSlot(0);					
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                 if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
-                    ff14bot.RemoteWindows.SelectYesno.ClickYes();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();				 			
-                }				
-            ]]>
-        </CodeChunk>											
-  </CodeChunks>
-  <GrindAreas>
-	<GrindArea name="RelicRebornGae">
-        <Hotspots>
-			<Hotspot Radius="200" XYZ="646.0118, 289.5695, 14.69111" />
-			<Hotspot Radius="200" XYZ="709.4556, 286.4642, 81.95009" />
-			<Hotspot Radius="200" XYZ="611.1263, 284.8232, 163.3602" />
-			<Hotspot Radius="200" XYZ="563.7203, 291.0807, 94.17103" />
-			<Hotspot Radius="200" XYZ="652.6025, 303.0003, -34.80959" />
-			<Hotspot Radius="200" XYZ="542.7427, 302.5898, -159.7233" />
-        </Hotspots>
-        <TargetMobs>
-			<TargetMob Name="Natalan Swiftbeak" Id="1844" Weight="1" />
-			<TargetMob Name="Natalan Fogcaller" Id="1845" Weight="1" />
-			<TargetMob Name="Natalan Boldwing" Id="1843" Weight="1" />			
-        </TargetMobs>
-	</GrindArea>
-  </GrindAreas>
+  <BehaviorDirectory></BehaviorDirectory>
   <Order>
-	<Log Message="Starting Dragoon Zodiac Questing Version 0.4" />
-    <!-- The Weaponsmith of Legend -->
-    <If Condition="not HasQuest(66241) and not IsQuestCompleted(66241)">
-	  <ChangeClass Job="Dragoon" />							 
-      <LisbethTravel ZoneId="140" XYZ="-470.4957, 23.03529, -355.3192"/>
-      <If Condition="IsQuestAcceptQualified(66241)">
-        <PickupQuest QuestId="66241" NpcId="1005021"/>
-      </If>
-    </If>
-    <If Condition="GetQuestStep(66241) == 1">
-      <LisbethTravel ZoneId="156" XYZ="25.51611, 29, -823.7956"/>
-      <TalkTo NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66241" StepId="1"/>
-    </If>
-    <If Condition="GetQuestStep(66241) == 255">
-	  <If Condition="not IsOnMap(154)">
-		<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-	  </If>
-      <FlyTo XYZ="427.4873, -5.342077, -74.43809" Land="True"/>
-      <TurnIn ItemId="2000987" QuestId="66241" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112"/>
-    </If>
-	<If Condition="ClassName == ((ClassJobType.Dragoon))">
-		<!-- A Relic Reborn (Gae Bolg) -->
-		<If Condition="not HasQuest(66658) and not IsQuestCompleted(66658)">
-		  <LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-		  <ChangeClass Job="Dragoon" />
-		  <If Condition="IsQuestAcceptQualified(66658)">
-			<PickupQuest QuestId="66658" NpcId="1003075"/>
-		  </If>
-		</If>
-		<If Condition="GetQuestStep(66658) == 1">
-			<LisbethTravel Area="Coerthas Central Highlands" Position="640.0771, 286.305, 140.4273"/>
-			<UseObject NpcIds="2002494" XYZ="638.2086, 286.427, 140.4897"  Radius="25"  QuestId="66658" StepId="1"/>
-		</If>  
-		<If Condition="GetQuestStep(66658) == 2">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-			<!-- Handover timeworn Gae Bolg -->
-			<HandOver ItemId="2000991" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66658" StepId="2"/>
-		</If>
-		<If Condition="GetQuestStep(66658) == 3 and not HasAtLeast(1879,1)">
-			<RunCode name="NoChampionLance"/>	
-		</If>
-		<If Condition="GetQuestStep(66658) == 3 and HasAtLeast(1879,1)">
-		  <LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-		  <!-- <SoTurnIn ItemId="2202" QuestId="66658" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112"/> -->
-		  <HandOver ItemId="2202" StepId="3" QuestId="66658" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112"/>	
-		</If>				 
-		<If Condition="GetQuestStep(66658) == 4">
-		<!-- Check if the duty A Relic Reborn: The Chimera is unlocked -->
-			<If condition="not (IsQuestCompleted(66655) or IsQuestCompleted(66656) or IsQuestCompleted(66657) or IsQuestCompleted(66658) or IsQuestCompleted(66659) or IsQuestCompleted(66660) or IsQuestCompleted(66661) or IsQuestCompleted(66658) or IsQuestCompleted(66663))">
-				<LisbethTravel Area="Coerthas Central Highlands" Position="530.7706, 350.1871, -709.9794"/>
-				<If condition="GameObjectManager.GetObjectByNPCId(2003993).IsTargetable">  
-				  <UseObject NpcIds="2003993" XYZ="532.5856, 350.6066, -710.9941"  Radius="25"  QuestId="66658"/>
-				</If>  
-			</If> 
-		  <LLoadProfile Path="../Dungeons/A Relic Reborn the Chimera.xml"/>
-		</If>
-		<If Condition="GetQuestStep(66658) == 5">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-			<!-- Handover pinch of alumina salts DRG -->
-			<HandOver ItemId="2001000" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66658" StepId="5"/>
-		</If>
-		<If Condition="GetQuestStep(66658) == 6">
-			<If Condition="not HasAtLeast(6267,1)">
-				<If Condition="HasAtLeast(28,15)">
-					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
-					<!-- Buy Radz-at-Han Quenching Oil -->										   
-					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6267" SelectString="2" Count="1"/>
-				</If>	
-				<If Condition="not HasAtLeast(28,15)">
-					<RunCode name="NeedPoetics"/>
-				</If>
-			</If>
-			<If Condition="not HasAtLeast(6268,3)">
-				<If Condition="HasAtLeast(28,60)">
-					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
-					<!-- Buy Thavnairian Mist -->
-					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
-				</If>	
-				<If Condition="not HasAtLeast(28,60)">
-					<RunCode name="NeedPoetics"/>
-				</If>
-			</If>
-		  <RunCode name="Disable_Flight"/>
-		  <LisbethTravel ZoneId="156" XYZ="26.15508, 29, -823.166"/>
-		  <TalkTo NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66658" StepId="6"/>
-		</If>
-		<If Condition="GetQuestStep(66658) == 7">
-			<If Condition="not ClassName == ClassJobType.Dragoon">	
-				<ChangeClass Job="Dragoon" />
-			</If>
-			<LLoadProfile Path="../Dungeons/Amdapor Keep.xml"/>
-		</If>
-		<If Condition="GetQuestStep(66658) == 8">
-		  <LisbethTravel ZoneId="156" XYZ="25.67217, 29, -823.6172"/>
-		  <!-- Handover Amdapor glyph DRG -->
-		  <HandOver ItemId="2001009" NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66658" StepId="8"/>
-		</If>
-		<If Condition="GetQuestStep(66658) == 9">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-			<!-- Handover copy of The Book of Reinette -->
-			<HandOver ItemId="2001018" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66658" StepId="9"/>
-		</If>
-		<If Condition="GetQuestStep(66658) == 10">
-			<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 1874">
-				<RunCode Name="UnfinishedGaeBolg" />
-				<WaitTimer WaitTime="3" />
-			</While>
-			<LisbethTravel Area="Coerthas Central Highlands" Position="515.0824, 302.8028, -181.5978"/>
-			<Grind grindRef="RelicRebornGae" postCombatDelay="1" while="GetQuestStep(66658) == 10"/>
-		</If>
-		<If Condition="GetQuestStep(66658) == 11">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>	
-			<TalkTo NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66658" StepId="11"/>	
-		</If>
-		<If Condition="GetQuestStep(66658) == 12">		
-			<!-- If does not have access to A Relic Reborn: the Hydra -->
-			<If condition="not (IsQuestCompleted(66655) or IsQuestCompleted(66656) or IsQuestCompleted(66657) or IsQuestCompleted(66658) or IsQuestCompleted(66659) or IsQuestCompleted(66660) or IsQuestCompleted(66661) or IsQuestCompleted(66658) or IsQuestCompleted(66663))">
-				<LisbethTravel Area="Eastern Thanalan" Position="-334.4583, -22.48309, 430.3237"/>	
-				<While condition="GameObjectManager.GetObjectByNPCId(2003994).IsTargetable">  
-				  <UseObject NpcIds="2003994" XYZ="-336.8429, -22.38501, 435.5992"  Radius="25"/>
-				</While>  
-			</If>
-			<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 1874">
-				<RunCode Name="UnfinishedOmnilex" />
-				<WaitTimer WaitTime="3" />
-			</If>			
-			<LLoadProfile Path="../Dungeons/A Relic Reborn the Hydra.xml"/>
-		</If>
-		<If Condition="GetQuestStep(66658) == 13">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>	
-			<TalkTo NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66658" StepId="13"/>
-		</If>
-		<If Condition="GetQuestStep(66658) == 14">
-			<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId == 1874">
-				<ChangeClass Job="Dragoon" />
-			</While>			
-			<HandOver ItemId="1874" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66658" StepId="14"/>						
-		</If>
-		<If Condition="GetQuestStep(66658) == 15">
-			<If Condition="not ClassName == ClassJobType.Dragoon">	
-				<ChangeClass Job="Dragoon" />
-			</If>
-			<LLoadProfile Path="../Dungeons/The Bowl of Embers (Hard).xml"/>	
-		</If>
-		<If Condition="GetQuestStep(66658) == 16">
-			<If Condition="not ClassName == ClassJobType.Dragoon">	
-				<ChangeClass Job="Dragoon" />
-			</If>
-			<LLoadProfile Path="../Dungeons/The Howling Eye (Hard).xml"/>	
-		</If>
-		<If Condition="GetQuestStep(66658) == 17">
-			<If Condition="not ClassName == ClassJobType.Dragoon">	
-				<ChangeClass Job="Dragoon" />
-			</If>
-			<LLoadProfile Path="../Dungeons/The Navel (Hard).xml"/>
-		</If>
-		<If Condition="GetQuestStep(66658) == 18">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-			<!-- Handin white-hot ember, howling gales, and hyperfused ore DRG -->			
-			<HandOver ItemIds="2001027,2001036,2001045" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66658" StepId="18"/>			
-		</If>
-		<If Condition="GetQuestStep(66658) == 255">
-			<If Condition="not HasAtLeast(6267,1)">
-				<If Condition="HasAtLeast(28,15)">
-					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
-					<!-- Buy Radz-at-Han Quenching Oil -->										   
-					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6267" SelectString="2" Count="1"/>
-				</If>	
-				<If Condition="not HasAtLeast(28,15)">
-					<RunCode name="NeedPoetics"/>
-				</If>
-			</If>
-			<If Condition="HasAtLeast(6267,1)">
-				<TurnIn ItemId="6267" QuestId="66658" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112"/>
-			</If>	
-		</If>
-		
-		<!-- Buy Zenith weapons -->
-		<!-- If Has Completed A Relic Reborn (Gae Bolg) and has Gae Bolg -->
-		<While Condition="IsQuestCompleted(66661) and HasAtLeast(1885,1)">	
-			<Log Message="Gae Bolg finished, upgrading toGae Bolg Zenith!" />
-			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
-				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
-					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
-					<!-- Buy Thavnairian Mist -->
-					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
-				</If>	
-				<While Condition="not HasAtLeast(28,60)">
-					<RunCode name="NeedPoetics"/>
-					<WaitTimer WaitTime="10" />
-				</While>
-			</If>
-			<If Condition="HasAtLeast(6268,3)"> <!-- HasAtLeast 3 Thavnairian Mist -->
-				<Log Message="Exchanging Gae Bolg with Furnace" />
-				<LisbethTravel ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
-				<BuyShopExchangeItem NpcId="2002555" ItemId="6260" Count="1"/>
-			</If>			
-		</While>			
-		
-		<!-- Up in Arms -->
-		<If Condition="IsQuestCompleted(66658)and not HasQuest(66971) and not IsQuestCompleted(66971)">
-<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-		  <If Condition="not HasAtLeast(6260,1)">
-			<RunCode name="NoGaeBolgZenith"/>
-		  </If>
-		  <If Condition="HasAtLeast(6260,1)">		  
-			  <If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 6260">
-					<RunCode Name="GaeBolgZenith" />
-					<WaitTimer WaitTime="3" />
-			  </If>
-		  </If>				  															   
-		  <If Condition="IsQuestAcceptQualified(66971)">
-			<PickupQuest QuestId="66971" NpcId="1003075"/>
-		  </If>
-		</If>
-		<If Condition="GetQuestStep(66971) == 255">
-		  <LisbethTravel ZoneId="154" XYZ="407.3613, -4.538448, -88.70496"/>
-		  <TurnIn QuestId="66971" NpcId="1008948" XYZ="405.1117, -4.498068, -89.15851"/>
-		</If>
+	
+	<Log Message="Starting Dragoon Zodiac Questing Version 1.0" />
 
-		<!-- Atma farm -->
-		<If Condition="(HasAtLeast(7851,1)) and (HasAtLeast(7852,1)) and (HasAtLeast(7853,1)) and (HasAtLeast(7854,1)) and (HasAtLeast(7855,1)) and (HasAtLeast(7856,1)) and (HasAtLeast(7857,1)) and (HasAtLeast(7858,1)) and (HasAtLeast(7859,1)) and (HasAtLeast(7860,1)) and (HasAtLeast(7861,1)) and (HasAtLeast(7862,1)) and HasAtLeast(6260,1)">
-			<Log Message="We have all the atmas taking us back to Jalzahn!" />
-			<If Condition="not IsOnMap(154)">
-				<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-			</If>
-			<FlyTo XYZ="410.7605, -6.053607, -88.41638" Land="True"/>
-			<ChangeClass Job="Dragoon" />
-			<LisbethTravel ZoneId="154" XYZ="405.1117,-4.498068,-89.15851"/>
-			<RunCode name="BuyGaeBolgAtma"/>														   								   
-		</If>		
-		<If Condition="HasAtLeast(6260,1) and not HasAtLeast(7827,1)">
-			  <If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 6260">
-					<RunCode Name="GaeBolgZenith" />
-					<WaitTimer WaitTime="3" />
-     		  </If>																																														  																						
-			<LLoadProfile Path="Atma_Farm.xml"/>
-		</If>	
-
-		<!-- Trials of the Braves -->
-		<!-- If has Gae Bolg Atma -->							 
-		<If Condition="HasAtLeast(7827,1) and not HasQuest(66972) and not IsQuestCompleted(66972)">
-		  <If Condition="not IsOnMap(154)">
-			<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-		  </If>
-		  <FlyTo XYZ="410.7605, -6.053607, -88.41638" Land="True"/>		
-		  <LisbethTravel ZoneId="154" XYZ="407.8153, -4.709439, -88.4598"/>
-			<!-- Equip Gae Bolg Atma so quest is available -->
-			  <If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7827">
-					<RunCode Name="GaeBolgAtma" />
-					<WaitTimer WaitTime="3" />
-			  </If>		  
-		  <If Condition="IsQuestAcceptQualified(66972)">
-			<PickupQuest QuestId="66972" NpcId="1008948"/>
-		  </If>
-		</If>
-		<If Condition="GetQuestStep(66972) == 1">
-		  <LisbethTravel ZoneId="156" XYZ="25.59451, 29, -822.5854"/>
-		  <TalkTo NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66972" StepId="1"/>
-		</If>
-		<If Condition="GetQuestStep(66972) == 255">
-		  <LisbethTravel ZoneId="156" XYZ="69.80656, 33.06655, -706.0764"/>
-		  <TurnIn QuestId="66972" NpcId="1006976" XYZ="71.94617, 33.06656, -706.2944"/>
-		</If>	
-
-	<!-- Start Animus Book Farm -->
-		<!-- Purchase first book if has none -->
-			<If Condition="HasAtLeast(7827,1) and not HasAtLeast(2001298,1) and not HasAtLeast(2001299,1) and not HasAtLeast(2001300,1) and not HasAtLeast(2001301,1) and not HasAtLeast(2001302,1) and not HasAtLeast(2001303,1) and not HasAtLeast(2001304,1) and not HasAtLeast(2001305,1) and not HasAtLeast(2001306,1)">
-			<!-- Purchase Skyfire I -->
-				<Log Message="Moving to purchase Skyfire I" />
-				<If Condition="not IsOnMap(156)">
-					<TeleportTo AetheryteId="24"/> 
-				</If>
-				<LisbethTravel ZoneId="156" XYZ="71.94617,33.06656,-706.2944"/>
-				<Dismount/>
-				<RunCode name="BuyFireBooks"/>
-			</If>
-			
-		<!-- Skyfire I -->	
-			<If Condition="HasAtLeast(2001298,1)  and HasAtLeast(7827,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7827">
-					<RunCode Name="GaeBolgAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-			
-		<!-- Skyfire II -->
-			<If Condition="HasAtLeast(2001299,1)  and HasAtLeast(7827,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7827">
-					<RunCode Name="GaeBolgAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-			
-		<!-- Netherfire I -->
-			<If Condition="HasAtLeast(2001300,1)  and HasAtLeast(7827,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7827">
-					<RunCode Name="GaeBolgAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>			
-			
-			
-		<!-- Skyfall I -->	
-			<If Condition="HasAtLeast(2001301,1)  and HasAtLeast(7827,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7827">
-					<RunCode Name="GaeBolgAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-			
-		<!-- Skyfall II -->	
-			<If Condition="HasAtLeast(2001302,1)  and HasAtLeast(7827,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7827">
-					<RunCode Name="GaeBolgAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-
-		<!-- Netherfall I -->	
-			<If Condition="HasAtLeast(2001303,1)  and HasAtLeast(7827,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7827">
-					<RunCode Name="GaeBolgAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-
-		<!-- Skywind I -->	
-			<If Condition="HasAtLeast(2001304,1)  and HasAtLeast(7827,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7827">
-					<RunCode Name="GaeBolgAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-
-		<!-- Skywind II -->	
-			<If Condition="HasAtLeast(2001305,1)  and HasAtLeast(7827,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7827">
-					<RunCode Name="GaeBolgAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-
-		<!-- Skyearth I -->	
-			<If Condition="HasAtLeast(2001306,1)  and HasAtLeast(7827,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7827">
-					<RunCode Name="GaeBolgAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>		
-
-	<!-- Animus Weapon Upgrade -->
-		<If condition="HasAtLeast(7837,1)">
-			<LLoadProfile Path="Relic Novus.xml"/>
-		</If>
-		
-	<!-- Novus Weapon Upgrade -->
-		<If condition="HasAtLeast(7866,1)">
-			<LLoadProfile Path="Relic Nexus.xml"/>
-		</If>
-
-	<!-- Nexus Weapon Upgrade -->
-		<If condition="HasAtLeast(8652,1)">
-			<LLoadProfile Path="Zodiac Braves.xml"/>
-		</If>
-		
-	<!-- Zodiac Weapn Upgrade -->	
-		<If condition="HasAtLeast(9494,1)">
-			<LLoadProfile Path="Zodiac Zeta.xml"/>
-		</If>		
-		
+	<!-- Obtain Base Relic: Gae Bolg -->
+	<If condition="not IsQuestCompleted(66658)">
+		<Log Message="Gae Bolg not yet obtained" />
+		<LLoadProfile Path="A Relic Reborn.xml"/>
 	</If>
+	
+	
+	<!-- Buy Zenith weapons -->
+	<!-- If Has Completed A Relic Reborn (Gae Bolg) and has Gae Bolg -->
+	<While Condition="IsQuestCompleted(66658) and HasAtLeast(1885,1)">	
+		<Log Message="Gae Bolg finished, upgrading toGae Bolg Zenith!" />
+		<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
+			<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
+				<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
+				<!-- Buy Thavnairian Mist -->
+				<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
+			</If>	
+			<While Condition="not HasAtLeast(28,60)">
+				<RunCode name="NeedPoetics"/>
+				<WaitTimer WaitTime="10" />
+			</While>
+		</If>
+		<If Condition="HasAtLeast(6268,3)"> <!-- HasAtLeast 3 Thavnairian Mist -->
+			<Log Message="Exchanging Gae Bolg with Furnace" />
+			<LisbethTravel ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
+			<BuyShopExchangeItem NpcId="2002555" ItemId="6260" Count="1"/>
+		</If>			
+	</While>							 
+
+	<!-- Obtain Gae Bolg Atma -->
+	<If Condition="HasAtLeast(6260,1)">
+		<Log Message="Starting Atma Farm..." />
+		<LLoadProfile Path="Atma Farm.xml"/>
+	</If>	
+	
+	<!-- Obtain Gae Bolg Animus -->
+	<If Condition="HasAtLeast(7827,1)">
+		<Log Message="Starting Animus Book Farm..." />
+		<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
+	</If>
+		
+	<!-- Obtain Gae Bolg Novus -->
+	<If condition="HasAtLeast(7837,1)">
+		<Log Message="Starting Gae Bolg Novus Questing..." />
+		<LLoadProfile Path="Relic Novus.xml"/>
+	</If>
+		
+	<!-- Obtain Gae Bolg Nexus -->
+	<If condition="HasAtLeast(7866,1)">
+		<Log Message="Starting Gae Bolg Nexus Questing..." />
+		<LLoadProfile Path="Relic Nexus.xml"/>
+	</If>
+
+	<!-- Obtain Longinus Rod -->
+	<If condition="HasAtLeast(8652,1)">
+		<Log Message="Starting Longinus Questing..." />
+		<LLoadProfile Path="Zodiac Braves.xml"/>
+	</If>
+		
+	<!-- Zodiac Yoichi Bow Zeta -->	
+	<If condition="HasAtLeast(9494,1)">
+		<Log Message="Starting Longinus Zeta Questing..." />
+		<LLoadProfile Path="Zodiac Zeta.xml"/>
+	</If>
+
+
   </Order>
+	<CodeChunks>
+		<CodeChunk Name="NeedPoetics">
+		  <![CDATA[ 
+			Core.OverlayManager.AddToast(() => "Please farm more Tomestone of Poetics.", TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
+			await Coroutine.Sleep(26000);
+		  ]]>
+		</CodeChunk>    
+	</CodeChunks>  
 </Profile>

@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <!--
   Profile: Warrior Relic Weapon
-	Version: 0.4
+	Version: 1.0
   Authors: Zamphire
   Code Credit: TuckMeIntoBread, Kayla, Sodimm
 -->
@@ -9,639 +9,81 @@
 <Profile>
   <Name>Warrior Relic Weapon</Name>
   <BehaviorDirectory>..\Quest Behaviors</BehaviorDirectory>
-  <CodeChunks>
-  		<CodeChunk Name="UnfinishedBravura">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 1805)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>
-  		<CodeChunk Name="BravuraZenith">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 6259)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>		
-		</CodeChunk>
-  		<CodeChunk Name="BravuraAtma">
-		<![CDATA[ 
-			BagSlot EquipSlot = ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand];
-			
-			foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledInventoryAndArmory)
-			{
-				if(slot.RawItemId == 7826)
-				{
-					slot.Move(EquipSlot);
-				}
-			}
-		]]>
-		</CodeChunk>				
-		<CodeChunk Name="NoBardiche">
-			  <![CDATA[
-				var _msg = String.Empty;
-				#if RB_CN
-						_msg = "请手动完成下一个任务。";
-				#else
-						_msg = "Please have Barbarian's Bardiche melded with Battledance Materia III X2.";
-				#endif
-				Core.OverlayManager.AddToast(() => _msg, TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
-			  ]]>
-		</CodeChunk>
-		<CodeChunk Name="NoBravuraZenith">
-			  <![CDATA[
-				var _msg = String.Empty;
-				#if RB_CN
-						_msg = "请手动完成下一个任务。";
-				#else
-						_msg = "Please trade Breavura and 3x Thavnairian Mist to the Furnace in North Shrough next to Gerolt for Bravura Zenith.";
-				#endif
-				Core.OverlayManager.AddToast(() => _msg, TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
-			  ]]>
-		</CodeChunk>
-		<CodeChunk Name="NeedPoetics">
-			  <![CDATA[
-				var _msg = String.Empty;
-				#if RB_CN
-						_msg = "请手动完成下一个任务。";
-				#else
-						_msg = "Please farm 75 poetics to purchase Radz-at-Han Quenching Oil and Thavnairian Mist x3.";
-				#endif
-				Core.OverlayManager.AddToast(() => _msg, TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
-			  ]]>
-		</CodeChunk>	
-		<CodeChunk Name="Disable_Flight">
-		<![CDATA[
-			foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "Enable Flight" || p.Plugin.Name == "启用飞行"))
-			{
-			try
-			{
-				if (!plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = false;  }
-			}
-			catch (Exception ex) {  }
-			}
-		]]>
-		</CodeChunk>
-		<CodeChunk Name="ExchangeBravura"> <!-- Purchase Bravura Zenith -->
-            <![CDATA[ 
-				ff14bot.Managers.GameObjectManager.GetObjectByNPCId(2002555).Interact();
-                await Buddy.Coroutines.Coroutine.Sleep(500);
-                RaptureAtkUnitManager.GetWindowByName("ShopExchangeItem").SendAction(2, 0, 0, 1, 2);
-                await Buddy.Coroutines.Coroutine.Sleep(120);
-                RaptureAtkUnitManager.GetWindowByName("ShopExchangeItemDialog").SendAction(1, 0, 2);
-                await Buddy.Coroutines.Coroutine.Sleep(120);
-                foreach(ff14bot.Managers.BagSlot slot in ff14bot.Managers.InventoryManager.FilledSlots)
-                {
-                    if(slot.RawItemId == 1816)
-                    {
-                        slot.Handover();
-                    }
-                    if(slot.RawItemId == 6268)
-                    {
-                        slot.Handover();
-                    }					
-                }
-                await Buddy.Coroutines.Coroutine.Sleep(120);
-                if (ff14bot.RemoteWindows.Request.IsOpen)
-                    ff14bot.RemoteWindows.Request.HandOver();
-            ]]>
-        </CodeChunk>		
-        <CodeChunk Name="BuyBravuraAtma"> <!-- Upgrade Bravura Zenith -->
-            <![CDATA[ 
-                await Buddy.Coroutines.Coroutine.Sleep(500);
-                ff14bot.Managers.GameObjectManager.GetObjectByNPCId(1008948).Interact();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectIconString.IsOpen)
-                    ff14bot.RemoteWindows.SelectIconString.ClickSlot(1);
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectString.IsOpen)
-                    ff14bot.RemoteWindows.SelectString.ClickSlot(2);
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                 if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
-                    ff14bot.RemoteWindows.SelectYesno.ClickYes();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }				
-            ]]>
-        </CodeChunk>
-        <CodeChunk Name="BuyFireBooks">
-            <![CDATA[ 
-                await Buddy.Coroutines.Coroutine.Sleep(500);
-                ff14bot.Managers.GameObjectManager.GetObjectByNPCId(1006976).Interact();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectIconString.IsOpen)
-                    ff14bot.RemoteWindows.SelectIconString.ClickSlot(0);
-				await Buddy.Coroutines.Coroutine.Sleep(1000);	
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectString.IsOpen)
-                    ff14bot.RemoteWindows.SelectString.ClickSlot(0);
-				await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectString.IsOpen)
-                    ff14bot.RemoteWindows.SelectString.ClickSlot(0);					
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                 if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
-                    ff14bot.RemoteWindows.SelectYesno.ClickYes();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }				
-            ]]>
-        </CodeChunk>
-        <CodeChunk Name="BuyFallBooks">
-            <![CDATA[ 
-                await Buddy.Coroutines.Coroutine.Sleep(500);
-                ff14bot.Managers.GameObjectManager.GetObjectByNPCId(1006976).Interact();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectIconString.IsOpen)
-                    ff14bot.RemoteWindows.SelectIconString.ClickSlot(0);
-				await Buddy.Coroutines.Coroutine.Sleep(1000);	
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (ff14bot.RemoteWindows.SelectString.IsOpen)
-                    ff14bot.RemoteWindows.SelectString.ClickSlot(1);
-				await Buddy.Coroutines.Coroutine.Sleep(1000);
-                 if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
-                    ff14bot.RemoteWindows.SelectYesno.ClickYes();
-                await Buddy.Coroutines.Coroutine.Sleep(1000);
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }
-                if (await Coroutine.Wait(1000, () => Talk.DialogOpen))
-                {
-                    Talk.Next();
-                }				
-            ]]>
-        </CodeChunk>						
-		<CodeChunk Name="Disable_Flight">
-		<![CDATA[
-			foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "Enable Flight" || p.Plugin.Name == "启用飞行"))
-			{
-			try
-			{
-				if (!plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = false;  }
-			}
-			catch (Exception ex) {  }
-			}
-		]]>
-		</CodeChunk>		
-  </CodeChunks>
-  <GrindAreas>
-	<GrindArea name="RelicRebornBravura">
-        <Hotspots>
-			<Hotspot Radius="200" XYZ="83.35999,41.08832,-571.6793" />
-			<Hotspot Radius="200" XYZ="19.97242, 24.5698, -616.7052" />
-			<Hotspot Radius="200" XYZ="14.42631, 22.65992, -656.0297" />
-			<Hotspot Radius="200" XYZ="79.60114, 23.52864, -710.6172" />
-			<Hotspot Radius="200" XYZ="25.91615, 21.49989, -774.8596" />
-			<Hotspot Radius="200" XYZ="116.4779, 22.83719, -779.9639" />
-			<Hotspot Radius="200" XYZ="116.4779, 22.83719, -779.9639" />
-        </Hotspots>
-        <TargetMobs>
-			<TargetMob Name="U'Ghamaro Bedesman" Id="1834" Weight="1" />
-			<TargetMob Name="U'Ghamaro Quarryman" Id="1833" Weight="1" />
-			<TargetMob Name="U'Ghamaro Roundsman" Id="1832" Weight="1" />			
-        </TargetMobs>
-	</GrindArea>
-  </GrindAreas>
   <Order>
-	<Log Message="Starting Warrior Zodiac Questing Version 0.4" />
-    <!-- The Weaponsmith of Legend -->
-    <If Condition="not HasQuest(66241) and not IsQuestCompleted(66241)">
-	  <ChangeClass Job="Warrior" />
-      <LisbethTravel ZoneId="140" XYZ="-470.4957, 23.03529, -355.3192"/>
-      <If Condition="IsQuestAcceptQualified(66241)">
-        <PickupQuest QuestId="66241" NpcId="1005021"/>
-      </If>
-    </If>
-    <If Condition="GetQuestStep(66241) == 1">
-      <LisbethTravel ZoneId="156" XYZ="25.51611, 29, -823.7956"/>
-      <TalkTo NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66241" StepId="1"/>
-    </If>
-    <If Condition="GetQuestStep(66241) == 255">
-	  <If Condition="not IsOnMap(154)">
-		<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-	  </If>
-      <FlyTo XYZ="427.4873, -5.342077, -74.43809" Land="True"/>
-      <TurnIn ItemId="2000987" QuestId="66241" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112"/>
-    </If>
-	<If Condition="ClassName == ((ClassJobType.Warrior))">
-		<!-- A Relic Reborn (Bravura) -->
-		<If Condition="not HasQuest(66655) and not IsQuestCompleted(66655)">
-		  <LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-		  <ChangeClass Job="Warrior" />
-		  <If Condition="IsQuestAcceptQualified(66655)">
-			<PickupQuest QuestId="66655" NpcId="1003075"/>
-		  </If>
-		</If>
-		<If Condition="GetQuestStep(66655) == 1">
-		  <LisbethTravel Area="Outer La Noscea" Position="159.8774, 21.42216, -702.3598"/>
-		  <UseObject NpcIds="2002491" XYZ="160.0519, 22.75116, -694.0261" Radius="25"  QuestId="66655" StepId="1"/>
-		</If>  
-		<If Condition="GetQuestStep(66655) == 2">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-			<!-- Handove timeworn Bravura -->
-			<HandOver ItemId="2000989" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66655" StepId="2"/>
-		</If>
-		<If Condition="GetQuestStep(66655) == 3 and HasAtLeast(1810,1)">
-		  <LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-		  <HandOver StepId="3" ItemId="1810" QuestId="66655" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112"/>	
-		</If>		
-		<If Condition="GetQuestStep(66655) == 3 and not HasAtLeast(1810,1)">
-			<RunCode name="NoBardiche"/>	
-		</If>				 
-		<If Condition="GetQuestStep(66655) == 4">
-		<!-- Check if the duty A Relic Reborn: The Chimera is unlocked -->
-			<If condition="not (IsQuestCompleted(66655) or IsQuestCompleted(66655) or IsQuestCompleted(66657) or IsQuestCompleted(66658) or IsQuestCompleted(66659) or IsQuestCompleted(66660) or IsQuestCompleted(66661) or IsQuestCompleted(66662) or IsQuestCompleted(66663))">
-				<LisbethTravel Area="Coerthas Central Highlands" Position="530.7706, 350.1871, -709.9794"/>
-				<If condition="GameObjectManager.GetObjectByNPCId(2003993).IsTargetable">  
-				  <UseObject NpcIds="2003993" XYZ="532.5856, 350.6066, -710.9941"  Radius="25"  QuestId="66655"/>
-				</If>  
-			</If> 
-		  <LLoadProfile Path="../Dungeons/A Relic Reborn the Chimera.xml"/>
-		</If>
-		<If Condition="GetQuestStep(66655) == 5">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-			<!-- Handover pinch of alumina salts WAR -->
-			<HandOver ItemId="2000997" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66655" StepId="5"/>
-		</If>
-		<If Condition="GetQuestStep(66655) == 6">
-			<If Condition="not HasAtLeast(6267,1)">
-				<If Condition="HasAtLeast(28,15)">
-					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
-					<!-- Buy Radz-at-Han Quenching Oil -->										   
-					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6267" SelectString="2" Count="1"/>
-				</If>	
-				<If Condition="not HasAtLeast(28,15)">
-					<RunCode name="NeedPoetics"/>
-				</If>
-			</If>
-			<If Condition="not HasAtLeast(6268,3)">
-				<If Condition="HasAtLeast(28,60)">
-					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
-					<!-- Buy Thavnairian Mist -->
-					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
-				</If>	
-				<If Condition="not HasAtLeast(28,60)">
-					<RunCode name="NeedPoetics"/>
-				</If>
-			</If>
-		  <RunCode name="Disable_Flight"/>			
-		  <LisbethTravel Area="Mor Dhona" Position="25.60284, 29, -823.7947"/>
-		  <TalkTo NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66655" StepId="6"/>
-		</If>
-		<If Condition="GetQuestStep(66655) == 7">
-			<If Condition="not ClassName == ClassJobType.Warrior">	
-				<ChangeClass Job="Warrior" />
-			</If>
-			<LLoadProfile Path="../Dungeons/Amdapor Keep.xml"/>
-		</If>
-		<If Condition="GetQuestStep(66655) == 8">
-		  <LisbethTravel Area="Mor Dhona" Position="25.60284, 29, -823.7947"/>
-		  <!-- Handover Amdapor glyph WAR -->
-		  <HandOver ItemId="2001006" NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66655" StepId="8"/>
-		</If>
-		<If Condition="GetQuestStep(66655) == 9">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-			<!-- Handover copy of The Warrior Within -->
-			<HandOver ItemId="2001015" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66655" StepId="9"/>
-		</If>
-		<If Condition="GetQuestStep(66655) == 10">
-			<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 1805">
-				<RunCode Name="UnfinishedBravura" />
-				<WaitTimer WaitTime="3" />
-			</While>
-			<LisbethTravel Area="Outer La Noscea" Position="113.715, 27.02575, -595.6255"/>
-			<Grind grindRef="RelicRebornBravura" postCombatDelay="1" while="GetQuestStep(66655) == 10"/>
-		</If>
-		<If Condition="GetQuestStep(66655) == 11">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>	
-			<TalkTo NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66655" StepId="11"/>	
-		</If>
-		<If Condition="GetQuestStep(66655) == 12">		
-			<!-- If does not have access to A Relic Reborn: the Hydra -->
-			<If condition="not (IsQuestCompleted(66655) or IsQuestCompleted(66655) or IsQuestCompleted(66657) or IsQuestCompleted(66658) or IsQuestCompleted(66659) or IsQuestCompleted(66660) or IsQuestCompleted(66661) or IsQuestCompleted(66662) or IsQuestCompleted(66663))">
-				<If Condition="not IsOnMap(145)">
-					<TeleportTo Name="Camp Drybone" AetheryteId="18"/>
-				</If>
-				<FlyTo XYZ="-334.4535, -22.49262, 429.417" Land="True"/>	
-				<While condition="GameObjectManager.GetObjectByNPCId(2003994).IsTargetable">  
-				  <UseObject NpcIds="2003994" XYZ="-336.8429, -22.38501, 435.5992"  Radius="25"/>
-				</While>  
-			</If> 			
-			<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 1805">
-				<RunCode Name="UnfinishedOmnilex" />
-				<WaitTimer WaitTime="3" />
-			</If>			
-			<LLoadProfile Path="../Dungeons/A Relic Reborn the Hydra.xml"/>
-		</If>
-		<If Condition="GetQuestStep(66655) == 13">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>	
-			<TalkTo NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66655" StepId="13"/>
-		</If>
-		<If Condition="GetQuestStep(66655) == 14">
-			<ChangeClass Job="Warrior" />
-			<!-- Turn in Unfinished Bravura -->			
-			<HandOver ItemId="1805" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66655" StepId="14"/>	
-		</If>
-		<If Condition="GetQuestStep(66655) == 15">
-			<If Condition="not ClassName == ClassJobType.Warrior">	
-				<ChangeClass Job="Warrior" />
-			</If>
-			<LLoadProfile Path="../Dungeons/The Bowl of Embers (Hard).xml"/>	
-		</If>
-		<If Condition="GetQuestStep(66655) == 16">
-			<If Condition="not ClassName == ClassJobType.Warrior">	
-				<ChangeClass Job="Warrior" />
-			</If>
-			<LLoadProfile Path="../Dungeons/The Howling Eye (Hard).xml"/>	
-		</If>
-		<If Condition="GetQuestStep(66655) == 17">
-			<If Condition="not ClassName == ClassJobType.Warrior">	
-				<ChangeClass Job="Warrior" />
-			</If>
-			<LLoadProfile Path="../Dungeons/The Navel (Hard).xml"/>
-		</If>
-		<If Condition="GetQuestStep(66655) == 18">
-			<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-			<!-- Handin white-hot ember, howling gale, and hyperfused ore WAR -->				
-			<HandOver ItemIds="2001024,2001033,2001042" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112" QuestId="66655" StepId="18"/>			
-		</If>
-		<If Condition="GetQuestStep(66655) == 255">
-			<If Condition="not HasAtLeast(6267,1)">
-				<If Condition="HasAtLeast(28,15)">
-					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
-					<!-- Buy Radz-at-Han Quenching Oil -->										   
-					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6267" SelectString="2" Count="1"/>
-				</If>	
-				<If Condition="not HasAtLeast(28,15)">
-					<RunCode name="NeedPoetics"/>
-				</If>
-			</If>
-			<If Condition="HasAtLeast(6267,1)">
-				<TurnIn ItemId="6267" QuestId="66655" NpcId="1003075" XYZ="440.7262, -0.9374562, -62.21112"/>
-			</If>		
-		</If>
-		
-		<!-- Buy Zenith weapons -->
-		<!-- If Has Completed A Relic Reborn (Bravura) and has Bravura -->
-		<While Condition="IsQuestCompleted(66661) and HasAtLeast(1816,1)">	
-			<Log Message="Bravura finished, upgrading to Bravura Zenith!" />
-			<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
-				<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
-					<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
-					<!-- Buy Thavnairian Mist -->
-					<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
-				</If>	
-				<While Condition="not HasAtLeast(28,60)">
-					<RunCode name="NeedPoetics"/>
-					<WaitTimer WaitTime="10" />
-				</While>
-			</If>
-			<If Condition="HasAtLeast(6268,3)"> <!-- HasAtLeast 3 Thavnairian Mist -->
-				<Log Message="Exchanging Bravura with Furnace" />
-				<LisbethTravel ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
-				<BuyShopExchangeItem NpcId="2002555" ItemId="6259" Count="1"/>
-			</If>			
-		</While>			
-		
-		<!-- Up in Arms -->
-		<If Condition="IsQuestCompleted(66655)and not HasQuest(66971) and not IsQuestCompleted(66971)">
-		<LisbethTravel Area="North Shroud" Position="440.463, -0.9374608, -64.74161"/>
-		  <If Condition="not HasAtLeast(6259,1)">
-			<RunCode name="NoBravuraZenith"/>
-		  </If>  
-		  <If Condition="HasAtLeast(6259,1)">		  
-			  <If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 6259">
-					<RunCode Name="BravuraZenith" />
-					<WaitTimer WaitTime="3" />
-			  </If>
-		  </If>	
-		  <If Condition="IsQuestAcceptQualified(66971)">
-			<PickupQuest QuestId="66971" NpcId="1003075"/>
-		  </If>
-		</If>
-		<If Condition="GetQuestStep(66971) == 255">
-		  <LisbethTravel ZoneId="154" XYZ="407.3613, -4.538448, -88.70496"/>
-		  <TurnIn QuestId="66971" NpcId="1008948" XYZ="405.1117, -4.498068, -89.15851"/>
-		</If>
-
-
-		<!-- Atma farm -->
-		<!-- Has all Atma and Bravura Zenith -->
-		<If Condition="HasAtLeast(7851,1) and HasAtLeast(7852,1) and HasAtLeast(7853,1) and HasAtLeast(7854,1) and HasAtLeast(7855,1) and HasAtLeast(7856,1) and HasAtLeast(7857,1) and HasAtLeast(7858,1) and HasAtLeast(7859,1) and HasAtLeast(7860,1) and HasAtLeast(7861,1) and HasAtLeast(7862,1) and HasAtLeast(6259,1)">
-			<Log Message="We have all the atmas taking us back to Jalzhn!" />
-			<If Condition="not IsOnMap(154)">
-				<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-			</If>
-			<FlyTo XYZ="410.7605, -6.053607, -88.41638" Land="True"/>
-			<ChangeClass Job="Warrior" />
-			<LisbethTravel ZoneId="154" XYZ="405.1117,-4.498068,-89.15851"/>
-			<RunCode name="BuyBravuraAtma"/>
-		</If>
-		<!-- Has Bravura Zenith and not Bravura Atma -->
-		<If Condition="HasAtLeast(6259,1) and not HasAtLeast(7826,1)">
-			  <If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 6259">
-					<RunCode Name="BravuraZenith" />
-					<WaitTimer WaitTime="3" />
-     		  </If>		
-			<LLoadProfile Path="Atma_Farm.xml"/>
-		</If>
-
-		<!-- Trials of the Braves -->
-		<!-- If has Bravura Atma -->					  
-		<If Condition="HasAtLeast(7826,1) and not HasQuest(66972) and not IsQuestCompleted(66972)">
-		  <If Condition="not IsOnMap(154)">
-			<TeleportTo Name="Fallgourd Float" AetheryteId="7"/>
-		  </If>
-		  <FlyTo XYZ="410.7605, -6.053607, -88.41638" Land="True"/>		
-		  <LisbethTravel ZoneId="154" XYZ="407.8153, -4.709439, -88.4598"/>
-			<!-- Equip Bravura Atma so quest is available -->
-			  <If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7826">
-					<RunCode Name="BravuraAtma" />
-					<WaitTimer WaitTime="3" />
-			  </If>		  
-		  <If Condition="IsQuestAcceptQualified(66972)">
-			<PickupQuest QuestId="66972" NpcId="1008948"/>
-		  </If>
-		</If>
-		<If Condition="GetQuestStep(66972) == 1">
-		  <LisbethTravel ZoneId="156" XYZ="25.59451, 29, -822.5854"/>
-		  <TalkTo NpcId="1001304" XYZ="25.58936, 29, -825.3757" QuestId="66972" StepId="1"/>
-		</If>
-		<If Condition="GetQuestStep(66972) == 255">
-		  <LisbethTravel ZoneId="156" XYZ="69.80656, 33.06655, -706.0764"/>
-		  <TurnIn QuestId="66972" NpcId="1006976" XYZ="71.94617, 33.06656, -706.2944"/>
-		</If>	
-
-	<!-- Start Animus Book Farm -->
-		<!-- Purchase first book if has none -->
-			<If Condition="HasAtLeast(7826,1) and not HasAtLeast(2001298,1) and not HasAtLeast(2001299,1) and not HasAtLeast(2001300,1) and not HasAtLeast(2001301,1) and not HasAtLeast(2001302,1) and not HasAtLeast(2001303,1) and not HasAtLeast(2001304,1) and not HasAtLeast(2001305,1) and not HasAtLeast(2001306,1)">
-			<!-- Purchase Skyfire I -->
-				<Log Message="Moving to purchase Skyfire I" />
-				<If Condition="not IsOnMap(156)">
-					<TeleportTo AetheryteId="24"/> 
-				</If>
-				<LisbethTravel ZoneId="156" XYZ="71.94617,33.06656,-706.2944"/>
-				<RunCode name="BuyFireBooks"/>
-			</If>
-			
-		<!-- Skyfire I -->	
-			<If Condition="HasAtLeast(2001298,1)  and HasAtLeast(7826,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7826">
-					<RunCode Name="BravuraAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-			
-		<!-- Skyfire II -->
-			<If Condition="HasAtLeast(2001299,1)  and HasAtLeast(7826,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7826">
-					<RunCode Name="BravuraAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-			
-		<!-- Netherfire I -->
-			<If Condition="HasAtLeast(2001300,1)  and HasAtLeast(7826,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7826">
-					<RunCode Name="BravuraAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>			
-			
-			
-		<!-- Skyfall I -->	
-			<If Condition="HasAtLeast(2001301,1)  and HasAtLeast(7826,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7826">
-					<RunCode Name="BravuraAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-			
-		<!-- Skyfall II -->	
-			<If Condition="HasAtLeast(2001302,1)  and HasAtLeast(7826,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7826">
-					<RunCode Name="BravuraAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-
-		<!-- Netherfall I -->	
-			<If Condition="HasAtLeast(2001303,1)  and HasAtLeast(7826,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7826">
-					<RunCode Name="BravuraAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-
-		<!-- Skywind I -->	
-			<If Condition="HasAtLeast(2001304,1)  and HasAtLeast(7826,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7826">
-					<RunCode Name="BravuraAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-
-		<!-- Skywind II -->	
-			<If Condition="HasAtLeast(2001305,1)  and HasAtLeast(7826,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7826">
-					<RunCode Name="BravuraAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>
-
-		<!-- Skyearth I -->	
-			<If Condition="HasAtLeast(2001306,1)  and HasAtLeast(7826,1)">
-				<If Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7826">
-					<RunCode Name="BravuraAtma" />
-					<WaitTimer WaitTime="3" />
-				</If>
-				<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
-			</If>		
 	
-	<!-- Animus Weapon Upgrade -->
-		<If condition="HasAtLeast(7836,1)">
-			<LLoadProfile Path="Relic Novus.xml"/>
-		</If>
-
-	<!-- Novus Weapon Upgrade -->
-		<If condition="HasAtLeast(7865,1)">
-			<LLoadProfile Path="Relic Nexus.xml"/>
-		</If>
-
-	<!-- Nexus Weapon Upgrade -->
-		<If condition="HasAtLeast(8651,1)">
-			<LLoadProfile Path="Zodiac Braves.xml"/>
-		</If>
-		
-	<!-- Zodiac Weapn Upgrade -->	
-		<If condition="HasAtLeast(9493,1)">
-			<LLoadProfile Path="Zodiac Zeta.xml"/>
-		</If>		
-		
+	<Log Message="Starting Warrior Zodiac Questing Version 1.0" />
+	
+	<!-- Obtain Base Relic: Bravura -->
+	<If condition="not IsQuestCompleted(66655)">
+		<Log Message="Bravura not yet obtained" />
+		<LLoadProfile Path="A Relic Reborn.xml"/>
 	</If>
+	
+	<!-- Buy Zenith weapons -->
+	<!-- If Has Completed A Relic Reborn (Bravura) and has Bravura -->
+	<While Condition="IsQuestCompleted(66655) and HasAtLeast(1816,1)">	
+		<Log Message="Bravura finished, upgrading to Bravura Zenith!" />
+		<If Condition="not HasAtLeast(6268,3)"> <!-- Not HasAtLeast 3 Thavnairian Mist -->
+			<If Condition="HasAtLeast(28,60)"> <!-- HasAtLeast 60 Poetics -->
+				<LisbethTravel ZoneId="156" XYZ="63.40987, 31.12387, -735.2782"/>
+				<!-- Buy Thavnairian Mist -->
+				<BuyShopExchangeCurrency NpcId= "1008119" ItemId="6268" SelectString="2" Count="3"/>
+			</If>	
+			<While Condition="not HasAtLeast(28,60)">
+				<RunCode name="NeedPoetics"/>
+				<WaitTimer WaitTime="10" />
+			</While>
+		</If>
+		<If Condition="HasAtLeast(6268,3)"> <!-- HasAtLeast 3 Thavnairian Mist -->
+			<Log Message="Exchanging Bravura with Furnace" />
+			<LisbethTravel ZoneId="154" XYZ="449.7941, -0.3727861, -70.40031"/>
+			<BuyShopExchangeItem NpcId="2002555" ItemId="6259" Count="1"/>
+		</If>			
+	</While>								 
+
+	<!-- Obtain Bravura Atma -->
+	<If Condition="HasAtLeast(6259,1)">
+		<Log Message="Starting Atma Farm..." />
+		<LLoadProfile Path="Atma Farm.xml"/>
+	</If>	
+	
+	<!-- Obtain Bravura Animus -->
+	<If Condition="HasAtLeast(7826,1)">
+		<Log Message="Starting Animus Book Farm..." />
+		<LLoadProfile Path="../Animus/Animus Book Farm.xml"/>
+	</If>
+		
+	<!-- Obtain Bravura Novus -->
+	<If condition="HasAtLeast(7836,1)">
+		<Log Message="Starting Bravura Novus Questing..." />
+		<LLoadProfile Path="Relic Novus.xml"/>
+	</If>
+		
+	<!-- Obtain Bravura Nexus -->
+	<If condition="HasAtLeast(7865,1)">
+		<Log Message="Starting Bravura Nexus Questing..." />
+		<LLoadProfile Path="Relic Nexus.xml"/>
+	</If>
+
+	<!-- Obtain Nirvana Rod -->
+	<If condition="HasAtLeast(8651,1)">
+		<Log Message="Starting Nirvana Questing..." />
+		<LLoadProfile Path="Zodiac Braves.xml"/>
+	</If>
+		
+	<!-- Zodiac Nirvana Zeta -->	
+	<If condition="HasAtLeast(9493,1)">
+		<Log Message="Starting Nirvana Zeta Questing..." />
+		<LLoadProfile Path="Zodiac Zeta.xml"/>
+	</If>
+
   </Order>
+	<CodeChunks>
+		<CodeChunk Name="NeedPoetics">
+		  <![CDATA[ 
+			Core.OverlayManager.AddToast(() => "Please farm more Tomestone of Poetics.", TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
+			await Coroutine.Sleep(26000);
+		  ]]>
+		</CodeChunk>    
+	</CodeChunks>   
 </Profile>
