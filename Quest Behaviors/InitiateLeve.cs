@@ -56,12 +56,9 @@ namespace ff14bot.NeoProfiles
 
 		protected async Task<bool> InitiateLeve()
 		{
-			// if (Core.Player.IsMounted)
-			// {
-				// ActionManager.Dismount();
-				// await Coroutine.Wait(20000, () => !Core.Player.IsMounted);
-				// await Coroutine.Sleep(500);
-			// }
+
+			ActionManager.Dismount();
+			await Coroutine.Wait(5000, () => !Core.Player.IsMounted);
 			var patternFinder = new GreyMagic.PatternFinder(Core.Memory);
 			IntPtr SearchResult = patternFinder.Find("48 8D 05 ? ? ? ? 48 89 54 24 ? 48 89 03 Add 3 TraceRelative");
 			int agent = AgentModule.FindAgentIdByVtable(SearchResult);
@@ -82,7 +79,6 @@ namespace ff14bot.NeoProfiles
 					{
 						if(leve.GlobalId == LeveId && leve.Step == 1)
 						{
-							ActionManager.Dismount();
 							ulong globalId = (ulong) leve.GlobalId;
 							windowByName.SendAction(3,3,0xC,3,globalId,3,2); //Set Quest
 							await Coroutine.Sleep(200);
