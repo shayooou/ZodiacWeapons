@@ -1,14 +1,17 @@
 using Clio.XmlEngine;
-using ff14bot.Behavior;
 using ff14bot.Helpers;
 using ff14bot.Managers;
 using ff14bot.RemoteWindows;
+using System.Threading.Tasks;
 using GreyMagic;
 using System;
+using System.ComponentModel;
 using System.Linq;
 using System.Windows.Media;
+using ff14bot.Behavior;
 using TreeSharp;
 using Action = TreeSharp.Action;
+using Buddy.Coroutines;
 
 namespace ff14bot.NeoProfiles
 {
@@ -21,11 +24,23 @@ namespace ff14bot.NeoProfiles
         public override bool IsDone { get { return _done; } }
         
         //装备耐久低于数值修理 1- 99的数值否则会报错
-        private const float Threshhold = 50;
-
+		[DefaultValue(10)]
+        [XmlAttribute("Threshhold")]
+        public int Threshhold { get; set; }
+		
+		[DefaultValue(true)]
+        [XmlAttribute("UseMoney")]
+		public bool UseMoney{ get; set; }
+		
+		public RepairEquipTag(){
+			Log("RepairEquipTag");
+		}
+		
         protected override Composite CreateBehavior()
         {
+			Log("CreateBehavior");
             return new PrioritySelector(
+                CommonBehaviors.HandleLoading,
                 new Decorator(r => !Repairing && CanRepair()
                     , new Action(r => {
                         Repairing = true;
@@ -52,36 +67,42 @@ namespace ff14bot.NeoProfiles
                                 )
                             ),
                             new Decorator(r => !Repair.IsOpen,
-                                new Sequence(
-                                    new Action(r => Log("Window not open so opening")),
-                                    new Action(r => OpenRepair()),
-                                    new WaitContinue(TimeSpan.FromMilliseconds(1500.0), r => !Repair.IsOpen, new Action(r => RunStatus.Success))
+                                new ActionRunCoroutine(
+                                    r => OpenRepair()
                                 )
                             )
                         )
                     ),
-                new Decorator(r => !Repairing && Repair.IsOpen, new Action(r => {
-                    Repair.Close();
+                new Decorator(r => !Repairing, new Action(r => {
+					if(Repair.IsOpen){
+						Repair.Close();
+					}
                     _done = true;
                 }))
             );
         }
         
-        private static bool CanRepair()
+        private bool CanRepair()
         {
             return InventoryManager.EquippedItems.Any(item => item.Item != null && item.Item.RepairItemId != 0 && item.Condition < Threshhold);
         }
 
 
-        private static void OpenRepair()
+        public async Task OpenRepair()
         {
-            var patternFinder = new PatternFinder(Core.Memory);
-            var off = patternFinder.Find("4C 8D 0D ? ? ? ? 45 33 C0 33 D2 48 8B C8 E8 ? ? ? ? Add 3 TraceRelative");
-            var func = patternFinder.Find("48 89 5C 24 ? 57 48 83 EC ? 88 51 ? 49 8B F9");
-            var vtable = patternFinder.Find("48 8D 05 ? ? ? ? 48 89 03 B9 ? ? ? ? 4C 89 43 ? Add 3 TraceRelative");
+			if(!UseMoney){
+				ActionManager.ToggleRepairWindow();
+			}else {
+				Log("Window not open so opening");
+				var patternFinder = new PatternFinder(Core.Memory);
+				var off = patternFinder.Find("4C 8D 0D ? ? ? ? 45 33 C0 33 D2 48 8B C8 E8 ? ? ? ? Add 3 TraceRelative");
+				var func = patternFinder.Find("48 89 5C 24 ? 57 48 83 EC ? 88 51 ? 49 8B F9");
+				var vtable = patternFinder.Find("48 8D 05 ? ? ? ? 48 89 03 B9 ? ? ? ? 4C 89 43 ? Add 3 TraceRelative");
             
-            Core.Memory.CallInjected64<IntPtr>(func, AgentModule.GetAgentInterfaceById(AgentModule.FindAgentIdByVtable(vtable)).Pointer, 0, 0, off);
-        }
+				Core.Memory.CallInjected64<IntPtr>(func, AgentModule.GetAgentInterfaceById(AgentModule.FindAgentIdByVtable(vtable)).Pointer, 0, 0, off);
+			}
+			await Coroutine.Wait(5000, () => Repair.IsOpen);
+		}
 
         public static bool Repairing { get; set; }
 
@@ -92,12 +113,16 @@ namespace ff14bot.NeoProfiles
 
         protected override void OnStart()
 		{
+			Log("OnStart");
 			_done = false;
+			Repairing = false;
 		}
 
         protected override void OnResetCachedDone()
         {
+			Log("OnResetCachedDone");
             _done = false;
+			Repairing = false;
         }
 
     }

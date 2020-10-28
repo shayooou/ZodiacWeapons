@@ -1,6 +1,7 @@
 using Buddy.Coroutines;
 using Clio.XmlEngine;
 using System.Threading.Tasks;
+using ff14bot.AClasses;
 using ff14bot.Enums;
 using ff14bot.Helpers;
 using ff14bot.Managers;
@@ -60,7 +61,18 @@ namespace ff14bot.NeoProfiles
 			Log("addLis");
             hasAddListenner = true;
             GamelogManager.MessageRecevied += ev;
-		}
+            TreeRoot.OnStop += OnBotStop;
+        }
+		
+        private void OnBotStop(BotBase bot)
+        {
+			if (hasAddListenner)
+            {
+				hasAddListenner = false;
+				GamelogManager.MessageRecevied -= ev;
+			}
+            TreeRoot.OnStop -= OnBotStop;
+        }
 
         protected override void OnStart()
 		{

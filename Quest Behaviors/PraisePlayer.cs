@@ -27,7 +27,7 @@ namespace ff14bot.NeoProfiles
                             try{
                             if (MovementManager.IsMoving) MovementManager.MoveStop();
                             if (RaptureAtkUnitManager.GetWindowByName("VoteMvp") == null)
-                                await Coroutine.Wait(10000, () => AgentModule.ToggleAgentInterfaceById(59) == 1 || AgentModule.ToggleAgentInterfaceById(120) == 1);
+                                await Coroutine.Wait(10000, () => AgentModule.ToggleAgentInterfaceById(120) == 1);
 
                             if (await Coroutine.Wait(6000, () => RaptureAtkUnitManager.GetWindowByName("VoteMvp") != null &&
                                RaptureAtkUnitManager.GetWindowByName("VoteMvp").IsValid &&
