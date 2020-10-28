@@ -1,30 +1,13 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Buddy.Coroutines;
-using ff14bot;
-using ff14bot.Behavior;
-using ff14bot.AClasses;
-using ff14bot.Behavior;
+using Clio.XmlEngine;
+using System.Threading.Tasks;
 using ff14bot.Enums;
 using ff14bot.Helpers;
 using ff14bot.Managers;
-using ff14bot.Navigation;
-using ff14bot.NeoProfiles;
-using ff14bot.Objects;
-using ff14bot.Pathing.Service_Navigation;
-using ff14bot.RemoteWindows;
-using GreyMagic;
+using System;
+using System.ComponentModel;
+using System.Windows.Media;
 using TreeSharp;
-using Action = TreeSharp.Action;
-using Clio.Utilities;
-using Clio.XmlEngine;
 
 namespace ff14bot.NeoProfiles
 {
@@ -38,53 +21,92 @@ namespace ff14bot.NeoProfiles
 
         public override bool IsDone { get { return _done; } }
 
-        private static bool _done;
+        private bool _done;
 
         private static bool _isStart;
 
         private const string Startstring = "任务开始。";
 
         private static DateTime IsStartTime = new DateTime(2019, 01, 01);
+        private static EventHandler<ChatEventArgs> ev = delegate (object sender, ChatEventArgs args)
+                   {
+					   Log("回调测试");
+                       if (args.ChatLogEntry.MessageType == (MessageType)2105 && args.ChatLogEntry.Contents.Contains(Startstring))
+                       {
+                           //Logging.Write(Colors.GreenYellow, $@"{GMLastReplyTime} {args.ChatLogEntry.TimeStamp}");
+                           if (IsStartTime < args.ChatLogEntry.TimeStamp - TimeSpan.FromSeconds(5))
+                           {
+                               IsStartTime = args.ChatLogEntry.TimeStamp;
+                               _isStart = true;
+                               Log($@"Start At {IsStartTime}");
+                           }
+                       }
+                   };
 
-        private static GamelogManager.MessageRecevied += delegate (object sender, ChatEventArgs args)
-                    {
-                        if (_isStart && args.ChatLogEntry.MessageType == (MessageType)2105 && args.ChatLogEntry.Contents.Contains(Startstring))
-                        {
-                            //Logging.Write(Colors.GreenYellow, $@"{GMLastReplyTime} {args.ChatLogEntry.TimeStamp}");
-                            if (IsStartTime < args.ChatLogEntry.TimeStamp - TimeSpan.FromSeconds(5))
-                            {
-                                IsStartTime = args.ChatLogEntry.TimeStamp;
-                                _done = true;
-                                _isStart = false;
-                                Logging.Write(Colors.GreenYellow, $@"Start At {IsStartTime}");
-                            }
-                        }
-                    };
+        private static bool hasAddListenner;
+
+        protected override void OnDone()
+        {
+			Log("removeLis");
+            hasAddListenner = false;
+            GamelogManager.MessageRecevied -= ev;
+        }
+		
+		public WaitStartingTag(){
+			if (hasAddListenner)
+            {
+                return;
+            }
+			Log("addLis");
+            hasAddListenner = true;
+            GamelogManager.MessageRecevied += ev;
+		}
 
         protected override void OnStart()
 		{
+			Log("onStart");
 			_done = false;
-            _isStart = true;
+			if (hasAddListenner)
+            {
+                return;
+            }
+			Log("addLis");
+            hasAddListenner = true;
+            GamelogManager.MessageRecevied += ev;
 		}
 
         protected override Composite CreateBehavior()
         {
-            return new ActionRunCoroutine(async r => {
-                await Coroutine.Wait(OutTime, () => _done);
+			Log("CreateBehavior");
+            return new ActionRunCoroutine(r => waitStart(_isStart));
+        }
+		
+		private async Task waitStart(bool isEnd){
+				if(!isEnd && !_isStart){
+					await Coroutine.Wait(OutTime*1000, () => _isStart);
+				}
                 _done = true;
                 _isStart = false;
-            });
+				Log("Start out");
+		}
+		
+        public static void Log(string text)
+        {
+            Logging.Write(Colors.OrangeRed, string.Format("[WaitStarting] {0}", text));
         }
         
         protected override void OnResetCachedDone()
         {
+			Log("OnResetCachedDone");
             _done = false;
-            _isStart = true;
-        }
-
-        protected override void OnDone()
-        {
-
+            _isStart = false;
+			if (hasAddListenner)
+            {
+                return;
+            }
+			Log("addLis");
+            hasAddListenner = true;
+            GamelogManager.MessageRecevied += ev;
         }
     }
 

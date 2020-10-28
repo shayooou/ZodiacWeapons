@@ -1,30 +1,14 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
-using Buddy.Coroutines;
-using ff14bot;
+using Clio.XmlEngine;
 using ff14bot.Behavior;
-using ff14bot.AClasses;
-using ff14bot.Behavior;
-using ff14bot.Enums;
 using ff14bot.Helpers;
 using ff14bot.Managers;
-using ff14bot.Navigation;
-using ff14bot.NeoProfiles;
-using ff14bot.Objects;
-using ff14bot.Pathing.Service_Navigation;
 using ff14bot.RemoteWindows;
 using GreyMagic;
+using System;
+using System.Linq;
+using System.Windows.Media;
 using TreeSharp;
 using Action = TreeSharp.Action;
-using Clio.Utilities;
-using Clio.XmlEngine;
 
 namespace ff14bot.NeoProfiles
 {
@@ -37,17 +21,16 @@ namespace ff14bot.NeoProfiles
         public override bool IsDone { get { return _done; } }
         
         //装备耐久低于数值修理 1- 99的数值否则会报错
-        private const float Threshhold = 30;
+        private const float Threshhold = 50;
 
         protected override Composite CreateBehavior()
         {
             return new PrioritySelector(
-                CommonBehaviors.HandleLoading,
                 new Decorator(r => !Repairing && CanRepair()
                     , new Action(r => {
                         Repairing = true;
                         Log("Should be repairing");
-                    }))
+                    })),
                 new Decorator(r => Repairing,
                         new PrioritySelector(
                             new Decorator(r => SelectYesno.IsOpen,

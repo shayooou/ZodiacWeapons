@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!DOCTYPE Profile [
+<!-- 赞的位置 默认第三个 -->
+<!ENTITY zanWeiZhi "3">
+]> 
+<Profile>
+  <Name>刷赞</Name>
+  <BehaviorDirectory>Quest Behaviors</BehaviorDirectory>
+  <Order>
+  <BotSettings AutoEquip="0" />
+  <RunCode name="DisableSideStep"/>
+	<While condition="Core.Me.IsValid">
+
+		<If condition="not DutyManager.InInstance">
+			<LLJoinDuty2 DutyId="43" OutSized="false"/>
+		</If>
+		<WaitTimer WaitTime="1" />
+		<If condition="DutyManager.InInstance">
+				<WaitStarting OutTime="15"/>
+				<RunCode name="MoveTowards"/>
+				<Grind GrindRef="bookman" While="not GameObjectManager.GetObjectByNPCId(72).CurrentHealth == 0"/> <!-- Kill bookman -->	
+				<PraisePlayer ZanIndex="&zanWeiZhi;" />
+				<While condition="DutyManager.InInstance">	
+					<WaitTimer WaitTime="3" />
+                    <LLLeaveDuty/>
+				</While>		
+		</If>
+	</While>	
+  </Order>
+  <GrindAreas>
+	<GrindArea name="bookman">
+        <Hotspots>
+			<Hotspot Radius="200" XYZ="-100.1755, -40.02073, 311.9097" />
+        </Hotspots>
+        <TargetMobs>
+			<TargetMob Name="bookman" Id="72" Weight="1" />		
+        </TargetMobs>
+	</GrindArea>
+  </GrindAreas>	
+  <CodeChunks >  
+    	<CodeChunk Name="MoveTowards">
+		<![CDATA[
+			var x = GameObjectManager.GetObjectByNPCId(72);
+			x.Target();
+			var pos = new Vector3(x.Location.X, x.Location.Y, x.Location.Z);
+			Navigator.PlayerMover.MoveTowards(pos);
+			await Coroutine.Sleep(4000);
+			Navigator.PlayerMover.MoveStop();
+      ]]>
+	</CodeChunk> 
+	    	<CodeChunk Name="NullMover">
+		<![CDATA[
+			var x = GameObjectManager.GetObjectByNPCId(72);
+			Navigator.PlayerMover = new NullMover();
+			x.Target();
+      ]]>
+	</CodeChunk> 
+	<CodeChunk Name="EnableSideStep">
+		<![CDATA[
+			foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "SideStep"))
+			{
+			try
+			{
+				if (plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = true;  }
+			}
+			catch (Exception ex) {  }
+			}
+		]]>
+	</CodeChunk>
+	<CodeChunk Name="DisableSideStep">
+		<![CDATA[
+			foreach (var plugin in PluginManager.Plugins.Where(p => p.Plugin.Name == "SideStep"))
+			{
+			try
+			{
+				if (!plugin.Enabled)  {  break;  }  else  {  plugin.Enabled = false;  }
+			}
+			catch (Exception ex) {  }
+			}
+		]]>
+	</CodeChunk> 		
+  </CodeChunks>  
+</Profile>

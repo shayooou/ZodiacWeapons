@@ -1,30 +1,11 @@
-using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Linq;
-using System.Runtime.InteropServices;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
-using System.Windows.Forms;
 using Buddy.Coroutines;
-using ff14bot;
-using ff14bot.Behavior;
-using ff14bot.AClasses;
-using ff14bot.Behavior;
-using ff14bot.Enums;
+using Clio.XmlEngine;
 using ff14bot.Helpers;
 using ff14bot.Managers;
-using ff14bot.Navigation;
-using ff14bot.NeoProfiles;
-using ff14bot.Objects;
-using ff14bot.Pathing.Service_Navigation;
-using ff14bot.RemoteWindows;
-using GreyMagic;
+using System;
+using System.ComponentModel;
+using System.Windows.Media;
 using TreeSharp;
-using Action = TreeSharp.Action;
-using Clio.Utilities;
-using Clio.XmlEngine;
 
 namespace ff14bot.NeoProfiles
 {
@@ -59,7 +40,7 @@ namespace ff14bot.NeoProfiles
                                 {
                                     Log($@"点赞:" + btn.Label.Text);
                                     await Coroutine.Sleep(100);
-                                    RaptureAtkUnitManager.GetWindowByName("VoteMvp").SendAction(1, 2+ZanIndex, 0);
+                                        RaptureAtkUnitManager.GetWindowByName("VoteMvp").SendAction(1, (ulong)(2 + ZanIndex), 0);
                                 }
 
                             }
