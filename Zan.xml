@@ -11,7 +11,11 @@
   <BotSettings AutoEquip="0" />
   <RunCode name="DisableSideStep"/>
 	<While condition="Core.Me.IsValid">
-
+		
+		<If Condition="not DutyManager.InInstance and IsOnMap(148)">
+		    <LLLeaveDuty/>
+			<WaitTimer WaitTime="3" />
+		</If>
 		<If condition="not DutyManager.InInstance">
 			<LLJoinDuty2 DutyId="43" OutSized="false"/>
 		</If>
