@@ -62,7 +62,7 @@
 		<If Condition="ClassName == ((ClassJobType.Scholar))"> 
 			<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 6265">
 				<Log Message="Equipping Omnilex Zenith..." />
-				<EquipWeapon ItemID="6266"/>	
+				<EquipWeapon ItemID="6265"/>	
 				<WaitTimer WaitTime="3" />
 			</While>
 		</If>
