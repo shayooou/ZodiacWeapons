@@ -1039,20 +1039,6 @@
 							}
 						}					
 					}
-
-					{
-						Logging.WriteDiagnostic("Select Yes/No window failed to open.");
-						ff14bot.TreeRoot.Stop("Window failed to open");
-					}
-
-					await Coroutine.Wait(10000, () => Talk.DialogOpen);
-					await Buddy.Coroutines.Coroutine.Sleep(500);
-					while (Talk.DialogOpen)
-					{
-						Talk.Next();
-						await Coroutine.Wait(2000, () => !Talk.DialogOpen);
-						await Buddy.Coroutines.Coroutine.Sleep(1000);
-					}
 				}					
             ]]>	
 		</CodeChunk>				
