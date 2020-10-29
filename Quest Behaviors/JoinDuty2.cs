@@ -50,31 +50,29 @@ namespace ff14bot.NeoProfiles
 
         private async Task JoinDutyTask(int DutyId,bool OutSized)
         {
-			if (DutyManager.QueueState == QueueState.InDungeon || DutyManager.InInstance)
-            {
-                DutyManager.LeaveActiveDuty();
-                await Coroutine.Sleep(500);
-                return;
-            }
+			if(DutyManager.QueueState == QueueState.InDungeon || DutyManager.InInstance){
+				_isDone = true;
+				return;
+			}
 			if(!(DutyManager.QueueState == QueueState.InQueue || DutyManager.QueueState == QueueState.JoiningInstance)){
 				Logging.WriteDiagnostic("Queuing for Dungeon");
 				GameSettingsManager.JoinWithUndersizedParty = OutSized;
 				DutyManager.Queue(DataManager.InstanceContentResults[(uint)DutyId]);
 			}
-           await Coroutine.Wait(5000, () => (DutyManager.QueueState == QueueState.InQueue || DutyManager.QueueState == QueueState.JoiningInstance));
+           await Coroutine.Wait(2000, () => (DutyManager.QueueState == QueueState.InQueue || DutyManager.QueueState == QueueState.JoiningInstance));
 
            Logging.WriteDiagnostic("Queued for Dungeon");
 
-           await Coroutine.Wait(10000, () => (DutyManager.QueueState == QueueState.JoiningInstance));
+           await Coroutine.Wait(2000, () => (DutyManager.QueueState == QueueState.JoiningInstance)||DutyManager.InInstance);
 			
-		   if(!await Coroutine.Wait(10000, () => (RaptureAtkUnitManager.GetWindowByName("ContentsFinderConfirm") != null))){
+		   if(!await Coroutine.Wait(10000, () => (RaptureAtkUnitManager.GetWindowByName("ContentsFinderConfirm") != null) || DutyManager.InInstance)){
 		     return;
 		   }
 
            Logging.WriteDiagnostic("Commencing");
            DutyManager.Commence();
            Logging.WriteDiagnostic("Waiting for Loading");
-           await Coroutine.Wait(10000, () => CommonBehaviors.IsLoading || QuestLogManager.InCutscene);
+           await Coroutine.Wait(10000, () => CommonBehaviors.IsLoading || QuestLogManager.InCutscene||DutyManager.InInstance);
 			
            if (CommonBehaviors.IsLoading)
            {

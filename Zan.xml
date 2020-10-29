@@ -12,10 +12,6 @@
   <RunCode name="DisableSideStep"/>
   <While condition="Core.Me.IsValid">
 		<RepairEquip Threshhold="10"  UseMoney="false"/>
-		<If Condition="IsOnMap(148)">
-		    <LLLeaveDuty/>
-			<WaitTimer WaitTime="3" />
-		</If>
 		<If condition="not DutyManager.InInstance">
 			<LLJoinDuty2 DutyId="43" OutSized="false"/>
 		</If>
@@ -23,7 +19,7 @@
 		<If condition="DutyManager.InInstance">
 				<WaitStarting OutTime="15"/>
 				<RunCode name="MoveTowards"/>
-				<Grind GrindRef="bookman" While="not GameObjectManager.GetObjectByNPCId(72).CurrentHealth == 0"/> <!-- Kill bookman -->	
+				<Grind GrindRef="bookman" While="GameObjectManager.GetObjectByNPCId(72) != null and not GameObjectManager.GetObjectByNPCId(72).CurrentHealth == 0"/> <!-- Kill bookman -->	
 				<PraisePlayer ZanIndex="&zanWeiZhi;" />
 				<While condition="DutyManager.InInstance">	
 					<WaitTimer WaitTime="3" />
@@ -46,11 +42,13 @@
     	<CodeChunk Name="MoveTowards">
 		<![CDATA[
 			var x = GameObjectManager.GetObjectByNPCId(72);
+			if(x != null){
 			x.Target();
 			var pos = new Vector3(x.Location.X, x.Location.Y, x.Location.Z);
 			Navigator.PlayerMover.MoveTowards(pos);
 			await Coroutine.Sleep(4000);
 			Navigator.PlayerMover.MoveStop();
+			}
       ]]>
 	</CodeChunk> 
 	    	<CodeChunk Name="NullMover">
