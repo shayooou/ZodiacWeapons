@@ -19,7 +19,7 @@
 		<If condition="DutyManager.InInstance">
 				<WaitStarting OutTime="15"/>
 				<RunCode name="MoveTowards"/>
-				<Grind GrindRef="bookman" While="GameObjectManager.GetObjectByNPCId(72) != null and not GameObjectManager.GetObjectByNPCId(72).CurrentHealth == 0"/> <!-- Kill bookman -->	
+				<Grind GrindRef="bookman" While="GameObjectManager.GetObjectByNPCId(72) and not GameObjectManager.GetObjectByNPCId(72).CurrentHealth == 0"/> <!-- Kill bookman -->	
 				<PraisePlayer ZanIndex="&zanWeiZhi;" />
 				<While condition="DutyManager.InInstance">	
 					<WaitTimer WaitTime="3" />
