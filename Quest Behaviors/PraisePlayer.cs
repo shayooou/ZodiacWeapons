@@ -36,11 +36,10 @@ namespace ff14bot.NeoProfiles
                                 var btn = RaptureAtkUnitManager.GetWindowByName("VoteMvp").FindButton(2+ZanIndex);
                                 if (btn != null &&
                                    btn.IsValid &&
-                                   btn.Label.Text != "")
+                                   btn.Clickable)
                                 {
                                     Log($@"点赞:" + btn.Label.Text);
-                                    await Coroutine.Sleep(100);
-                                        RaptureAtkUnitManager.GetWindowByName("VoteMvp").SendAction(1, (ulong)(2 + ZanIndex), 0);
+                                    RaptureAtkUnitManager.GetWindowByName("VoteMvp").SendAction(1, (ulong)(2 + ZanIndex), 0);
                                 }
 
                             }

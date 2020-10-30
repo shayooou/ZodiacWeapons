@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <!DOCTYPE Profile [
-<!-- 赞的位置 默认第三个 -->
-<!ENTITY zanWeiZhi "3">
+<!-- 赞的位置 默认第1个 -->
+<!ENTITY zanWeiZhi "1">
 ]> 
 <Profile>
   <Name>刷赞</Name>
