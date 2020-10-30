@@ -46,7 +46,7 @@
 			x.Target();
 			var pos = new Vector3(x.Location.X, x.Location.Y, x.Location.Z);
 			Navigator.PlayerMover.MoveTowards(pos);
-			await Coroutine.Sleep(4000);
+			await Coroutine.Sleep(5000);
 			Navigator.PlayerMover.MoveStop();
 			}
       ]]>
