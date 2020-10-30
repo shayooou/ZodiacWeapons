@@ -33,6 +33,7 @@ namespace ff14bot.NeoProfiles
                                RaptureAtkUnitManager.GetWindowByName("VoteMvp").IsValid &&
                                RaptureAtkUnitManager.GetWindowByName("VoteMvp").IsVisible))
                             {
+								await Coroutine.Sleep(500);
                                 var btn = RaptureAtkUnitManager.GetWindowByName("VoteMvp").FindButton(2+ZanIndex);
                                 if (btn != null &&
                                    btn.IsValid &&
