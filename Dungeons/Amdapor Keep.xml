@@ -62,7 +62,7 @@
 			<MoveTo XYZ="136.8121, 44, -0.5193871"/> <!-- Move to first big door -->
 			<MoveTo XYZ="25.36752, 48, 0.3284818" /> <!-- Move into bosses room -->
 			<BotSettings AutoEquip="0" />
-			<If Condition="HasAtLeast(2001302,1)">		
+			<If Condition="HasAtLeast(2001302,1) or HasAtLeast(2001306,1)">		
 				<If Condition="ClassName == ((ClassJobType.Bard))"> 
 					<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7828">
 						<Log Message="Equipping Artemis Bow Atma" />
