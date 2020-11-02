@@ -57,7 +57,10 @@
 	<!-- Obtain Gae Bolg Novus -->
 	<If condition="HasAtLeast(7837,1)">
 		<Log Message="Starting Gae Bolg Novus Questing..." />
-		<LLoadProfile Path="Relic Novus.xml"/>
+		<If condition="HasAtLeast(2001306,1)">
+			<RunCode name="DiscardSkyearth"/>
+		</If>		
+		<LLoadProfile Path="Relic Novus.xml"/>		
 	</If>
 		
 	<!-- Obtain Gae Bolg Nexus -->
@@ -86,6 +89,12 @@
 			Core.OverlayManager.AddToast(() => "Please farm more Tomestone of Poetics.", TimeSpan.FromMilliseconds(25000), System.Windows.Media.Color.FromRgb(29,213,226), System.Windows.Media.Color.FromRgb(13,106,175), new System.Windows.Media.FontFamily("Gautami"));
 			await Coroutine.Sleep(26000);
 		  ]]>
-		</CodeChunk>    
+		</CodeChunk>
+		<CodeChunk Name="DiscardSkyearth">
+		  <![CDATA[ 
+            BagSlot toDiscard = InventoryManager.FilledInventoryAndArmory.First(x => x.RawItemId == 2001306);
+            if (toDiscard != null && toDiscard.IsFilled) LlamaLibrary.Extensions.BagSlotExtensions.Discard(toDiscard);
+		  ]]>
+		</CodeChunk>		
 	</CodeChunks>  
 </Profile>
