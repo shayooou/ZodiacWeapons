@@ -49,6 +49,7 @@
         <Hotspots>
 			<Hotspot Radius="200" XYZ="-402.698, 225.8024, -153.2489" />
 			<Hotspot Radius="200" XYZ="-428.9366, 221.9002, -161.629" />
+			<Hotspot Radius="200" XYZ="-520.7536, 216.6075, -138.0164" />
         </Hotspots>
         <TargetMobs>
 			<TargetMob Name="Giant Drubber" Id="1631" Weight="1" />

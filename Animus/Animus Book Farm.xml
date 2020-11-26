@@ -1003,7 +1003,7 @@
 					{
 						Talk.Next();
 						await Coroutine.Wait(2000, () => !Talk.DialogOpen);
-						await Buddy.Coroutines.Coroutine.Sleep(1000);
+						await Buddy.Coroutines.Coroutine.Sleep(2000);
 					}
 
 					await Coroutine.Wait(5000, () => SelectString.IsOpen);

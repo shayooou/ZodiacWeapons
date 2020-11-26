@@ -196,7 +196,7 @@
 				<TeleportTo Name="Horizon" AetheryteId="17"/> <!-- Horizon -->
 			</If>	
             <While Condition="not HasAtLeast(7857,1)">
-                <LLFate MinLevel="1" MaxLevel="50" while="not HasAtLeast(7857,1)"/>
+                <LLFate MinLevel="1" MaxLevel="50" while="not HasAtLeast(7857,1)" BlacklistId="346"/>
             </While>
         </While>
 		
@@ -208,7 +208,7 @@
 				<TeleportTo Name="Little Ala Mhigo" AetheryteId="19"/> <!-- Little Ala Mhigo -->
 			</If>				              
             <While Condition="not HasAtLeast(7852,1)">
-                <LLFate MinLevel="1" MaxLevel="50" while="not HasAtLeast(7852,1)"/>
+                <LLFate MinLevel="1" MaxLevel="50" while="not HasAtLeast(7852,1)" BlacklistId="421"/>
             </While>
         </While>
 
@@ -244,7 +244,7 @@
 				<TeleportTo Name="Bentbranch Meadows" AetheryteId="3"/> <!-- Bentbranch Meadows -->
 			</If>									
             <While Condition="not HasAtLeast(7851,1)">
-                <LLFate MinLevel="1" MaxLevel="50" while="not HasAtLeast(7851,1)" BlacklistIds="128,131"/>
+                <LLFate MinLevel="1" MaxLevel="50" while="not HasAtLeast(7851,1)" BlacklistIds="128,131,124"/>
             </While>
         </While>
 		
