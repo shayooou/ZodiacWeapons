@@ -38,7 +38,8 @@
 			<If Condition="&openchest; == 1">
 				<LLOpenChest />
 			</If>
-			<UseObject NpcId="2000216" XYZ="62.90795,33.96952,-31.17228" Radius="25" condition="GameObjectManager.GetObjectByNPCId(2000216).IsTargetable"/>			
+			<UseObject NpcId="2000216" XYZ="62.90795,33.96952,-31.17228" Radius="25" condition="GameObjectManager.GetObjectByNPCId(2000216).IsTargetable"/>	
+			<WaitTimer WaitTime="3" />	
 		</If>
 		
 		<!-- Discover the pirate captain 0/1 -->

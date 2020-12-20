@@ -182,7 +182,7 @@
 
 			<!-- Book completed -->
 				<If condition="HasAtLeast(2001299,1) and ZodiacManager.CurrentBook.KillTask1Completed and ZodiacManager.CurrentBook.KillTask2Completed and ZodiacManager.CurrentBook.KillTask3Completed and ZodiacManager.CurrentBook.KillTask4Completed and ZodiacManager.CurrentBook.KillTask5Completed and ZodiacManager.CurrentBook.KillTask6Completed and ZodiacManager.CurrentBook.KillTask7Completed and ZodiacManager.CurrentBook.KillTask8Completed and ZodiacManager.CurrentBook.KillTask9Completed and ZodiacManager.CurrentBook.KillTask10Completed and ZodiacManager.CurrentBook.DungeonTask1Completed and ZodiacManager.CurrentBook.DungeonTask2Completed and ZodiacManager.CurrentBook.DungeonTask3Completed and ZodiacManager.CurrentBook.FateTask1Completed and ZodiacManager.CurrentBook.FateTask2Completed and ZodiacManager.CurrentBook.FateTask3Completed and ZodiacManager.CurrentBook.GuildleveTask1Completed and ZodiacManager.CurrentBook.GuildleveTask2Completed and ZodiacManager.CurrentBook.GuildleveTask3Completed">									
-					<Log Message="Skyfire II completed. Buying Skyfall I" />
+					<Log Message="Skyfire II completed. Buying Netherfire I" />
 					<LisbethTravel Area="Mor Dhona" Position="71.13229, 33.06656, -707.7657"/>
 					<Dismount/>
 					<While Condition="not HasAtLeast(28,100)">
@@ -1003,7 +1003,7 @@
 					{
 						Talk.Next();
 						await Coroutine.Wait(2000, () => !Talk.DialogOpen);
-						await Buddy.Coroutines.Coroutine.Sleep(1000);
+						await Buddy.Coroutines.Coroutine.Sleep(2000);
 					}
 
 					await Coroutine.Wait(5000, () => SelectString.IsOpen);
@@ -1038,20 +1038,6 @@
 								await Buddy.Coroutines.Coroutine.Sleep(1000);
 							}
 						}					
-					}
-
-					{
-						Logging.WriteDiagnostic("Select Yes/No window failed to open.");
-						ff14bot.TreeRoot.Stop("Window failed to open");
-					}
-
-					await Coroutine.Wait(10000, () => Talk.DialogOpen);
-					await Buddy.Coroutines.Coroutine.Sleep(500);
-					while (Talk.DialogOpen)
-					{
-						Talk.Next();
-						await Coroutine.Wait(2000, () => !Talk.DialogOpen);
-						await Buddy.Coroutines.Coroutine.Sleep(1000);
 					}
 				}					
             ]]>	

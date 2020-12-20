@@ -272,20 +272,7 @@
 				if (ff14bot.RemoteWindows.SelectYesno.IsOpen)
 				{
 					Logging.WriteDiagnostic("Selecting Yes.");
-					ff14bot.RemoteWindows.SelectYesno.ClickYes();
-					await Coroutine.Wait(10000, ()=> QuestLogManager.InCutscene);
-						if (QuestLogManager.InCutscene)
-						{
-							while (QuestLogManager.InCutscene)
-							{
-								while (Talk.DialogOpen)
-								{
-									Talk.Next();
-									await Buddy.Coroutines.Coroutine.Sleep(2000);
-								}
-								await Buddy.Coroutines.Coroutine.Sleep(2000);
-							}
-						}					
+					ff14bot.RemoteWindows.SelectYesno.ClickYes();				
 				}		  
 				else
 				{
@@ -354,6 +341,19 @@
 				{
 					Logging.WriteDiagnostic("Select Yes/No Window failed to open.");
 					ff14bot.TreeRoot.Stop("Window failed to open");
+						await Coroutine.Wait(10000, ()=> QuestLogManager.InCutscene);
+						if (QuestLogManager.InCutscene)
+						{
+							while (QuestLogManager.InCutscene)
+							{
+								while (Talk.DialogOpen)
+								{
+									Talk.Next();
+									await Buddy.Coroutines.Coroutine.Sleep(1000);
+								}
+								await Buddy.Coroutines.Coroutine.Sleep(1000);
+							}
+						}					
 				}
 		  
 				await Coroutine.Wait(10000, () => Talk.DialogOpen);
