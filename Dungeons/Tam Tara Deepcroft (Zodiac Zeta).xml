@@ -23,33 +23,35 @@
 				<Log Message="Cultist orbs destroyed 0/4" />
 				<RunCode name="DisableSideStep"/>	
 				<BotSettings AutoEquip="1" />			
-				<NoCombatMoveTo XYZ="-5.470666, 29.90929, -16.37786" /> <!-- Move to first boss room -->
+				<MoveTo XYZ="-5.470666, 29.90929, -16.37786" /> <!-- Move to first boss room -->
 				<While Condition="GetInstanceTodo(0) == 0">
 					<MoveTo XYZ="-8.080134, 30.82913, -16.51366" distance="2"/> <!-- Move to first orb -->			
 					<RunCode name="CultistOrb1"/>
 				</While>	
 				<If Condition="&openchest; == 1">
 					<LLOpenChest />
-				</If>			
+				</If>
+				<MoveTo XYZ="-4.338048, 29.54992, -16.72049" usemesh="false" />	
 			</If>
 			
 			<!-- Cultist orbs destroyed 1/4 -->	
 			<If Condition="GetInstanceTodo(0) == 1">
 				<Log Message="Cultist orbs destroyed 1/4" />
 				<While Condition="GetInstanceTodo(0) == 1">			
-					<NoCombatMoveTo XYZ="-22.78436,25.5263,20.48222" distance="2"/> <!-- Move to second Cultist orb -->
+					<MoveTo XYZ="-22.78436,25.5263,20.48222" distance="2"/> <!-- Move to second Cultist orb -->
 					<RunCode name="CultistOrb2"/>
 				</While>	
 				<If Condition="&openchest; == 1">
 					<LLOpenChest />
-				</If>			
+				</If>
+				<MoveTo XYZ="-20.4999, 23.41024, 24.06461" usemesh="false" />				
 			</If>
 			
 			<!-- Cultist rosary 0/1 -->	
 			<If Condition="GetInstanceTodo(1) == 0 and GetInstanceTodo(0) == 2">
 				<Log Message="Cultist rosary 0/1" />
 				<While Condition="GetInstanceTodo(1) == 0">
-					<NoCombatMoveTo XYZ="-180.8298, 13.61397, -7.697925" distance="2"/> <!-- Move to cultist rosary -->
+					<MoveTo XYZ="-180.8298, 13.61397, -7.697925" distance="2"/> <!-- Move to cultist rosary -->
 					<RunCode name="CultistRosary"/>
 				</While>
 			</If>

@@ -80,7 +80,7 @@ namespace ff14bot.NeoProfiles
 						if(leve.GlobalId == LeveId && leve.Step == 1)
 						{
 							ulong globalId = (ulong) leve.GlobalId;
-							windowByName.SendAction(3,3,0xC,3,globalId,3,2); //Set Quest
+							windowByName.SendAction(3,3,0xD,3,globalId,3,2); //Set Quest
 							await Coroutine.Sleep(200);
 							windowByName.SendAction(2,3,4,4,globalId); //Initiate
 							if (await Coroutine.Wait(10000, () => SelectYesno.IsOpen))

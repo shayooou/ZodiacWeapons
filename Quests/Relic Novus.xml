@@ -179,124 +179,135 @@
 		<!-- Upgrade to Nexus -->
 			<!-- Sphere Scroll: Curtana -->
 			<If condition="HasAtLeast(7873,1)">
-				<While condition="SphereCompletion(78783) == 100">
-					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
-					<RunCode name="UpgradeAnimus"/>
-				</While>			
 				<While condition="SphereCompletion(78783) &lt; 100">
 					<RunCode name="MeldMateria"/>
 					<WaitTimer WaitTime="60" />
-				</While>		
-			</If>
-			<!-- Sphere Scroll: Sphairai -->
-			<If condition="HasAtLeast(7874,1)">
-				<While condition="SphereCompletion(7874) == 100">
+				</While>			
+				<While condition="SphereCompletion(78783) == 100">
+					<Log Message="Sphere Scroll: Curtana complete, traveling to Jalzahn..." />
 					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
 					<RunCode name="UpgradeAnimus"/>
-				</While>			
+				</While>					
+			</If>
+			<!-- Sphere Scroll: Sphairai -->
+			<If condition="HasAtLeast(7874,1)">			
 				<While condition="SphereCompletion(7874) &lt; 100">
 					<RunCode name="MeldMateria"/>
 					<WaitTimer WaitTime="60" />
-				</While>		
-			</If>
-			<!-- Sphere Scroll: Bravura -->
-			<If condition="HasAtLeast(7875,1)">
-				<While condition="SphereCompletion(7875) == 100">
+				</While>
+				<While condition="SphereCompletion(7874) == 100">
+					<Log Message="Sphere Scroll: Sphairai complete, traveling to Jalzahn..." />
 					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
 					<RunCode name="UpgradeAnimus"/>
-				</While>			
+				</While>				
+			</If>
+			<!-- Sphere Scroll: Bravura -->
+			<If condition="HasAtLeast(7875,1)">		
 				<While condition="SphereCompletion(7875) &lt; 100">
 					<RunCode name="MeldMateria"/>
 					<WaitTimer WaitTime="60" />
-				</While>		
+				</While>
+				<While condition="SphereCompletion(7875) == 100">
+					<Log Message="Sphere Scroll: Bravura complete, traveling to Jalzahn..." />
+					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
+					<RunCode name="UpgradeAnimus"/>
+				</While>					
 			</If>			
 			<!-- Sphere Scroll: Gae Bolg -->
-			<If condition="HasAtLeast(7876,1)">
-				<While condition="SphereCompletion(7876) == 100">
-					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
-					<RunCode name="UpgradeAnimus"/>
-				</While>			
+			<If condition="HasAtLeast(7876,1)">			
 				<While condition="SphereCompletion(7876) &lt; 100">
 					<RunCode name="MeldMateria"/>
-					<WaitTimer WaitTime="60" />
-				</While>		
-			</If>
-			<!-- Sphere Scroll: Artemis Bow -->
-			<If condition="HasAtLeast(7877,1)">
-				<While condition="SphereCompletion(7877) == 100">
+					<WaitTimer WaitTime="60" />					
+				</While>
+				<While condition="SphereCompletion(7876) == 100">
+					<Log Message="Sphere Scroll: Gae Bolg complete, traveling to Jalzahn..." />
 					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
 					<RunCode name="UpgradeAnimus"/>
-				</While>			
+				</While>				
+			</If>
+			<!-- Sphere Scroll: Artemis Bow -->
+			<If condition="HasAtLeast(7877,1)">		
 				<While condition="SphereCompletion(7877) &lt; 100">
 					<RunCode name="MeldMateria"/>
 					<WaitTimer WaitTime="60" />
-				</While>		
-			</If>
-			<!-- Sphere Scroll: Thyrus -->
-			<If condition="HasAtLeast(7878,1)">
-				<While condition="SphereCompletion(7878) == 100">
+				</While>
+				<While condition="SphereCompletion(7877) == 100">
+					<Log Message="Sphere Scroll: Artemis Bow complete, traveling to Jalzahn..." />
 					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
 					<RunCode name="UpgradeAnimus"/>
-				</While>			
+				</While>					
+			</If>
+			<!-- Sphere Scroll: Thyrus -->
+			<If condition="HasAtLeast(7878,1)">		
 				<While condition="SphereCompletion(7878) &lt; 100">
 					<RunCode name="MeldMateria"/>
 					<WaitTimer WaitTime="60" />
-				</While>		
-			</If>			
-			<!-- Sphere Scroll: Stardust Rod -->
-			<If condition="HasAtLeast(7879,1)">
-				<While condition="SphereCompletion(7879) == 100">
+				</While>
+				<While condition="SphereCompletion(7878) == 100">
+					<Log Message="Sphere Scroll: Thyrus complete, traveling to Jalzahn..." />
 					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
 					<RunCode name="UpgradeAnimus"/>
-				</While>			
+				</While>					
+			</If>			
+			<!-- Sphere Scroll: Stardust Rod -->
+			<If condition="HasAtLeast(7879,1)">		
 				<While condition="SphereCompletion(7879) &lt; 100">
 					<RunCode name="MeldMateria"/>
 					<WaitTimer WaitTime="60" />
-				</While>		
-			</If>
-			<!-- Sphere Scroll: the Veil of Wiyu -->
-			<If condition="HasAtLeast(7880,1)">
-				<While condition="SphereCompletion(7880) == 100">
+				</While>
+				<While condition="SphereCompletion(7879) == 100">
+					<Log Message="Sphere Scroll: Stardust Rod complete, traveling to Jalzahn..." />
 					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
 					<RunCode name="UpgradeAnimus"/>
-				</While>			
+				</While>					
+			</If>
+			<!-- Sphere Scroll: The Veil of Wiyu -->
+			<If condition="HasAtLeast(7880,1)">			
 				<While condition="SphereCompletion(7880) &lt; 100">
 					<RunCode name="MeldMateria"/>
 					<WaitTimer WaitTime="60" />
-				</While>		
-			</If>
-			<!-- Sphere Scroll: Omnilex	-->
-			<If condition="HasAtLeast(7881,1)">
-				<While condition="SphereCompletion(7881) == 100">
+				</While>
+				<While condition="SphereCompletion(7880) == 100">
+					<Log Message="Sphere Scroll: The Veil of Wiyu complete, traveling to Jalzahn..." />
 					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
 					<RunCode name="UpgradeAnimus"/>
-				</While>			
+				</While>				
+			</If>
+			<!-- Sphere Scroll: Omnilex	-->
+			<If condition="HasAtLeast(7881,1)">			
 				<While condition="SphereCompletion(7881) &lt; 100">
 					<RunCode name="MeldMateria"/>
 					<WaitTimer WaitTime="60" />
-				</While>		
-			</If>
-			<!-- Sphere Scroll: Holy Shield	-->
-			<If condition="HasAtLeast(7882,1)">
-				<While condition="SphereCompletion(7882) == 100">
+				</While>
+				<While condition="SphereCompletion(7881) == 100">
+					<Log Message="Sphere Scroll: Omnilex complete, traveling to Jalzahn..." />
 					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
 					<RunCode name="UpgradeAnimus"/>
-				</While>			
+				</While>				
+			</If>
+			<!-- Sphere Scroll: Holy Shield	-->
+			<If condition="HasAtLeast(7882,1)">			
 				<While condition="SphereCompletion(7882) &lt; 100">
 					<RunCode name="MeldMateria"/>
 					<WaitTimer WaitTime="60" />
-				</While>		
-			</If>
-			<!-- Sphere Scroll: Yoshimitsu	-->
-			<If condition="HasAtLeast(9255,1)">
-				<While condition="SphereCompletion(9255) == 100">
+				</While>
+				<While condition="SphereCompletion(7882) == 100">
+					<Log Message="Sphere Scroll: Holy Shield complete, traveling to Jalzahn..." />
 					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
 					<RunCode name="UpgradeAnimus"/>
-				</While>			
+				</While>				
+			</If>
+			<!-- Sphere Scroll: Yoshimitsu	-->
+			<If condition="HasAtLeast(9255,1)">			
 				<While condition="SphereCompletion(9255) &lt; 100">
 					<RunCode name="MeldMateria"/>
 					<WaitTimer WaitTime="60" />
-				</While>		
+				</While>
+				<While condition="SphereCompletion(9255) == 100">
+					<Log Message="Sphere Scroll: Yoshimitsu complete, traveling to Jalzahn..." />
+					<LisbethTravel Area="North Shroud" Position="406.4227, -4.498047, -89.40662"/>
+					<RunCode name="UpgradeAnimus"/>
+				</While>				
 			</If>
 
 		<LLoadProfile Path="../Start.xml"/>		

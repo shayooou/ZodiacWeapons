@@ -116,9 +116,8 @@
 		<!-- Kill Task 4 -->
 		<GrindArea name="zaharak_pugilist">
 			<Hotspots>
-				<Hotspot Radius="500" XYZ="121.7811, 15.9091, 8.022686" name="zaharak_pugilist" />
-				<Hotspot Radius="500" XYZ="250.3565, 8, -27.13245" name="zaharak_pugilist" />
-				<Hotspot Radius="500" XYZ="355.3093, 9.96371, -40.27342" name="zaharak_pugilist" />
+				<Hotspot Radius="500" XYZ="95.12254, 11.1597, 5.542565" name="zaharak_pugilist" />
+				<Hotspot Radius="500" XYZ="236.2357, 8, -23.16737" name="zaharak_pugilist" />
 			</Hotspots>
 			<TargetMobs>
 				<TargetMob id="1839"  /> 
