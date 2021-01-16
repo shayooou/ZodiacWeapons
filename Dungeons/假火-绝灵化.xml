@@ -14,7 +14,6 @@
   <Name>The Bowl of Embers</Name>
   <BehaviorDirectory>..\Quest Behaviors</BehaviorDirectory>
   <Order>
-    <ApplyRoutine />
 	<While Condition="NovusLightLevel() &lt; 2000">
 	
 		<If condition="not DutyManager.InInstance">

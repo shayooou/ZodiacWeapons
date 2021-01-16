@@ -7,10 +7,9 @@
 
 <Profile>
   <Name>假火刷魂石</Name>
-  <BehaviorDirectory></BehaviorDirectory>
+  <BehaviorDirectory>..\Quest Behaviors</BehaviorDirectory>
   <Order>
   <BotSettings AutoEquip="0" />
-      <ApplyRoutine />
 	<While condition="not ZodiacMahatmaIsDone()">
 		<If condition="not DutyManager.InInstance">
 			<LLJoinDuty2 DutyId="56" Trial="true"/>
