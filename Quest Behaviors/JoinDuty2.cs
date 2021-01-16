@@ -22,9 +22,9 @@ namespace ff14bot.NeoProfiles
 
         [XmlAttribute("DutyId")] public int DutyId { get; set; }
         
-        [XmlAttribute("OutSized")] 
-        [DefaultValue(true)]
-        public bool OutSized { get; set; }
+        [XmlAttribute("Trial")] 
+        [DefaultValue(false)]
+        public bool Trial { get; set; }
         
         public override bool HighPriority => true;
 
@@ -45,7 +45,7 @@ namespace ff14bot.NeoProfiles
 
         protected override Composite CreateBehavior()
         {
-            return new ActionRunCoroutine(r => JoinDutyTask(DutyId,OutSized));
+            return new ActionRunCoroutine(r => JoinDutyTask(DutyId,Trial));
         }
 
         private async Task JoinDutyTask(int DutyId,bool OutSized)

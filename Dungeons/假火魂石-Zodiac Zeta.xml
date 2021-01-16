@@ -10,9 +10,10 @@
   <BehaviorDirectory></BehaviorDirectory>
   <Order>
   <BotSettings AutoEquip="0" />
+      <ApplyRoutine />
 	<While condition="not ZodiacMahatmaIsDone()">
 		<If condition="not DutyManager.InInstance">
-			<LLJoinDuty DutyId="56" trial="true"/>
+			<LLJoinDuty2 DutyId="56" Trial="true"/>
 		</If>
 		<WaitTimer WaitTime="1" />
 		<If condition="DutyManager.InInstance">
@@ -93,11 +94,7 @@
 							<WaitTimer WaitTime="3" />
 						</While>
 					</If>				
-				<Grind GrindRef="Ifrit" While="not GameObjectManager.GetObjectByNPCId(1185).CurrentHealth == 0"/> <!-- Kill Ifrit -->	
-				<While condition="DutyManager.InInstance">	
-                    <LLLeaveDuty/>
-					<WaitTimer WaitTime="3" />
-				</While>		
+			<Ifrit />
 		</If>
 	</While>	
 	<If condition="ZodiacMahatmaIsDone()">

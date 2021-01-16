@@ -27,7 +27,7 @@ namespace ff14bot.NeoProfiles
                             try{
                             if (MovementManager.IsMoving) MovementManager.MoveStop();
                             if (RaptureAtkUnitManager.GetWindowByName("VoteMvp") == null)
-                                await Coroutine.Wait(4000, () => AgentModule.ToggleAgentInterfaceById(120) == 1);
+                                await Coroutine.Wait(4000, () => AgentModule.ToggleAgentInterfaceById(123) == 1);
 
                             if (await Coroutine.Wait(2000, () => RaptureAtkUnitManager.GetWindowByName("VoteMvp") != null &&
                                RaptureAtkUnitManager.GetWindowByName("VoteMvp").IsValid &&
@@ -40,7 +40,7 @@ namespace ff14bot.NeoProfiles
                                    btn.Clickable)
                                 {
                                     Log($@"点赞:" + btn.Label.Text);
-                                    RaptureAtkUnitManager.GetWindowByName("VoteMvp").SendAction(1, (ulong)(2 + ZanIndex), 0);
+                                    RaptureAtkUnitManager.GetWindowByName("VoteMvp").SendAction(2, 3,0,3,(ulong)(ZanIndex));
                                 }
 
                             }

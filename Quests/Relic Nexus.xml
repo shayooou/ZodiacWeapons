@@ -214,7 +214,7 @@
 					<LLoadProfile Path="../Dungeons/The Howling Eye (Extreme) - SoulGlazed.xml"/>
 				</If>
 				<If Condition="&ifrit; == 1">	
-					<LLoadProfile Path="../Dungeons/The Bowl of Embers - SoulGlazed.xml"/>
+					<LLoadProfile Path="../Dungeons/假火-绝灵化.xml"/>
 				</If>
 				<If Condition="&sastasha; == 1">	
 					<LLoadProfile Path="../Dungeons/Sastasha - SoulGlazed.xml"/>
@@ -237,7 +237,7 @@
 				if (ff14bot.RemoteWindows.SelectIconString.IsOpen)
 				{
 					Logging.WriteDiagnostic("Selecting 'Relic Weapon Novus Soulglazing'.");
-					SelectIconString.ClickLineContains("Relic Weapon Novus Soulglazing");
+					SelectIconString.ClickLineContains("绝灵化");
 				}
 				else
 				{
@@ -277,7 +277,6 @@
 				else
 				{
 					Logging.WriteDiagnostic("Select Yes/No Window failed to open.");
-					ff14bot.TreeRoot.Stop("Window failed to open");
 				}
 		  
 				await Coroutine.Wait(10000, () => Talk.DialogOpen);
@@ -300,7 +299,7 @@
 				if (ff14bot.RemoteWindows.SelectIconString.IsOpen)
 				{
 					Logging.WriteDiagnostic("Selecting 'Relic Weapon Novus Soulglazing'.");
-					SelectIconString.ClickLineContains("Relic Weapon Novus Soulglazing");
+					SelectIconString.ClickLineContains("绝灵化");
 				}
 				else
 				{
@@ -327,7 +326,6 @@
 				else
 				{
 					Logging.WriteDiagnostic("Weapon select window failed to open.");
-					ff14bot.TreeRoot.Stop("Window failed to open");
 				}		  
 		  
 				await Coroutine.Wait(5000, () => SelectYesno.IsOpen);
@@ -340,7 +338,6 @@
 				else
 				{
 					Logging.WriteDiagnostic("Select Yes/No Window failed to open.");
-					ff14bot.TreeRoot.Stop("Window failed to open");
 						await Coroutine.Wait(10000, ()=> QuestLogManager.InCutscene);
 						if (QuestLogManager.InCutscene)
 						{
