@@ -6,20 +6,14 @@
 -->
 
 <!DOCTYPE Profile [
-<!-- Profile Settings -->
-<!ENTITY openchest "0">
+<!-- 爆发技能，写中文技能名 -->
+<!ENTITY BurstAction "战逃反应">	
 ]>
 
 <Profile>
   <Name>The Bowl of Embers</Name>
   <BehaviorDirectory>..\Quest Behaviors</BehaviorDirectory>
   <Order>
-	<While Condition="NovusLightLevel() &lt; 2000">
-	
-		<If condition="not DutyManager.InInstance">
-			<LLJoinDuty2 DutyId="56" Trial="true"/>
-		</If>
-		<If condition="DutyManager.InInstance">
 			<If Condition="ClassName == ((ClassJobType.Bard))"> 
 				<While Condition="ff14bot.Managers.InventoryManager.GetBagByInventoryBagId(ff14bot.Enums.InventoryBagId.EquippedItems)[ff14bot.Enums.EquipmentSlot.MainHand].RawItemId != 7876">
 					<Log Message="Equipping Artemis Bow Novus..." />
@@ -95,7 +89,10 @@
 					<WaitTimer WaitTime="3" />
 				</While>
 			</If>
-			<Ifrit />
+	<While Condition="NovusLightLevel() &lt; 2000">
+		<LLJoinDuty2 DutyId="56" Trial="true"/>
+		<If condition="DutyManager.InInstance">
+			<Ifrit BurstAction="&BurstAction;"/>
 			<RunCode name="LightLevel"/>		
 		</If> 
 	</While>
@@ -106,16 +103,6 @@
 	</If>
 	
  </Order>
-  <GrindAreas>
-	<GrindArea name="Ifrit">
-        <Hotspots>
-			<Hotspot Radius="200" XYZ="15,0,0" />
-        </Hotspots>
-        <TargetMobs>
-			<TargetMob Name="Ifrit" Id="1185" Weight="1" />		
-        </TargetMobs>
-	</GrindArea>
-  </GrindAreas>		
   <CodeChunks>
  		<CodeChunk Name="LightLevel">
 		  <![CDATA[ 

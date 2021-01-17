@@ -29,8 +29,15 @@ namespace ff14bot.NeoProfiles
         [XmlAttribute("MapId")]
         public int MapId { get; set; }
         
-        
+        [DefaultValue("")]
+        [XmlAttribute("BurstAction")]
+        public string BurstAction { get; set; }
+		
         private bool _done;
+		
+		private uint actionID = 0;
+		
+		private bool isSearched = false;
 
         public override bool IsDone { get { return _done; } }
 
@@ -49,24 +56,12 @@ namespace ff14bot.NeoProfiles
                     })
                 ),
                 new Decorator(ret => WorldManager.ZoneId != MapId && !NowLoading.IsVisible,
-                    new PrioritySelector(
-                        new Decorator(ret => RaptureAtkUnitManager.GetWindowByName("ContentsFinder") == null,
-                            new ActionRunCoroutine(async r =>
+                    new ActionRunCoroutine(async r =>
                             {
-                                ChatManager.SendChat("/dfinder");
-
-                                await Coroutine.Wait(5000, () => RaptureAtkUnitManager.GetWindowByName("ContentsFinder") != null);
+                                GameSettingsManager.JoinWithUndersizedParty = true;
+								DutyManager.Queue(DataManager.InstanceContentResults[(uint)56]);
+								await Coroutine.Wait(2000, () => ContentsFinderConfirm.IsOpen);
                             })
-                        ),
-                        new Decorator(ret => RaptureAtkUnitManager.GetWindowByName("ContentsFinder") != null,
-                            new ActionRunCoroutine(async r =>
-                            {
-                                RaptureAtkUnitManager.GetWindowByName("ContentsFinder").SendAction(1, 3, 4);
-                            
-                                await Coroutine.Wait(2000, () => ContentsFinderConfirm.IsOpen);
-                            })
-                        )
-                    )
                 ),
                 new Decorator(ret => WorldManager.ZoneId == MapId && !NowLoading.IsVisible && Core.Target == null && !MovementManager.IsMoving && RaptureAtkUnitManager.GetWindowByName("ContentsFinderMenu") == null,
                   new Sequence(
@@ -75,8 +70,28 @@ namespace ff14bot.NeoProfiles
                         var objs = GameObjectManager.GameObjects.Where(o => IsValidEnemy(o));
                         if (objs.Any())
                             Poi.Current = new Poi(objs.OrderBy(o => o.CurrentHealthPercent).First(), PoiType.Kill);
-                        if (Poi.Current != null && IsValidEnemy(Poi.Current.BattleCharacter))
+                        if (Poi.Current != null && IsValidEnemy(Poi.Current.BattleCharacter)){
                             Poi.Current.BattleCharacter.Target();
+							ActionManager.Sprint();
+							if (actionID > 0){
+								ActionManager.DoAction(actionID,null);
+							}else{
+								if (!isSearched && BurstAction != ""){
+									isSearched = true;
+									IEnumerator<KeyValuePair<uint, SpellData>> enumerator = ActionManager.CurrentActions.GetEnumerator();
+									while (enumerator.MoveNext())
+									{
+										KeyValuePair<uint, SpellData> current = enumerator.Current;
+										if(current.Value.LocalizedName == BurstAction){
+											Logging.Write(System.Windows.Media.Colors.GreenYellow, current.Key + ":" + current.Value.Name + ":" + current.Value.LocalizedName);
+											actionID = current.Key;
+											ActionManager.DoAction(actionID,null);
+											break;
+										}
+									}
+								}
+							}
+						}
                     }),
                     new ActionRunCoroutine(async r =>
                     {
@@ -84,6 +99,7 @@ namespace ff14bot.NeoProfiles
                         if (!objs.Any() && !Core.Me.InCombat)
                         {
 							ff14bot.Managers.DutyManager.LeaveActiveDuty();
+							await Coroutine.Sleep(2000);
                             await Coroutine.Wait(20000, () => CommonBehaviors.IsLoading);
 							if (CommonBehaviors.IsLoading)
 							{

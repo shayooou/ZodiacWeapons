@@ -50,14 +50,20 @@ namespace ff14bot.NeoProfiles
 
         private async Task JoinDutyTask(int DutyId,bool OutSized)
         {
+			await Coroutine.Wait(20000, () => !CommonBehaviors.IsLoading);
 			if(DutyManager.QueueState == QueueState.InDungeon || DutyManager.InInstance){
-				_isDone = true;
-				return;
+				if(await Coroutine.Wait(5000, () => !DutyManager.InInstance)){
+					return;
+				}else{
+					_isDone = true;
+					return;
+				}
 			}
 			if(!(DutyManager.QueueState == QueueState.InQueue || DutyManager.QueueState == QueueState.JoiningInstance)){
 				Logging.WriteDiagnostic("Queuing for Dungeon");
 				GameSettingsManager.JoinWithUndersizedParty = OutSized;
 				DutyManager.Queue(DataManager.InstanceContentResults[(uint)DutyId]);
+				return;
 			}
            await Coroutine.Wait(2000, () => (DutyManager.QueueState == QueueState.InQueue || DutyManager.QueueState == QueueState.JoiningInstance));
 
